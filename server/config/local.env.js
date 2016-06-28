@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 // Use local.env.js for environment variables that grunt will set when the server starts locally.
 // Use for your api keys, secrets, etc. This file should not be tracked by git.
@@ -7,7 +7,7 @@
 
 module.exports = {
   DOMAIN: 'http://localhost:9000',
-  SESSION_SECRET: "vuefullstack-secret",
+  SESSION_SECRET: 'vuefullstack-secret',
   // Control debug level for modules using visionmedia/debug
   DEBUG: ''
-};
+}
