@@ -1,4 +1,5 @@
 'use strict'
+var path = require('path')
 
 // Production specific configuration
 // =================================
@@ -18,6 +19,9 @@ module.exports = {
     uri: process.env.MONGOLAB_URI ||
          process.env.MONGOHQ_URL ||
          process.env.OPENSHIFT_MONGODB_DB_URL + process.env.OPENSHIFT_APP_NAME ||
-            'mongodb://localhost/vuefullstack'
-  }
+            'mongodb://localhost/vue-fullstack'
+  },
+
+  // frontend folder
+  frontend: path.resolve(__dirname, '../../../dist')
 }

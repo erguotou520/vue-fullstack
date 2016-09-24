@@ -1,6 +1,7 @@
 <template>
   <div>
     Hi, {{name}}!
+    <img :src="src" alt="" />
   </div>
 </template>
 
@@ -8,6 +9,7 @@
 export default {
   data () {
     return {
+      src: '/static/1.png',
       name: 'Foo'
     }
   }
