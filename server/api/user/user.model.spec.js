@@ -7,7 +7,7 @@ var User = require('./user.model')
 var user = new User({
   provider: 'local',
   name: 'Fake User',
-  email: 'test@test.com',
+  username: 'test@test.com',
   password: 'password'
 })
 
@@ -42,8 +42,8 @@ describe('User Model', function () {
     })
   })
 
-  it('should fail when saving without an email', function (done) {
-    user.email = ''
+  it('should fail when saving without an username', function (done) {
+    user.username = ''
     user.save(function (err) {
       should.exist(err)
       done()

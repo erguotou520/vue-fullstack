@@ -14,9 +14,9 @@ export default {
   route: {
     data () {
       window.fetch('/api/things').then(function (res) {
-        console.log(res)
+        console.log(res.json())
       }).catch(function (err) {
-        console.log(err)
+        console.log(err.json())
       })
       this.name = 'Bar'
     }

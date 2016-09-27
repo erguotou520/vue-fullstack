@@ -6,7 +6,7 @@ var crypto = require('crypto')
 
 var UserSchema = new Schema({
   name: String,
-  email: { type: String, lowercase: true },
+  username: { type: String, lowercase: true },
   role: {
     type: String,
     default: 'user'
@@ -54,12 +54,12 @@ UserSchema
  * Validations
  */
 
-// Validate empty email
+// Validate empty username
 UserSchema
-  .path('email')
-  .validate(function (email) {
-    return email.length
-  }, 'Email cannot be blank')
+  .path('username')
+  .validate(function (username) {
+    return username.length
+  }, 'Username cannot be blank')
 
 // Validate empty password
 UserSchema
@@ -68,12 +68,12 @@ UserSchema
     return hashedPassword.length
   }, 'Password cannot be blank')
 
-// Validate email is not taken
+// Validate username is not taken
 UserSchema
-  .path('email')
+  .path('username')
   .validate(function (value, respond) {
     var self = this
-    this.constructor.findOne({email: value}, function (err, user) {
+    this.constructor.findOne({ username: value }, function (err, user) {
       if (err) throw err
       if (user) {
         if (self.id === user.id) return respond(true)
@@ -81,7 +81,7 @@ UserSchema
       }
       respond(true)
     })
-  }, 'The specified email address is already in use.')
+  }, 'The specified username is already in use.')
 
 var validatePresenceOf = function (value) {
   return value && value.length
