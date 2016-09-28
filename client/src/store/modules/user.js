@@ -36,7 +36,7 @@ const actions = {
       changeStorage(payload.remberme ? 'localStorage' : 'sessionStorage')
       commit('LOGIN', {
         username: payload.username,
-        access_token: data.data.token,
+        access_token: data.token,
         refresh_token: ''
       })
       saveMulti([{
@@ -44,7 +44,7 @@ const actions = {
         value: payload.username
       }, {
         key: 'user.access_token',
-        value: data.data.token
+        value: data.token
       }, {
         key: 'user.refresh_token',
         value: ''
@@ -66,13 +66,19 @@ const actions = {
   // logout action
   LOGOUT ({ commit }, payload) {
     commit('LOGOUT')
-    clearMulti(['username', 'access_token', 'refresh_token'])
+    clearMulti(['user.username', 'user.access_token', 'user.refresh_token'])
   }
 }
 
 const getters = {
   loggedIn (state) {
     return !!(state.username && state.access_token)
+  },
+  username (state) {
+    return state.username
+  },
+  accessToken (state) {
+    return state.access_token
   }
 }
 

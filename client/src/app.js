@@ -7,6 +7,23 @@ import Element from 'element-ui'
 
 Vue.use(VueResource)
 Vue.http.options.root = '/api'
+// request interceptor, add token to headers
+Vue.http.interceptors.push((request, next) => {
+  if (store.getters.loggedIn) {
+    request.headers.set('Authorization', `Bearer ${store.getters.accessToken}`)
+  }
+  next()
+})
+// response interceptor
+// Vue.http.interceptors.push((request, next) => {
+//   next((response) => {
+//     if (response.ok) {
+//       return response.json()
+//     } else {
+//       return response
+//     }
+//   })
+// })
 Vue.use(Element)
 const app = new Vue({
   router,

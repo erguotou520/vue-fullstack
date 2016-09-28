@@ -23,7 +23,6 @@
   </div>
 </template>
 <script>
-import Vue from 'vue'
 import { throttle } from 'lodash'
 export default {
   data () {
@@ -63,9 +62,6 @@ export default {
         password: this.form.password,
         remberme: this.remberme
       }).then((data) => {
-        Vue.http.interceptors.push((request, next) => {
-          request.headers['Authorization'] = `Bearer ${data.data.token}`
-        })
         this.loading = false
         this.$router.push(this.$route.query.redirect || '/')
       }).catch((err) => {

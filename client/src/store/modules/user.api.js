@@ -9,5 +9,9 @@ export function login (username, password) {
   return Vue.http.post('auth/local', {
     username,
     password
-  })
+  }).then(res => res.json())
+}
+
+export function logout () {
+  return Vue.http.post('auth/logout')
 }

@@ -16,7 +16,7 @@ var validationError = function (res, err) {
 exports.index = function (req, res) {
   User.find({}, '-salt -hashedPassword', function (err, users) {
     if (err) return res.send(500, err)
-    res.json(200, users)
+    res.json(200, { data: users })
   })
 }
 

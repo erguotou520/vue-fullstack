@@ -20,15 +20,20 @@ const routes = [{
     skipAuth: true
   }
 }, {
-  path: '/foo',
+  path: '/users',
   component: (resolve) => {
-    require(['../view/Foo.vue'], resolve)
+    require(['../view/UserList.vue'], resolve)
   }
 }, {
-  path: '/bar',
+  path: '/things',
   component: (resolve) => {
-    require(['../view/Bar.vue'], resolve)
+    require(['../view/ThingList.vue'], resolve)
   }
+}, {
+  path: '*',
+  component: Vue.component({
+    template: '<div>Not found</div>'
+  })
 }]
 
 const router = new VueRouter({

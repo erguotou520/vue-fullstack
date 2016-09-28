@@ -2,7 +2,7 @@
   <div>
     <x-header></x-header>
     <x-menu></x-menu>
-    <div class="app-container">
+    <div class="app-container" :class="{'logged-in': loggedIn}">
       <transition name="router" mode="out-in">
         <router-view></router-view>
       </transition>
@@ -10,9 +10,15 @@
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 import XHeader from './components/Header'
 import XMenu from './components/Menu'
 export default {
+  computed: {
+    ...mapGetters([
+      'loggedIn'
+    ])
+  },
   components: {
     XHeader,
     XMenu
@@ -20,6 +26,7 @@ export default {
 }
 </script>
 <style lang="stylus">
+@import "./assets/css/variable"
 html
   font-size 16px
   font-family "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif
@@ -33,7 +40,9 @@ a
   display block
   clear both
 .app-container
-  padding 1rem 1rem 1rem 11.5rem
+  padding 1rem
+  &.logged-in
+    padding-left ($menu-width + 1rem)
 .router-enter-active
 .router-leave-active
   transition all .5s cubic-bezier(0, 0, 0, 1)
