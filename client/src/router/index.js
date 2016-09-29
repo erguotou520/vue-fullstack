@@ -43,25 +43,31 @@ const router = new VueRouter({
   routes
 })
 
-router.beforeEach((route, redirect, next) => {
-  // has logged in, redirect
-  if (route.matched[0] && route.matched[0].path === '/login' && store.getters.loggedIn) {
-    redirect(route.query.redirect || '/')
-  }
-  if (route.matched.every(record => !record.meta.skipAuth)) {
-    // this route requires auth, check if logged in
-    // if not, redirect to login page.
-    if (!store.getters.loggedIn) {
-      redirect({
-        path: '/login',
-        query: { redirect: route.fullPath }
-      })
+router.beforeEach((to, from, next) => {
+  store.dispatch('changeRouteLoading', true).then(() => {
+    // has logged in, redirect
+    if (to.matched[0] && to.matched[0].path === '/login' && store.getters.loggedIn) {
+      next(from.query.redirect || '/')
+    }
+    if (!to.meta.skipAuth) {
+      // this route requires auth, check if logged in
+      // if not, redirect to login page.
+      if (!store.getters.loggedIn) {
+        next({
+          path: '/login',
+          query: { redirect: to.fullPath }
+        })
+      } else {
+        next()
+      }
     } else {
       next()
     }
-  } else {
-    next()
-  }
+  })
+})
+
+router.afterEach(() => {
+  store.dispatch('changeRouteLoading', false)
 })
 
 export default router

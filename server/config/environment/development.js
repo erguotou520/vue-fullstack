@@ -8,7 +8,7 @@ module.exports = {
     uri: 'mongodb://localhost/vue-fullstack-dev'
   },
 
-  seedDB: true,
+  seedDB: false,
 
   // frontend folder
   frontend: path.resolve(__dirname, '../../../client')

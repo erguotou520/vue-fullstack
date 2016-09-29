@@ -1,9 +1,8 @@
 <template>
-  <header id="header">
+  <header id="header" v-if="loggedIn">
     <div class="container clearfix">
-      <h1><router-link to="/" exact>Backend System</router-link></h1>
       <div class="nav" v-if="loggedIn">
-        <el-dropdown class="dropdown" :text="'欢迎你，'+username" type="text" :icon-separate="false" trigger="click">
+        <el-dropdown class="dropdown" :text="username" type="text" :icon-separate="false" trigger="click">
           <el-dropdown-item @click.native="toProfile">个人中心</el-dropdown-item>
           <el-dropdown-item @click.native="logout">退出</el-dropdown-item>
         </el-dropdown>
