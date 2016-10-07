@@ -1,28 +1,35 @@
 <template>
   <div v-if="loggedIn" id="app-menu">
     <router-link class="logo-wrapper" to="/" exact>Backend System</router-link>
-    <el-menu class="el-menu"
+    <!-- <el-menu class="el-menu" :default-active="$route.path"
       theme="dark" :router="true">
       <el-menu-item index="/users">Users</el-menu-item>
       <el-menu-item index="/things">Things</el-menu-item>
-    </el-menu>
+    </el-menu> -->
+    <ul class="menu">
+      <li class="menu-item">
+        <router-link class="menu-link" to="/users">Users</router-link>
+      </li>
+      <li class="menu-item">
+        <router-link class="menu-link" to="/things">Things</router-link>
+      </li>
+    </ul>
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 export default {
   computed: {
-    loggedIn () {
-      return this.$store.getters.loggedIn
-    }
+    ...mapGetters(['loggedIn'])
   }
 }
 </script>
-<style lang="stylus" scoped>
+<style lang="stylus">
 @import "../assets/css/variable"
 #app-menu
   width $menu-width
   min-width @width
-  background-color #324057
+  background-color $color-black-light
   overflow auto
   .logo-wrapper
     display block
@@ -31,5 +38,21 @@ export default {
     line-height @height
     color #fff
     font-size 1.25rem
-    background-color #3663ad
+    background-color #435065
+  > .menu
+    margin 0
+    padding 0
+    list-style none
+    .menu-item
+      display block
+      height 3.5rem
+      line-height @height
+      .menu-link
+        display block
+        padding-left 1.25rem
+        color $color-silver-exact-light
+        &:hover
+          background-color $color-black-exact-light
+        &.active
+          color $color-primary
 </style>

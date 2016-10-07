@@ -6,7 +6,7 @@ var config = require('../../config/environment')
 var jwt = require('jsonwebtoken')
 
 var validationError = function (res, err) {
-  return res.json(422, err)
+  return res.status(422).json(err)
 }
 
 /**
@@ -16,7 +16,7 @@ var validationError = function (res, err) {
 exports.index = function (req, res) {
   User.find({}, '-salt -hashedPassword', function (err, users) {
     if (err) return res.send(500, err)
-    res.json(200, { data: users })
+    res.status(200).json({ data: users })
   })
 }
 
@@ -29,7 +29,7 @@ exports.create = function (req, res, next) {
   newUser.role = 'user'
   newUser.save(function (err, user) {
     if (err) return validationError(res, err)
-    var token = jwt.sign({ _id: user._id }, config.secrets.session, { expiresInMinutes: 60 * 5 })
+    var token = jwt.sign({ _id: user._id }, config.secrets.session, { expiresIn: '7d' })
     res.json({ token: token })
   })
 }
@@ -42,7 +42,7 @@ exports.show = function (req, res, next) {
 
   User.findById(userId, function (err, user) {
     if (err) return next(err)
-    if (!user) return res.send(401)
+    if (!user) return res.send(404)
     res.json(user.profile)
   })
 }

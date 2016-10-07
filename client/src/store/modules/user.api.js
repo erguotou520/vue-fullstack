@@ -1,8 +1,15 @@
 import Vue from 'vue'
-import { readMulti } from '../../storage'
+import { read, readMulti, clearMulti } from '../../storage'
+import { STORE_KEY_USERNAME, STORE_KEY_ACCESS_TOKEN, STORE_KEY_REFRESH_TOKEN, STORE_KEY_EXPIRES } from '../../constants'
 
 export function init () {
-  return readMulti(['user.username', 'user.access_token', 'user.refresh_token'], true)
+  const time = new Date().getTime()
+  const storedTime = +read(STORE_KEY_EXPIRES)
+  if (storedTime && time > storedTime) {
+    clearMulti([STORE_KEY_USERNAME, STORE_KEY_ACCESS_TOKEN, STORE_KEY_REFRESH_TOKEN])
+    return ['', '', '']
+  }
+  return readMulti([STORE_KEY_USERNAME, STORE_KEY_ACCESS_TOKEN, STORE_KEY_REFRESH_TOKEN])
 }
 
 export function login (username, password) {
@@ -10,8 +17,4 @@ export function login (username, password) {
     username,
     password
   }).then(res => res.json())
-}
-
-export function logout () {
-  return Vue.http.post('auth/logout')
 }

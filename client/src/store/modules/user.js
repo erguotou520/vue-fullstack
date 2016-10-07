@@ -1,5 +1,6 @@
-import { changeStorage, saveMulti, clearMulti } from '../../storage'
+import { save, saveMulti, clearMulti } from '../../storage'
 import { init, login } from './user.api'
+import { STORE_KEY_USERNAME, STORE_KEY_ACCESS_TOKEN, STORE_KEY_REFRESH_TOKEN, STORE_KEY_EXPIRES } from '../../constants'
 
 const stored = init()
 
@@ -31,54 +32,57 @@ const mutations = {
 
 const actions = {
   // login action
-  LOGIN ({ commit }, payload) {
+  login ({ commit }, payload) {
+    const time = new Date().getTime()
     return login(payload.username, payload.password).then(data => {
-      changeStorage(payload.remberme ? 'localStorage' : 'sessionStorage')
       commit('LOGIN', {
         username: payload.username,
         access_token: data.token,
         refresh_token: ''
       })
+      if (payload.remberme) {
+        save(STORE_KEY_EXPIRES, time + (7 * 3600 * 1000))
+      }
       saveMulti([{
-        key: 'user.username',
+        key: STORE_KEY_USERNAME,
         value: payload.username
       }, {
-        key: 'user.access_token',
+        key: STORE_KEY_ACCESS_TOKEN,
         value: data.token
       }, {
-        key: 'user.refresh_token',
+        key: STORE_KEY_REFRESH_TOKEN,
         value: ''
       }])
       return data
     })
   },
   // refresh token action
-  REFERE_TOKEN ({ commit }, payload) {
+  refreToken ({ commit }, payload) {
     commit('REFERE_TOKEN')
     saveMulti[{
-      key: 'user.access_token',
+      key: STORE_KEY_ACCESS_TOKEN,
       value: payload.access_token
     }, {
-      key: 'user.refresh_token',
+      key: STORE_KEY_REFRESH_TOKEN,
       value: payload.refresh_token
     }]
   },
   // logout action
-  LOGOUT ({ commit }, payload) {
+  logout ({ commit }, payload) {
     commit('LOGOUT')
-    clearMulti(['user.username', 'user.access_token', 'user.refresh_token'])
+    clearMulti([STORE_KEY_USERNAME, STORE_KEY_ACCESS_TOKEN, STORE_KEY_REFRESH_TOKEN, STORE_KEY_EXPIRES])
   }
 }
 
 const getters = {
-  loggedIn (state) {
-    return !!(state.username && state.access_token)
+  accessToken (state) {
+    return state.access_token
   },
   username (state) {
     return state.username
   },
-  accessToken (state) {
-    return state.access_token
+  loggedIn (state) {
+    return !!(state.username && state.access_token)
   }
 }
 

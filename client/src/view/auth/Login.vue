@@ -1,13 +1,14 @@
 <template>
   <div class="login-wrapper">
+    <h1>XXX Backend System</h1>
     <el-form ref="form" :model="form" :rules="rules"
-      label-width="80px" @submit.native.prevent="onSubmit">
-      <el-form-item label="用户名" prop="username">
+      @submit.native.prevent="onSubmit">
+      <el-form-item prop="username">
         <el-input v-model="form.username" type="text"
           required :maxlength="20" :minlength="3"
           placeholder="请输入用户名"></el-input>
       </el-form-item>
-      <el-form-item label="密码" prop="password">
+      <el-form-item prop="password">
         <el-input v-model="form.password" type="password"
           required :maxlength="20" :minlength="3"
           placeholder="请输入密码"></el-input>
@@ -16,13 +17,14 @@
         <el-checkbox class="checkbox" v-model="remberme">一周之内免登录</el-checkbox>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" native-type="submit"
-          :disabled="!valid" :loading="loading" class="login-button">登录</el-button>
+        <el-button class="login-button" :class="{error: loginError}" type="success"
+          native-type="submit" :loading="loading">登录</el-button>
       </el-form-item>
     </el-form>
   </div>
 </template>
 <script>
+import { mapActions } from 'vuex'
 import { throttle } from 'lodash'
 export default {
   data () {
@@ -41,7 +43,8 @@ export default {
       },
       remberme: false,
       loading: false,
-      valid: false
+      valid: false,
+      loginError: false
     }
   },
   watch: {
@@ -55,9 +58,10 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['login']),
     onSubmit () {
       this.loading = true
-      this.$store.dispatch('LOGIN', {
+      this.login({
         username: this.form.username,
         password: this.form.password,
         remberme: this.remberme
@@ -73,15 +77,25 @@ export default {
           duration: 1500
         })
         this.loading = false
+        this.loginError = true
+        setTimeout(() => {
+          this.loginError = false
+        }, 500)
       })
     }
   }
 }
 </script>
-<style lang="stylus" scoped>
+<style lang="stylus">
+$input-width = 15rem
 .login-wrapper
-  width 24rem
-  margin 7.5rem auto
+  align-self center
+  margin -10rem auto 0
+  > form
+    width $input-width
+    margin 0 auto
 .login-button
   width 100%
+  &.error
+    animation shake .5s
 </style>
