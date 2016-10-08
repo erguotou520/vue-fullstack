@@ -1,13 +1,15 @@
 import Vue from 'vue'
-import VueResource from 'vue-resource'
-import App from './App.vue'
+// router and store
 import store from './store'
-import './locale'
 import router from './router'
 import { sync } from 'vuex-router-sync'
 sync(store, router)
-import Element from 'element-ui'
 
+// locale
+import './locale'
+
+// ajax
+import VueResource from 'vue-resource'
 Vue.use(VueResource)
 Vue.http.options.root = '/api'
 Vue.http.interceptors.push((request, next) => {
@@ -28,7 +30,14 @@ Vue.http.interceptors.push((request, next) => {
     }
   })
 })
+
+// ui library
+import Element from 'element-ui'
 Vue.use(Element)
+
+// main component
+import App from './App'
+
 const app = new Vue({
   router,
   store,

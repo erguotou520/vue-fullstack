@@ -5,16 +5,11 @@
       @submit.native.prevent="onSubmit">
       <el-form-item prop="username">
         <el-input v-model="form.username" type="text"
-          required :maxlength="20" :minlength="3"
-          placeholder="请输入用户名"></el-input>
+          required placeholder="请输入用户名"></el-input>
       </el-form-item>
       <el-form-item prop="password">
         <el-input v-model="form.password" type="password"
-          required :maxlength="20" :minlength="3"
-          placeholder="请输入密码"></el-input>
-      </el-form-item>
-      <el-form-item>
-        <el-checkbox class="checkbox" v-model="remberme">一周之内免登录</el-checkbox>
+          required placeholder="请输入密码"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button class="login-button" :class="{error: loginError}" type="success"
@@ -41,7 +36,6 @@ export default {
           required: true, message: '请输入密码', trigger: 'blur'
         }]
       },
-      remberme: false,
       loading: false,
       valid: false,
       loginError: false
@@ -63,8 +57,7 @@ export default {
       this.loading = true
       this.login({
         username: this.form.username,
-        password: this.form.password,
-        remberme: this.remberme
+        password: this.form.password
       }).then((data) => {
         this.loading = false
         this.$router.push(this.$route.query.redirect || '/')

@@ -60,5 +60,5 @@ a
       background-color #fff
       overflow auto
       &.active
-        margin 1rem 1rem 0
+        margin 1rem 1rem 2rem
 </style>

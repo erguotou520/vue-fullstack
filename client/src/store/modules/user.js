@@ -1,10 +1,12 @@
-import { save, saveMulti, clearMulti } from '../../storage'
+import { saveMulti, clearMulti } from '../../storage'
 import { init, login } from './user.api'
-import { STORE_KEY_USERNAME, STORE_KEY_ACCESS_TOKEN, STORE_KEY_REFRESH_TOKEN, STORE_KEY_EXPIRES } from '../../constants'
+import { STORE_KEY_USERNAME, STORE_KEY_ACCESS_TOKEN, STORE_KEY_REFRESH_TOKEN } from '../../constants'
 
-const stored = init()
+const { stored, userInfo } = init()
 
 const state = {
+  _id: userInfo._id || '',
+  role: userInfo.role || 'guest',
   username: stored[0] || '',
   access_token: stored[1] || '',
   refresh_token: stored[2] || ''
@@ -33,16 +35,12 @@ const mutations = {
 const actions = {
   // login action
   login ({ commit }, payload) {
-    const time = new Date().getTime()
     return login(payload.username, payload.password).then(data => {
       commit('LOGIN', {
         username: payload.username,
         access_token: data.token,
         refresh_token: ''
       })
-      if (payload.remberme) {
-        save(STORE_KEY_EXPIRES, time + (7 * 3600 * 1000))
-      }
       saveMulti([{
         key: STORE_KEY_USERNAME,
         value: payload.username
@@ -70,7 +68,7 @@ const actions = {
   // logout action
   logout ({ commit }, payload) {
     commit('LOGOUT')
-    clearMulti([STORE_KEY_USERNAME, STORE_KEY_ACCESS_TOKEN, STORE_KEY_REFRESH_TOKEN, STORE_KEY_EXPIRES])
+    clearMulti([STORE_KEY_USERNAME, STORE_KEY_ACCESS_TOKEN, STORE_KEY_REFRESH_TOKEN])
   }
 }
 
