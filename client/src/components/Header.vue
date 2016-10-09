@@ -1,14 +1,16 @@
 <template>
-  <header id="header" v-if="loggedIn">
-    <div class="container">
-      <div class="nav" v-if="loggedIn">
-        <el-dropdown class="dropdown" :text="username" type="text" :icon-separate="false" trigger="click">
-          <el-dropdown-item @click.native="toProfile">个人中心</el-dropdown-item>
-          <el-dropdown-item @click.native="doLogout">退出</el-dropdown-item>
-        </el-dropdown>
+  <transition name="header">
+    <header id="header" v-if="loggedIn">
+      <div class="container">
+        <div class="nav" v-if="loggedIn">
+          <el-dropdown class="dropdown" :text="username" type="text" :icon-separate="false" trigger="click">
+            <el-dropdown-item @click.native="toProfile">个人中心</el-dropdown-item>
+            <el-dropdown-item @click.native="doLogout">退出</el-dropdown-item>
+          </el-dropdown>
+        </div>
       </div>
-    </div>
-  </header>
+    </header>
+  </transition>
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
@@ -34,6 +36,12 @@ export default {
 </script>
 <style lang="stylus">
 @import "../assets/css/variable"
+.header-enter-active
+.header-leave-active
+  transition all .5s
+.header-enter
+.header-leave-active
+  margin-top -($header-height)
 #header
   background-color $color-white
   .container

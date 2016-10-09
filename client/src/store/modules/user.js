@@ -1,12 +1,12 @@
 import { saveMulti, clearMulti } from '../../storage'
-import { init, login } from './user.api'
+import { init, login, getUserInfo } from './user.api'
 import { STORE_KEY_USERNAME, STORE_KEY_ACCESS_TOKEN, STORE_KEY_REFRESH_TOKEN } from '../../constants'
 
-const { stored, userInfo } = init()
+const stored = init()
 
 const state = {
-  _id: userInfo._id || '',
-  role: userInfo.role || 'guest',
+  _id: '',
+  role: 'guest',
   username: stored[0] || '',
   access_token: stored[1] || '',
   refresh_token: stored[2] || ''
@@ -18,6 +18,11 @@ const mutations = {
     state.username = payload.username
     state.access_token = payload.access_token
     state.refresh_token = payload.refresh_token
+  },
+  // set user info
+  SET_USER_INFO (state, userInfo) {
+    state._id = userInfo._id
+    state.role = userInfo.role
   },
   // update stored token
   UPDATE_TOKEN (state, payload) {
@@ -69,10 +74,21 @@ const actions = {
   logout ({ commit }, payload) {
     commit('LOGOUT')
     clearMulti([STORE_KEY_USERNAME, STORE_KEY_ACCESS_TOKEN, STORE_KEY_REFRESH_TOKEN])
+  },
+  // init user info
+  initUserInfo ({ commit, state }) {
+    if (state.access_token) {
+      getUserInfo(state.access_token).then(data => {
+        commit('SET_USER_INFO', data)
+      })
+    }
   }
 }
 
 const getters = {
+  userId (state) {
+    return state._id
+  },
   accessToken (state) {
     return state.access_token
   },

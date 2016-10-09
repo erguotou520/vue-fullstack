@@ -1,5 +1,5 @@
 # vue-fullstack
-This is a project using `vue@next`, `vue-router@next`, `vuex@next`.
+This is a NodeJs fullstack project using `express`, `vue`, `vue-router`, `vuex`.
 
 ## Dev step
 1. Run `npm install`

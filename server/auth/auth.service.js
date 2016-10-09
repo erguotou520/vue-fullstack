@@ -25,9 +25,7 @@ function isAuthenticated () {
     })
     // Attach user to request
     .use(function (req, res, next) {
-      console.log(2, req.user._id)
       User.findById(req.user._id, function (err, user) {
-        console.log(3, err, user)
         if (err) return next(err)
         if (!user) return res.send(401)
 
@@ -46,7 +44,6 @@ function hasRole (roleRequired) {
   return compose()
     .use(isAuthenticated())
     .use(function meetsRequirements (req, res, next) {
-      console.log(req.user.role)
       if (config.userRoles.indexOf(req.user.role) >= config.userRoles.indexOf(roleRequired)) {
         next()
       } else {

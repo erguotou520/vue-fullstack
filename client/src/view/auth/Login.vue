@@ -1,5 +1,5 @@
 <template>
-  <div class="login-wrapper">
+  <div class="login-wrapper" v-show="!loggedIn">
     <h1>XXX Backend System</h1>
     <el-form ref="form" :model="form" :rules="rules"
       @submit.native.prevent="onSubmit">
@@ -19,7 +19,7 @@
   </div>
 </template>
 <script>
-import { mapActions } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 import { throttle } from 'lodash'
 export default {
   data () {
@@ -40,6 +40,9 @@ export default {
       valid: false,
       loginError: false
     }
+  },
+  computed: {
+    ...mapGetters(['loggedIn'])
   },
   watch: {
     'form': {

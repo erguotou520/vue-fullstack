@@ -1,20 +1,17 @@
 <template>
-  <div v-if="loggedIn" id="app-menu">
-    <router-link class="logo-wrapper" to="/" exact>Backend System</router-link>
-    <!-- <el-menu class="el-menu" :default-active="$route.path"
-      theme="dark" :router="true">
-      <el-menu-item index="/users">Users</el-menu-item>
-      <el-menu-item index="/things">Things</el-menu-item>
-    </el-menu> -->
-    <ul class="menu">
-      <li class="menu-item">
-        <router-link class="menu-link" to="/users">Users</router-link>
-      </li>
-      <li class="menu-item">
-        <router-link class="menu-link" to="/things">Things</router-link>
-      </li>
-    </ul>
-  </div>
+  <transition name="menu">
+    <div v-if="loggedIn" id="app-menu">
+      <router-link class="logo-wrapper" to="/" exact>Backend System</router-link>
+      <ul class="menu">
+        <li class="menu-item">
+          <router-link class="menu-link" to="/users">Users</router-link>
+        </li>
+        <li class="menu-item">
+          <router-link class="menu-link" to="/things">Things</router-link>
+        </li>
+      </ul>
+    </div>
+  </transition>
 </template>
 <script>
 import { mapGetters } from 'vuex'
@@ -26,6 +23,12 @@ export default {
 </script>
 <style lang="stylus">
 @import "../assets/css/variable"
+.menu-enter-active
+.menu-leave-active
+  transition all .5s
+.menu-enter
+.menu-leave-active
+  margin-left -($menu-width)
 #app-menu
   width $menu-width
   min-width @width
