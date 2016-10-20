@@ -8,7 +8,8 @@ module.exports = {
   ],
   // add your custom rules here
   'rules': {
-    "no-sequences": [0]
+    "no-sequences": [0],
+    "no-debugger": process.env.NODE_ENV === 'production' ? 0 : 2
   },
   globals: {
     "it": true,
