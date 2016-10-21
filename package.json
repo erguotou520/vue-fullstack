@@ -18,7 +18,7 @@
     "client": "node client/build/dev-server.js",
     "server": "./node_modules/.bin/nodemon --watch server server/app.js",
     "dev": "npm run client|npm run server",
-    "build": "node build/build.js",
+    "build": "node client/build/build.js",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
   },
   "dependencies": {

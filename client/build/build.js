@@ -18,7 +18,7 @@ spinner.start()
 var assetsPath = path.join(config.build.assetsRoot, config.build.assetsSubDirectory)
 rm('-rf', assetsPath) // eslint-disable-line
 mkdir('-p', assetsPath) // eslint-disable-line
-cp('-R', '../static/', assetsPath) // eslint-disable-line
+cp('-R', 'client/static/', assetsPath) // eslint-disable-line
 
 webpack(webpackConfig, function (err, stats) {
   spinner.stop()
