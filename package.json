@@ -4,9 +4,9 @@
   "keywords": [
     "vue",
     "vuejs",
-    "vuex"
+    "vuex",
     "vue-router",
-    "vue-resource"
+    "vue-resource",
     "fullstack",
     "mongodb",
     "mongoose"
@@ -15,7 +15,7 @@
   "author": "erguotou <erguotou525@gmail.com>",
   "private": false,
   "scripts": {
-    "client": "node build/dev-server.js",
+    "client": "node client/build/dev-server.js",
     "server": "./node_modules/.bin/nodemon --watch server server/app.js",
     "dev": "npm run client|npm run server",
     "build": "node build/build.js",

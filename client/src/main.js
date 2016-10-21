@@ -44,4 +44,4 @@ const app = new Vue({
   ...App // Object spread copying everything from App.vue
 })
 // actually mount to DOM
-app.$mount('app')
+app.$mount('#app')

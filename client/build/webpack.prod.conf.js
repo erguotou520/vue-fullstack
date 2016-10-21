@@ -1,12 +1,11 @@
 var path = require('path')
-var config = require('../config')
+var config = require('../../config')
 var utils = require('./utils')
 var webpack = require('webpack')
 var merge = require('webpack-merge')
 var baseWebpackConfig = require('./webpack.base.conf')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
-var env = config.build.env
 
 var webpackConfig = merge(baseWebpackConfig, {
   module: {
@@ -27,7 +26,7 @@ var webpackConfig = merge(baseWebpackConfig, {
   plugins: [
     // http://vuejs.github.io/vue-loader/workflow/production.html
     new webpack.DefinePlugin({
-      'process.env': env
+      'process.env': '"production"'
     }),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
@@ -42,7 +41,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     // see https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       filename: config.build.index,
-      template: 'index.html',
+      template: 'client/index.html',
       inject: true,
       minify: {
         removeComments: true,

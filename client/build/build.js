@@ -1,9 +1,7 @@
 // https://github.com/shelljs/shelljs
 require('shelljs/global')
-env.NODE_ENV = 'production' // eslint-disable-line
-
 var path = require('path')
-var config = require('../config')
+var config = require('../../config')
 var ora = require('ora')
 var webpack = require('webpack')
 var webpackConfig = require('./webpack.prod.conf')
@@ -20,7 +18,7 @@ spinner.start()
 var assetsPath = path.join(config.build.assetsRoot, config.build.assetsSubDirectory)
 rm('-rf', assetsPath) // eslint-disable-line
 mkdir('-p', assetsPath) // eslint-disable-line
-cp('-R', 'static/', assetsPath) // eslint-disable-line
+cp('-R', '../static/', assetsPath) // eslint-disable-line
 
 webpack(webpackConfig, function (err, stats) {
   spinner.stop()
