@@ -2,7 +2,7 @@
 
 var User = require('./user.model')
 // var passport = require('passport')
-var config = require('../../config/environment')
+var config = require('../../../config').backend
 var jwt = require('jsonwebtoken')
 
 var validationError = function (res, err) {
@@ -15,7 +15,7 @@ var validationError = function (res, err) {
  */
 exports.index = function (req, res) {
   User.find({}, '-salt -hashedPassword', function (err, users) {
-    if (err) return res.send(500, err)
+    if (err) return res.status(500).send(err)
     res.status(200).json({ data: users })
   })
 }
@@ -42,7 +42,7 @@ exports.show = function (req, res, next) {
 
   User.findById(userId, function (err, user) {
     if (err) return next(err)
-    if (!user) return res.send(404)
+    if (!user) return res.sendStatus(404)
     res.json(user.profile)
   })
 }
@@ -53,8 +53,8 @@ exports.show = function (req, res, next) {
  */
 exports.destroy = function (req, res) {
   User.findByIdAndRemove(req.params.id, function (err, user) {
-    if (err) return res.send(500, err)
-    return res.send(204)
+    if (err) return res.status(500).send(err)
+    return res.sendStatus(204)
   })
 }
 
@@ -74,10 +74,10 @@ exports.changePassword = function (req, res, next) {
       user.password = newPass
       user.save(function (err) {
         if (err) return validationError(res, err)
-        res.send(200)
+        res.sendStatus(200)
       })
     } else {
-      res.send(403)
+      res.status(403).json({ message: '旧密码不正确' })
     }
   })
 }
@@ -94,11 +94,4 @@ exports.me = function (req, res, next) {
     if (!user) return res.json(401)
     res.json(user)
   })
-}
-
-/**
- * Authentication callback
- */
-exports.authCallback = function (req, res, next) {
-  res.redirect('/')
 }

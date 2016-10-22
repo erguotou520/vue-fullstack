@@ -31,7 +31,9 @@ const mutations = {
   },
   // after logout
   LOGOUT (state) {
+    state._id = ''
     state.username = ''
+    state.role = 'guest'
     state.access_token = ''
     state.refresh_token = ''
   }
@@ -39,7 +41,7 @@ const mutations = {
 
 const actions = {
   // login action
-  login ({ commit }, payload) {
+  login ({ commit, dispatch }, payload) {
     return login(payload.username, payload.password).then(data => {
       commit('LOGIN', {
         username: payload.username,
@@ -56,8 +58,10 @@ const actions = {
         key: STORE_KEY_REFRESH_TOKEN,
         value: ''
       }])
-      return data
-    })
+      dispatch('initUserInfo').then(() => {
+        return data
+      })
+    }).catch(() => {})
   },
   // refresh token action
   refreToken ({ commit }, payload) {

@@ -16,7 +16,7 @@ import XHeader from './components/Header'
 import XMenu from './components/Menu'
 // import RouterLoading from './components/RouterLoading'
 import NProgress from './components/NProgress'
-import { mapGetters, mapActions } from 'vuex'
+import { mapGetters } from 'vuex'
 export default {
   computed: {
     ...mapGetters(['loggedIn'])
@@ -26,13 +26,6 @@ export default {
     XMenu,
     // RouterLoading,
     NProgress
-  },
-  methods: {
-    ...mapActions(['initUserInfo'])
-  },
-  created () {
-    // init user info
-    this.initUserInfo()
   }
 }
 </script>
@@ -66,10 +59,14 @@ a
       position relative
       flex 1
       display flex
+      justify-content center
       margin 0
       padding 1rem
       background-color #fff
       overflow auto
       &.active
         margin 1rem
+
+.el-dropdown-link
+  cursor pointer
 </style>

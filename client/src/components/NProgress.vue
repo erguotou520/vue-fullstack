@@ -1,5 +1,6 @@
 <template></template>
 <script>
+import Vue from 'vue'
 import nprogress from 'nprogress'
 export default {
   props: {
@@ -16,7 +17,7 @@ export default {
     this.$router.afterEach(() => {
       nprogress.done()
     })
-    this.$http.interceptors.push((request, next) => {
+    Vue.http.interceptors.push((request, next) => {
       nprogress.start()
       next(response => {
         nprogress.done()

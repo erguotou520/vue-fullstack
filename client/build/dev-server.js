@@ -1,5 +1,5 @@
-var config = require('../../config')
 process.env.NODE_ENV = 'development'
+var config = require('../../config').frontend
 var path = require('path')
 var express = require('express')
 var webpack = require('webpack')
@@ -7,10 +7,10 @@ var proxyMiddleware = require('http-proxy-middleware')
 var webpackConfig = require('./webpack.dev.conf')
 
 // default port where dev server listens for incoming traffic
-var port = config.frontend.development.port || 8080
+var port = config.port || 8080
 // Define HTTP proxies to your custom API backend
 // https://github.com/chimurai/http-proxy-middleware
-var proxyTable = config.frontend.development.proxyTable
+var proxyTable = config.proxyTable
 
 var app = express()
 var compiler = webpack(webpackConfig)
@@ -52,7 +52,7 @@ app.use(devMiddleware)
 app.use(hotMiddleware)
 
 // serve pure static assets
-var staticPath = path.posix.join(config.frontend.development.assetsPublicPath, config.frontend.development.assetsSubDirectory)
+var staticPath = path.posix.join(config.assetsPublicPath, config.assetsSubDirectory)
 app.use(staticPath, express.static('./static'))
 
 module.exports = app.listen(port, function (err) {

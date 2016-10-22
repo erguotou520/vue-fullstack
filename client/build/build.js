@@ -1,7 +1,8 @@
 // https://github.com/shelljs/shelljs
 require('shelljs/global')
 var path = require('path')
-var config = require('../../config')
+process.env.NODE_ENV = 'production'
+var config = require('../../config').frontend
 var ora = require('ora')
 var webpack = require('webpack')
 var webpackConfig = require('./webpack.prod.conf')
@@ -15,7 +16,7 @@ console.log(
 var spinner = ora('building for production...')
 spinner.start()
 
-var assetsPath = path.join(config.build.assetsRoot, config.build.assetsSubDirectory)
+var assetsPath = path.join(config.assetsRoot, config.assetsSubDirectory)
 rm('-rf', assetsPath) // eslint-disable-line
 mkdir('-p', assetsPath) // eslint-disable-line
 cp('-R', 'client/static/', assetsPath) // eslint-disable-line

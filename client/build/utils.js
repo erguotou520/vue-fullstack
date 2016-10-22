@@ -1,9 +1,9 @@
 var path = require('path')
-var config = require('../../config')
+var config = require('../../config').frontend
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 exports.assetsPath = function (_path) {
-  var assetsSubDirectory = config.build.assetsSubDirectory
+  var assetsSubDirectory = config.assetsSubDirectory
   return path.posix.join(assetsSubDirectory, _path)
 }
 

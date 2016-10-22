@@ -19,7 +19,7 @@
     "server": "./node_modules/.bin/nodemon --watch server server/app.js",
     "dev": "npm run client|npm run server",
     "build": "node client/build/build.js",
-    "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
+    "lint": "eslint --ext .js,.vue client/src"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
@@ -27,6 +27,7 @@
     "compression": "^1.6.2",
     "cookie-parser": "^1.4.3",
     "crypto": "0.0.3",
+    "ejs": "^2.5.2",
     "element-ui": "^1.0.0-rc.7",
     "express": "^4.14.0",
     "express-jwt": "^3.4.0",
@@ -34,7 +35,6 @@
     "lodash": "^4.16.2",
     "method-override": "^2.3.6",
     "mongoose": "^4.5.2",
-    "morgan": "^1.7.0",
     "nprogress": "^0.2.0",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",

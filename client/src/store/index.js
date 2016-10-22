@@ -4,8 +4,8 @@ import locale from './modules/locale'
 import routeLoading from './modules/route'
 import user from './modules/user'
 Vue.use(Vuex)
-console.log(process)
-export default new Vuex.Store({
+
+const store = new Vuex.Store({
   strict: process.env.NODE_ENV !== 'production',
   modules: {
     locale,
@@ -13,3 +13,8 @@ export default new Vuex.Store({
     routeLoading
   }
 })
+
+export default store
+export function initStore () {
+  store.dispatch('initUserInfo')
+}

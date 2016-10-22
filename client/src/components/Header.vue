@@ -1,13 +1,17 @@
 <template>
   <transition name="header">
     <header id="header" v-if="loggedIn">
-      <div class="container">
-        <div class="nav" v-if="loggedIn">
-          <el-dropdown class="dropdown" :text="username" type="text" :icon-separate="false" trigger="click">
+      <h1></h1>
+      <div class="nav" v-if="loggedIn">
+        <el-dropdown trigger="click">
+          <span class="el-dropdown-link">
+            {{username}}&nbsp;<i class="el-icon-caret-bottom el-icon-right"></i>
+          </span>
+          <el-dropdown-menu slot="dropdown">
             <el-dropdown-item @click.native="toProfile">个人中心</el-dropdown-item>
             <el-dropdown-item @click.native="doLogout">退出</el-dropdown-item>
-          </el-dropdown>
-        </div>
+          </el-dropdown-menu>
+        </el-dropdown>
       </div>
     </header>
   </transition>
@@ -43,9 +47,12 @@ export default {
 .header-leave-active
   margin-top -($header-height)
 #header
+  display flex
+  flex-direction row
+  align-items center
+  justify-content space-between
+  padding 0 1rem
   background-color $color-white
-  .container
-    padding 0 1rem
   h1
     float left
     height $header-height
@@ -58,6 +65,4 @@ export default {
     float right
     margin 0
     padding 0
-    height $header-height
-    line-height @height
 </style>

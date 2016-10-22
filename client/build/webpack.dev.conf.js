@@ -1,4 +1,4 @@
-var config = require('../../config')
+var config = require('../../config').frontend
 var webpack = require('webpack')
 var merge = require('webpack-merge')
 var utils = require('./utils')
@@ -12,7 +12,7 @@ Object.keys(baseWebpackConfig.entry).forEach(function (name) {
 
 module.exports = merge(baseWebpackConfig, {
   module: {
-    loaders: utils.styleLoaders({ sourceMap: config.frontend.development.cssSourceMap })
+    loaders: utils.styleLoaders({ sourceMap: config.cssSourceMap })
   },
   // eval-source-map is faster for development
   devtool: '#source-map',
