@@ -31,12 +31,12 @@ var backendBase = {
 
 var development = {
   frontend: {
-    port: 8080,
+    port: 8082,
     assetsRoot: path.resolve(__dirname, './client/src'),
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/api': { target: 'http://localhost:' + backendBase.port, changeOrigin: true }
+      '/api': { target: 'http://localhost:' + backendBase.port, changeOrigin: true, ws: true }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README

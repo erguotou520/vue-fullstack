@@ -1,6 +1,7 @@
 import { saveMulti, clearMulti } from '../../storage'
 import { init, login, getUserInfo } from './user.api'
 import { STORE_KEY_USERNAME, STORE_KEY_ACCESS_TOKEN, STORE_KEY_REFRESH_TOKEN } from '../../constants'
+import socketFn from '../../socket'
 
 const stored = init()
 
@@ -85,6 +86,7 @@ const actions = {
       getUserInfo(state.access_token).then(data => {
         commit('SET_USER_INFO', data)
       })
+      socketFn(state.access_token)
     }
   }
 }

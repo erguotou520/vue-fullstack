@@ -5,6 +5,8 @@
 'use strict'
 
 var errors = require('./components/errors')
+var config = require('../config').backend
+var path = require('path')
 
 module.exports = function (app) {
   // Insert routes below
@@ -17,7 +19,9 @@ module.exports = function (app) {
   app.route('/:url(api|auth|static)/*').get(errors[404])
 
   // All other routes should redirect to the index.html
-  app.route('/*').get(function (req, res) {
-    res.sendFile(app.get('appPath') + '/index.html')
-  })
+  if (config.serverFrontend) {
+    app.route('/*').get(function (req, res) {
+      res.sendFile(path.resolve(config.backend, '/index.html'))
+    })
+  }
 }

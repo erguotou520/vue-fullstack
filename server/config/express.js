@@ -26,7 +26,6 @@ module.exports = function (app) {
   app.use(cookieParser())
   app.use(passport.initialize())
 
-  app.set('appPath', config.backend.frontend)
   if (config.backend.serverFrontend) {
     var staticPath = path.posix.join(config.frontend.assetsPublicPath, config.frontend.assetsSubDirectory)
     app.use(staticPath, express.static(path.join(config.backend.frontend, '/static')))

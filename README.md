@@ -4,6 +4,7 @@ This is a NodeJs fullstack project using `express`, `mongodb`, `passport`, `vue`
 ## Feature
 - Separate for backend and frontend when development
 - Configurable
+- Restfull api
 
 ## Before dev
 1. Install `mongodb` follow [official manual](https://docs.mongodb.com/manual/installation/). It's recommend to use [MongoChef](3t.io/mongochef/) as the db client.
