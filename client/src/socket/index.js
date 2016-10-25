@@ -1,13 +1,14 @@
 import io from 'socket.io-client'
+console.log(io)
 
 export default (token, cb) => {
-  const socket = io.connect('localhost:8082/socket.io/socket.io.js')
+  const socket = io.connect()
   console.log(Object.keys(socket))
-  socket.on('connect', socket => {
-    socket.on('authenticated', () => {
-      cb(socket)
-    })
-    // send the jwt
-    .emit('authenticate', { token: token })
+  socket.on('connect', function (socket) {
+    socket
+      .on('authenticated', function () {
+        // do other things
+      })
+      .emit('authenticate', { token: token }) // send the jwt
   })
 }
