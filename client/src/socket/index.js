@@ -1,14 +1,11 @@
-import io from 'socket.io-client'
-console.log(io)
+import IO from 'socket.io-client'
+import Vue from 'vue'
 
 export default (token, cb) => {
-  const socket = io.connect()
-  console.log(Object.keys(socket))
-  socket.on('connect', function (socket) {
-    socket
-      .on('authenticated', function () {
-        // do other things
-      })
-      .emit('authenticate', { token: token }) // send the jwt
-  })
+  const socket = IO.connect()
+  socket
+    .on('authenticated', function () {
+      Vue.prototype.$socket = socket
+    })
+    .emit('authenticate', { token: token })
 }
