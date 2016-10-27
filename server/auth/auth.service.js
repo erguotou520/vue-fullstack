@@ -27,7 +27,7 @@ function isAuthenticated () {
     .use(function (req, res, next) {
       User.findById(req.user._id, function (err, user) {
         if (err) return next(err)
-        if (!user) return res.send(401)
+        if (!user) return res.sendStatus(401)
 
         req.user = user
         next()
@@ -47,7 +47,7 @@ function hasRole (roleRequired) {
       if (config.userRoles.indexOf(req.user.role) >= config.userRoles.indexOf(roleRequired)) {
         next()
       } else {
-        res.send(403)
+        res.sendStatus(403)
       }
     })
 }
@@ -55,8 +55,8 @@ function hasRole (roleRequired) {
 /**
  * Returns a jwt token signed by the app secret
  */
-function signToken (id) {
-  return jwt.sign({ _id: id }, config.secrets.session, { expiresIn: '7d' })
+function signToken (user) {
+  return jwt.sign({ _id: user._id, name: user.name, role: user.role }, config.secrets.session, { expiresIn: '7d' })
 }
 
 /**
@@ -64,7 +64,7 @@ function signToken (id) {
  */
 function setTokenCookie (req, res) {
   if (!req.user) return res.json(404, { message: 'Something went wrong, please try again.' })
-  var token = signToken(req.user._id, req.user.role)
+  var token = signToken(req.user)
   res.cookie('token', JSON.stringify(token))
   res.redirect('/')
 }

@@ -7,5 +7,8 @@ export default (token, cb) => {
     .on('authenticated', function () {
       Vue.prototype.$socket = socket
     })
+    .on('news', data => {
+      console.log(data)
+    })
     .emit('authenticate', { token: token })
 }
