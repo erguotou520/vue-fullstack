@@ -34,6 +34,7 @@
   </div>
 </template>
 <script>
+import { thing } from 'resources'
 export default {
   data () {
     return {
@@ -48,7 +49,7 @@ export default {
   },
   methods: {
     fetch () {
-      this.$http.get('things').then(data => data.json()).then(data => {
+      thing.query().then(data => data.json()).then(data => {
         this.things = data.data
       }).catch(err => {
         console.error(err)
@@ -66,9 +67,9 @@ export default {
     saveForm () {
       let promise
       if (this.form._id) {
-        promise = this.$http.put('things/' + this.form._id, this.form)
+        promise = thing.update({ _id: this.form._id }, this.form)
       } else {
-        promise = this.$http.post('things', {
+        promise = thing.save({}, {
           name: this.form.name,
           info: this.form.info
         })
@@ -77,16 +78,10 @@ export default {
         this.cancelForm()
         this.$message({
           type: 'success',
-          message: '新增成功'
+          message: this.form._id ? '修改成功' : '新增成功'
         })
         this.fetch()
-      }).catch((err) => {
-        console.error(err)
-        this.$message({
-          type: 'error',
-          message: '新增失败'
-        })
-      })
+      }).catch(() => {})
     },
     editThing (thing) {
       Object.assign(this.form, thing)
@@ -96,16 +91,14 @@ export default {
       this.$confirm('此操作将删除该纪录, 是否继续?', '提示', {
         type: 'warning'
       }).then(() => {
-        this.$http.delete('things/' + _id).then(() => {
+        thing.delete({ _id }).then(() => {
           this.$message({
             type: 'success',
             message: '删除成功!'
           })
           this.fetch()
         })
-      }).catch(() => {
-        // do nothing
-      })
+      }).catch(() => {})
     }
   },
   created () {

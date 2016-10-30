@@ -54,6 +54,7 @@
   </div>
 </template>
 <script>
+import { user } from 'resources'
 export default {
   data () {
     return {
@@ -67,7 +68,7 @@ export default {
   },
   methods: {
     fetch () {
-      this.$http.get('users').then(data => data.json()).then(data => {
+      user.query().then(data => data.json()).then(data => {
         this.users = data.data
       }).catch(err => {
         console.error(err)
@@ -82,7 +83,7 @@ export default {
       this.formVisible = false
     },
     saveForm () {
-      this.$http.post('users', this.form).then(() => {
+      user.save({}, this.form).then(() => {
         this.cancelForm()
         this.$message({
           type: 'success',
@@ -121,7 +122,7 @@ export default {
       this.$confirm('此操作将永久删除该用户, 是否继续?', '提示', {
         type: 'warning'
       }).then(() => {
-        this.$http.delete('users/' + _id).then(() => {
+        user.delete({ _id }).then(() => {
           this.$message({
             type: 'success',
             message: '删除成功!'
