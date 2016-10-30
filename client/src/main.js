@@ -21,6 +21,8 @@ initStore()
 // main component
 import App from './App'
 
+import './socket'
+
 const app = new Vue({
   router,
   store,

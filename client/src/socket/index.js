@@ -1,14 +1,14 @@
 import IO from 'socket.io-client'
 import Vue from 'vue'
 
-export default (token, cb) => {
-  const socket = IO.connect()
+const socket = IO.connect()
+Vue.prototype.$socket = socket
+
+export default socket
+export function authSocket (token, cb) {
   socket
-    .on('authenticated', function () {
-      Vue.prototype.$socket = socket
-    })
-    .on('news', data => {
-      console.log(data)
+    .on('authenticated', () => {
+      cb()
     })
     .emit('authenticate', { token: token })
 }

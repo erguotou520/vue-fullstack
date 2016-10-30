@@ -34,7 +34,6 @@ exports.show = function (req, res) {
 // Creates a new thing in the DB.
 exports.create = function (req, res) {
   Thing.create(req.body, function (err, thing) {
-    console.log(err)
     if (err) { return handleError(res, err) }
     return res.status(200).json(thing)
   })

@@ -13,7 +13,7 @@ var backendBase = {
 
   // Secret for session, you will want to change this and make it an environment variable
   secrets: {
-    session: 'vue-fullstack-secret'
+    session: process.env.SECRET || 'vue-fullstack-secret'
   },
 
   // List of user roles

@@ -28,7 +28,7 @@
     "cookie-parser": "^1.4.3",
     "crypto": "0.0.3",
     "ejs": "^2.5.2",
-    "element-ui": "^1.0.0-rc.7",
+    "element-ui": "^1.0.0-rc.8",
     "express": "^4.14.0",
     "express-jwt": "^3.4.0",
     "jsonwebtoken": "^7.0.1",
