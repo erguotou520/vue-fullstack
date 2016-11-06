@@ -1,6 +1,6 @@
 import Vue from 'vue'
 // router and store
-import store, { initStore } from './store'
+import store from './store'
 import router from './router'
 import { sync } from 'vuex-router-sync'
 sync(store, router)
@@ -16,7 +16,8 @@ Vue.use(Element)
 import './http'
 
 // init store data
-initStore()
+store.dispatch('initGlobalConfig')
+store.dispatch('initUserInfo')
 
 // main component
 import App from './App'

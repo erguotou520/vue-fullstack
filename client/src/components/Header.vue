@@ -9,24 +9,69 @@
           </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item @click.native="toProfile">个人中心</el-dropdown-item>
+            <el-dropdown-item @click.native="showConfig">用户设置</el-dropdown-item>
             <el-dropdown-item @click.native="doLogout">退出</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
+      <!-- 用户设置 -->
+      <el-dialog title="用户设置" v-model="config.visible" size="small"
+        top="4%" @close="cancelConfig">
+        <el-form class="noline" ref="config" label-position="top"
+          :model="config.form" :rules="config.rules">
+          <el-form-item label="语言" prop="locale">
+            <el-select v-model="config.form.locale">
+              <el-option label="简体中文(zh_CN)" value="zh_CN"></el-option>
+              <el-option label="English(en)" value="en"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="每页条目数" prop="pageLimit">
+            <el-slider v-model="config.form.pageLimit" :min="1" :max="100" show-input></el-slider>
+          </el-form-item>
+        </el-form>
+        <span slot="footer" class="dialog-footer">
+          <el-button @click.native="config.visible=false">取 消</el-button>
+          <el-button type="primary" @click.native="saveConfig">确 定</el-button>
+        </span>
+      </el-dialog>
     </header>
   </transition>
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
 export default {
+  data () {
+    return {
+      config: {
+        visible: false,
+        form: {
+          locale: '',
+          pageLimit: 10
+        },
+        rules: {
+          locale: [{ required: true }],
+          pageLimit: [{ type: 'number', required: true }]
+        }
+      }
+    }
+  },
   computed: {
     ...mapGetters([
       'username',
-      'loggedIn'
+      'loggedIn',
+      'globalConfig'
     ])
   },
+  watch: {
+    'config.form': {
+      deep: true,
+      handler (val) {
+        console.log(val)
+      }
+    }
+  },
   methods: {
-    ...mapActions(['logout']),
+    ...mapActions(['logout', 'updateGlobalConfig']),
     toProfile () {
       this.$router.push('/profile')
     },
@@ -34,7 +79,23 @@ export default {
       this.logout().then(() => {
         this.$router.push('/login')
       })
+    },
+    showConfig () {
+      this.config.visible = true
+    },
+    cancelConfig () {
+      this.config.form.locale = this.globalConfig.locale
+      this.config.form.pageLimit = this.globalConfig.pageLimit
+      this.config.visible = false
+    },
+    saveConfig () {
+      this.updateGlobalConfig(this.config.form)
+      this.config.visible = false
+      this.$message.success('已保存修改')
     }
+  },
+  created () {
+    this.cancelConfig()
   }
 }
 </script>

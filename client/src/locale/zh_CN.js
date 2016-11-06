@@ -1,8 +1,7 @@
 export default {
-  host: {
-    menuTitle: '云主机',
-    overview: {
-      menuTitle: '概览'
+  el: {
+    select: {
+      noData: '无匹配数据'
     }
   }
 }

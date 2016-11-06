@@ -1,7 +1,9 @@
 <template>
-  <transition name="router" mode="out-in">
-    <router-view></router-view>
-  </transition>
+  <div class="flex flex-1">
+    <transition name="router" mode="out-in">
+      <router-view></router-view>
+    </transition>
+  </div>
 </template>
 <style lang="stylus">
 .router-enter-active

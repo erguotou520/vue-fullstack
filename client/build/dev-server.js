@@ -53,7 +53,7 @@ app.use(hotMiddleware)
 
 // serve pure static assets
 var staticPath = path.posix.join(config.assetsPublicPath, config.assetsSubDirectory)
-app.use(staticPath, express.static('./static'))
+app.use(staticPath, express.static(path.join(__dirname, '../static')))
 
 module.exports = app.listen(port, function (err) {
   if (err) {

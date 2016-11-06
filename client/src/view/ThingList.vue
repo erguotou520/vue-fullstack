@@ -1,7 +1,7 @@
 <template>
   <div style="width:100%">
     <el-breadcrumb separator="/" style="margin-bottom:.5rem">
-      <el-breadcrumb-item>首页</el-breadcrumb-item>
+      <el-breadcrumb-item to="/dashboard">首页</el-breadcrumb-item>
       <el-breadcrumb-item>事情管理</el-breadcrumb-item>
     </el-breadcrumb>
     <el-button type="primary" icon="plus" @click.native="createThing" style="margin-bottom:.5rem">新增</el-button>

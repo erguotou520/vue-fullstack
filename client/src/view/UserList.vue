@@ -1,43 +1,29 @@
 <template>
-  <div style="width:100%">
+  <content-module name="users">
     <el-breadcrumb separator="/" style="margin-bottom:.5rem">
-      <el-breadcrumb-item>首页</el-breadcrumb-item>
+      <el-breadcrumb-item to="/dashboard">首页</el-breadcrumb-item>
       <el-breadcrumb-item>用户管理</el-breadcrumb-item>
     </el-breadcrumb>
-    <el-button type="primary" icon="plus" @click.native="createUser" style="margin-bottom:.5rem">新增</el-button>
-    <el-table
-      :data="users"
-      border
-      style="width: 100%">
-      <el-table-column
-        property="_id"
-        label="ID"
-        sortable
-        width="220">
-      </el-table-column>
-      <el-table-column
-        property="username"
-        label="用户名"
-        sortable
-        min-width="240">
-      </el-table-column>
-      <el-table-column
-        property="role"
-        label="角色"
-        min-width="100">
-      </el-table-column>
-      <el-table-column
-        inline-template
-        label="操作"
-        align="center"
-        width="100">
-        <template>
-          <!-- <el-button type="warning" @click.native="updatePassword(row._id)">修改密码</el-button> -->
-          <el-button type="text" @click.native="deleteUser(row._id)">删除</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
-    <el-dialog title="新增用户" v-model="formVisible">
+    <data-table ref="users">
+      <div slot="toolbar">
+        <el-button type="primary" icon="plus" @click.native="createUser">新增</el-button>
+      </div>
+      <el-table :data="users" border slot="table"
+        :height="$refs.users?$refs.users.avaliableHeight:0">
+        <el-table-column property="_id" label="ID" sortable min-width="120"></el-table-column>
+        <el-table-column property="username" label="用户名" sortable min-width="120"></el-table-column>
+        <el-table-column property="role" label="角色" min-width="90"></el-table-column>
+        <el-table-column inline-template label="操作" align="center" width="100">
+          <template>
+            <!-- <el-button type="warning" @click.native="updatePassword(row._id)">修改密码</el-button> -->
+            <el-button type="text" @click.native="deleteUser(row._id)">删除</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <pagination slot="pagination" :current="$refs.users?$refs.users.page.current:0"
+        :total="$refs.users?$refs.users.page.total:0" @page-change="fetch"></pagination>
+    </data-table>
+    <el-dialog title="新增用户" v-model="formVisible" @close="cancelForm">
       <el-form :model="form">
         <el-form-item label="用户名">
           <el-input v-model="form.username"></el-input>
@@ -47,17 +33,21 @@
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
-        <el-button @click.native="cancelForm">取 消</el-button>
+        <el-button @click.native="formVisible=false">取 消</el-button>
         <el-button type="primary" @click.native="saveForm">确 定</el-button>
       </span>
     </el-dialog>
-  </div>
+  </content-module>
 </template>
 <script>
+import DataTable from 'components/DataTable'
 import { user } from 'resources'
 export default {
   data () {
     return {
+      search: {
+
+      },
       form: {
         username: '',
         password: ''
@@ -66,10 +56,13 @@ export default {
       users: []
     }
   },
+  components: {
+    DataTable
+  },
   methods: {
-    fetch () {
-      user.query().then(data => data.json()).then(data => {
-        this.users = data.data
+    fetch (current = 1) {
+      this.$refs.users.query(user, current, { search: this.search }).then(list => {
+        this.users = list
       }).catch(err => {
         console.error(err)
       })
@@ -134,8 +127,10 @@ export default {
       })
     }
   },
-  created () {
-    this.fetch()
+  mounted () {
+    this.$nextTick(() => {
+      this.fetch()
+    })
   }
 }
 </script>
