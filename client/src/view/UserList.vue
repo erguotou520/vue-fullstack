@@ -16,7 +16,7 @@
         <el-table-column inline-template label="操作" align="center" width="100">
           <template>
             <!-- <el-button type="warning" @click.native="updatePassword(row._id)">修改密码</el-button> -->
-            <el-button type="text" @click.native="deleteUser(row._id)">删除</el-button>
+            <el-button type="text" @click.native="deleteUser(row)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -127,7 +127,7 @@ export default {
       this.$confirm(`此操作将删除用户: ${user.username}, 是否继续?`, '提示', {
         type: 'warning'
       }).then(() => {
-        user.delete({ _id }).then(() => {
+        user.delete({ _id: user._id }).then(() => {
           this.$message({
             type: 'success',
             message: '删除成功!'
