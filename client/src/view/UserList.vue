@@ -24,11 +24,12 @@
         :total="$refs.users?$refs.users.page.total:0" @page-change="fetch"></pagination>
     </data-table>
     <el-dialog title="新增用户" v-model="formVisible" @close="cancelForm">
-      <el-form :model="form">
-        <el-form-item label="用户名">
+      <el-form :model="form" :rules="rules" ref="form"
+        :close-on-click-modal="false" :close-on-press-escape="false">
+        <el-form-item label="用户名" prop="username">
           <el-input v-model="form.username"></el-input>
         </el-form-item>
-        <el-form-item label="密码">
+        <el-form-item label="密码" prop="password">
           <el-input type="password" v-model="form.password"></el-input>
         </el-form-item>
       </el-form>
@@ -46,11 +47,18 @@ export default {
   data () {
     return {
       search: {
-
       },
       form: {
         username: '',
         password: ''
+      },
+      rules: {
+        username: [{
+          required: true, message: '请输入用户名', trigger: 'blur'
+        }],
+        password: [{
+          required: true, message: '请输入密码', trigger: 'blur'
+        }]
       },
       formVisible: false,
       users: []
@@ -76,18 +84,22 @@ export default {
       this.formVisible = false
     },
     saveForm () {
-      user.save({}, this.form).then(() => {
-        this.cancelForm()
-        this.$message({
-          type: 'success',
-          message: '新增成功'
-        })
-        this.fetch()
-      }).catch((err) => {
-        this.$message({
-          type: 'error',
-          message: err.status === 422 ? '用户名已存在' : '新增失败'
-        })
+      this.$refs.form.validate(valid => {
+        if (valid) {
+          this.$http.post('users', this.form).then(() => {
+            this.cancelForm()
+            this.$message({
+              type: 'success',
+              message: '新增成功'
+            })
+            this.fetch()
+          }).catch((err) => {
+            this.$message({
+              type: 'error',
+              message: err.status === 422 ? '用户名已存在' : '新增失败'
+            })
+          })
+        }
       })
     },
     // updatePassword (_id) {
@@ -111,8 +123,8 @@ export default {
     //     // do nothing
     //   })
     // },
-    deleteUser (_id) {
-      this.$confirm('此操作将永久删除该用户, 是否继续?', '提示', {
+    deleteUser (user) {
+      this.$confirm(`此操作将删除用户: ${user.username}, 是否继续?`, '提示', {
         type: 'warning'
       }).then(() => {
         user.delete({ _id }).then(() => {
