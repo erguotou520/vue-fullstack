@@ -1,10 +1,12 @@
 <template>
-  <div style="width:100%">
+  <content-module name="things">
     <el-breadcrumb separator="/" style="margin-bottom:.5rem">
       <el-breadcrumb-item to="/dashboard">首页</el-breadcrumb-item>
       <el-breadcrumb-item>事情管理</el-breadcrumb-item>
     </el-breadcrumb>
-    <el-button type="primary" icon="plus" @click.native="createThing" style="margin-bottom:.5rem">新增</el-button>
+    <div style="margin-bottom:.5rem">
+      <el-button type="primary" icon="plus" @click.native="createThing">新增</el-button>
+    </div>
     <div>
       <el-card class="box-card" v-for="thing in things">
         <div slot="header" class="clearfix">
@@ -31,7 +33,7 @@
         <el-button type="primary" @click.native="saveForm">确 定</el-button>
       </span>
     </el-dialog>
-  </div>
+  </content-module>
 </template>
 <script>
 import { thing } from 'resources'
