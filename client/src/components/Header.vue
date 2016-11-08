@@ -62,14 +62,6 @@ export default {
       'globalConfig'
     ])
   },
-  watch: {
-    'config.form': {
-      deep: true,
-      handler (val) {
-        console.log(val)
-      }
-    }
-  },
   methods: {
     ...mapActions(['logout', 'updateGlobalConfig']),
     toProfile () {

@@ -4,24 +4,20 @@
       <el-breadcrumb-item to="/dashboard">首页</el-breadcrumb-item>
       <el-breadcrumb-item>用户管理</el-breadcrumb-item>
     </el-breadcrumb>
-    <data-table ref="users">
+    <data-table :data="users" ref="users" row-key="_id"
+      @page-change="fetch">
       <div slot="toolbar">
         <el-button type="primary" icon="plus" @click.native="createUser">新增</el-button>
       </div>
-      <el-table :data="users" border slot="table"
-        :height="$refs.users?$refs.users.avaliableHeight:0">
-        <el-table-column property="_id" label="ID" sortable min-width="120"></el-table-column>
-        <el-table-column property="username" label="用户名" sortable min-width="120"></el-table-column>
-        <el-table-column property="role" label="角色" min-width="90"></el-table-column>
-        <el-table-column inline-template label="操作" align="center" width="100">
-          <template>
-            <!-- <el-button type="warning" @click.native="updatePassword(row._id)">修改密码</el-button> -->
-            <el-button type="text" @click.native="deleteUser(row)">删除</el-button>
-          </template>
-        </el-table-column>
-      </el-table>
-      <pagination slot="pagination" :current="$refs.users?$refs.users.page.current:0"
-        :total="$refs.users?$refs.users.page.total:0" @page-change="fetch"></pagination>
+      <el-table-column property="_id" label="ID" sortable min-width="120"></el-table-column>
+      <el-table-column property="username" label="用户名" sortable min-width="120"></el-table-column>
+      <el-table-column property="role" label="角色" min-width="90"></el-table-column>
+      <el-table-column inline-template label="操作" align="center" width="100">
+        <template>
+          <!-- <el-button type="warning" @click.native="updatePassword(row._id)">修改密码</el-button> -->
+          <el-button type="text" @click.native="deleteUser(row)">删除</el-button>
+        </template>
+      </el-table-column>
     </data-table>
     <el-dialog title="新增用户" v-model="formVisible" @close="cancelForm">
       <el-form :model="form" :rules="rules" ref="form"

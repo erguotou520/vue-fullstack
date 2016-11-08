@@ -4,6 +4,9 @@
       <slot name="toolbar"></slot>
     </div>
     <div class="data-table flex flex-1" ref="wrapper">
+      <el-table :data="data" border :height="avaliableHeight">
+        <slot></slot>
+      </el-table>
       <slot name="table"></slot>
       <transition name="fade">
         <div class="data-loading flex flex-main-center flex-cross-center" v-show="pending">
@@ -14,17 +17,27 @@
         </div>
       </transition>
     </div>
-    <slot name="pagination"></slot>
+    <pagination v-if="showPagination" :current="page.current"
+      :total="page.total||0" @page-change="onPageChange"></pagination>
   </div>
 </template>
 <script>
-import Vue from 'vue'
 import { mapGetters } from 'vuex'
 import { merge } from 'lodash'
 import Pagination from 'components/Pagination'
-Vue.component('Pagination', Pagination)
 
 export default {
+  props: {
+    data: {
+      type: Array,
+      required: true
+    },
+    rowKey: String,
+    showPagination: {
+      type: Boolean,
+      default: true
+    }
+  },
   data () {
     return {
       avaliableHeight: 0,
@@ -37,13 +50,17 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({ globalConfig: 'globalConfig' })
+    ...mapGetters(['globalConfig'])
   },
   watch: {
     'globalConfig.pageLimit' (val) {
       this.page.current = 1
       this.page.limit = val
+      this.$emit('page-change', 1)
     }
+  },
+  components: {
+    Pagination
   },
   methods: {
     calcTableAvaliableHeight () {
@@ -52,15 +69,19 @@ export default {
       })
     },
     query (resource, current, ...rest) {
+      current = current || this.page.current
       this.pending = true
       const condition = merge({ page: { current, limit: this.globalConfig.pageLimit }}, ...rest)
       return resource.query(condition)
       .then(res => res.json()).then(data => {
         this.pending = false
         this.page.current = current || this.page.current
-        this.page.total = data.page.total || 0
+        this.page.total = data.page ? data.page.total : data.results.length
         return data.results
       })
+    },
+    onPageChange (targetPage) {
+      this.$emit('page-change', targetPage)
     }
   },
   created () {
