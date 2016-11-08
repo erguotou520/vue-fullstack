@@ -4,7 +4,7 @@
       <slot name="toolbar"></slot>
     </div>
     <div class="data-table flex flex-1" ref="wrapper">
-      <el-table :data="data" border :height="avaliableHeight">
+      <el-table :data="data" border :height="avaliableHeight" :row-key="(row)=>row[rowKey]">
         <slot></slot>
       </el-table>
       <slot name="table"></slot>
@@ -101,6 +101,8 @@ export default {
 .ui-data-table
   .toolbar
     margin-bottom .5rem
+    .el-form-item
+      margin-bottom 0
   // 数据表格
   .data-table
     position relative
