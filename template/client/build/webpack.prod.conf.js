@@ -67,11 +67,22 @@ var webpackConfig = merge(baseWebpackConfig, {
         )
       }
     }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'element',
+      minChunks: function (module, count) {
+        // element-ui will extracted to element
+        return (
+          module.resource.indexOf(
+            path.join(__dirname, '../node_modules/element-ui')
+          ) === 0
+        )
+      }
+    }),
     // extract webpack runtime and module manifest to its own file in order to
     // prevent vendor hash from being updated whenever app bundle is updated
     new webpack.optimize.CommonsChunkPlugin({
       name: 'manifest',
-      chunks: ['vendor']
+      chunks: ['vendor', 'element']
     })
   ]
 })

@@ -1,21 +1,25 @@
-# vue-fullstack
-This is a NodeJs fullstack project using `express`, `mongodb`, `passport`, `vue`, `vue-router`, `vuex`.
-
-## Feature
-- Separate for backend and frontend when development
-- Configurable
-- Restfull api
-
-## Before dev
-1. Install `mongodb` follow [official manual](https://docs.mongodb.com/manual/installation/). It's recommend to use [MongoChef](3t.io/mongochef/) as the db client.
-2. NodeJs installed.
-3. Clone this repo locally and `cd` in
-
-## Dev step
-1. Open terminal and run `npm install`
-2. Run `npm run server`, this will initial the db and `User` document if not exists
-3. Open other terminal and run `npm run client`, you can combine the two command with `npm run dev`
-4. Open browser and nav to `localhost:8080` (the default port is 8080, if you change this, change the port)
-
-## Build
-Run `npm run build`
+# Vue fullstack template
+This project's target is to helper people to create a **Reactivity, Realtime, User friendly** backend system.
+## Requirement
+- `Mongodb` This project require `mongodb` as the db store, you can follow [it's tutorial](https://docs.mongodb.com/manual/administration/install-community/) to install if you do not installed.
+- Base `vue` skills
+## Usage
+This is a project template for vue-cli. It is recommended to use npm 3+ for a more efficient dependency tree.
+```shell
+$ npm install -g vue-cli
+$ vue init erguotou520/vue-fullstack my-project
+$ cd my-project
+$ npm install
+$ npm run server
+$ npm run client
+```
+## What's Included
+- `vue`
+- `vue-router`
+- `vuex`
+- `vue-i18n`
+- `vue-resource`
+- `element-ui`
+- `express`
+- `mongoose`
+- `socket.io`

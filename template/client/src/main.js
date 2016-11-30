@@ -5,9 +5,10 @@ import router from './router'
 import { sync } from 'vuex-router-sync'
 sync(store, router)
 
+{{#if i18n}}
 // locale
 import './locale'
-
+{{/if}}
 // ui library
 import Element from 'element-ui'
 Vue.use(Element)

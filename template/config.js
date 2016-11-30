@@ -9,11 +9,11 @@ var backendBase = {
   root: path.normalize(__dirname),
 
   // Server port
-  port: process.env.PORT || 9000,
+  port: process.env.PORT || {{backendPort}},
 
   // Secret for session, you will want to change this and make it an environment variable
   secrets: {
-    session: process.env.SECRET || 'vue-fullstack-secret'
+    session: process.env.SECRET || '{{name}}-secret'
   },
 
   // List of user roles
@@ -31,7 +31,7 @@ var backendBase = {
 
 var development = {
   frontend: {
-    port: 8082,
+    port: {{frontendPort}},
     assetsRoot: path.resolve(__dirname, './client/src'),
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
@@ -48,7 +48,7 @@ var development = {
   },
   backend: _.merge({}, backendBase, {
     mongo: {
-      uri: 'mongodb://localhost/vue-fullstack-dev'
+      uri: {{#if mongoUri}}'{{mongoUri}}-dev'{{else}}'mongodb://localhost/{{name}}-dev'{{/if}}
     }
   })
 }
@@ -73,12 +73,12 @@ var production = {
     // Server IP
     ip: process.env.OPENSHIFT_NODEJS_IP || process.env.IP || undefined,
     // Server port
-    port: process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 8080,
+    port: process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT,
     // MongoDB connection options
     mongo: {
       uri: process.env.MONGOLAB_URI || process.env.MONGOHQ_URL ||
            process.env.OPENSHIFT_MONGODB_DB_URL + process.env.OPENSHIFT_APP_NAME ||
-           'mongodb://localhost/vue-fullstack'
+           {{#if mongoUri}}'{{mongoUri}}'{{else}}'mongodb://localhost/{{name}}'{{/if}}
     },
 
     // frontend folder
