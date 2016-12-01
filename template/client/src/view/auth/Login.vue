@@ -1,18 +1,18 @@
 <template>
   <div class="login-wrapper" v-show="!loggedIn">
     <div class="bg"></div>
-    <h1>XXX Backend System</h1>
+    <h1>{{$t('config.title')}}</h1>
     <el-form ref="form" :model="form" :rules="rules"
       @submit.native.prevent="onSubmit">
       <el-form-item prop="username">
-        <el-input v-model="form.username" placeholder="请输入用户名"></el-input>
+        <el-input v-model="form.username" :placeholder="$t('login.username')"></el-input>
       </el-form-item>
       <el-form-item prop="password">
-        <el-input v-model="form.password" type="password" placeholder="请输入密码"></el-input>
+        <el-input v-model="form.password" type="password" :placeholder="$t('login.password')"></el-input>
       </el-form-item>
       <el-form-item>
         <el-button class="login-button" :class="{error: loginError}" type="success"
-          native-type="submit" :loading="loading">登录</el-button>
+          native-type="submit" :loading="loading">{{$t('login.button')}}</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -28,10 +28,10 @@ export default {
       },
       rules: {
         username: [{
-          required: true, message: '请输入用户名', trigger: 'blur'
+          required: true, message: this.$t('login.username'), trigger: 'blur'
         }],
         password: [{
-          required: true, message: '请输入密码', trigger: 'blur'
+          required: true, message: this.$t('login.password'), trigger: 'blur'
         }]
       },
       loading: false,
@@ -55,14 +55,12 @@ export default {
             this.loading = false
             this.$router.push(this.$route.query.redirect || '/')
           }).catch((err) => {
-            if (err.ok) {
-              this.$notify({
-                title: '错误',
-                message: err.message || '用户名或密码错误',
-                type: 'error',
-                duration: 1500
-              })
-            }
+            this.$notify({
+              title: '错误',
+              message: err.message || '用户名或密码错误',
+              type: 'error',
+              duration: 1500
+            })
             this.loading = false
             this.loginError = true
             setTimeout(() => {
@@ -94,6 +92,7 @@ $input-width = 15rem
   > h1
     position relative
     margin 0 0 1rem
+    text-align center
     z-index 1
   > form
     width $input-width

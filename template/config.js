@@ -67,17 +67,16 @@ var production = {
     productionGzipExtensions: ['js', 'css']
   },
   backend: _.merge({}, backendBase, {
-    // is backend server frontend, you can use nginx to server frontend and proxy to backend services
+    // whether backend servers the frontend, you can use nginx to server frontend and proxy to backend services
     // if set to true, you need no web services like nginx
     serverFrontend: true,
     // Server IP
-    ip: process.env.OPENSHIFT_NODEJS_IP || process.env.IP || undefined,
+    ip: process.env.APP_HOST || process.env.APP_IP || process.env.HOST || process.env.IP,
     // Server port
-    port: process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT,
+    port: process.env.APP_PORT || process.env.PORT,
     // MongoDB connection options
     mongo: {
-      uri: process.env.MONGOLAB_URI || process.env.MONGOHQ_URL ||
-           process.env.OPENSHIFT_MONGODB_DB_URL + process.env.OPENSHIFT_APP_NAME ||
+      uri: process.env.MONGODB_URI || process.env.MONGOHQ_URI ||
            {{#if mongoUri}}'{{mongoUri}}'{{else}}'mongodb://localhost/{{name}}'{{/if}}
     },
 

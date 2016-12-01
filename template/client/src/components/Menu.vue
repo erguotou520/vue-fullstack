@@ -4,10 +4,10 @@
       <router-link class="logo-wrapper" to="/" exact>Backend System</router-link>
       <ul class="menu">
         <li class="menu-item">
-          <router-link class="menu-link" to="/users">Users</router-link>
+          <router-link class="menu-link" to="/users">{{$t('menu.users')}}</router-link>
         </li>
         <li class="menu-item">
-          <router-link class="menu-link" to="/things">Things</router-link>
+          <router-link class="menu-link" to="/things">{{$t('menu.things')}}</router-link>
         </li>
       </ul>
     </div>

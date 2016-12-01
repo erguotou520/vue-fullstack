@@ -21,7 +21,7 @@ module.exports = function (app) {
   // All other routes should redirect to the index.html
   if (config.serverFrontend) {
     app.route('/*').get(function (req, res) {
-      res.sendFile(path.resolve(config.backend, '/index.html'))
+      res.sendFile(path.join(config.frontend, '/index.html'))
     })
   }
 }

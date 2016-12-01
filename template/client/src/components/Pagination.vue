@@ -1,6 +1,6 @@
 <template>
   <div class="ui-pagination">
-    <span class="current">当前第&nbsp;{{current}}&nbsp;页，共&nbsp;{{pages}}&nbsp;页</span>
+    <span class="current">{{$t('pagination.current')}}&nbsp;{{current}}&nbsp;{{$t('pagination.currentAppend')}}&nbsp;&nbsp;{{$t('pagination.pages')}}&nbsp;{{pages}}&nbsp;{{$t('pagination.pagesAppend')}}</span>
     <div class="navs">
       <a :disabled="current<=1" @click="change(1, current<=1)">
         <span class="iconfont icon-home-page"></span>

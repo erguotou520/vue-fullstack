@@ -4,11 +4,6 @@ export default [{
     require(['../view/Dashboard.vue'], resolve)
   }
 }, {
-  path: '/profile',
-  component: (resolve) => {
-    require(['../view/Profile.vue'], resolve)
-  }
-}, {
   path: '/users',
   component: (resolve) => {
     require(['../view/UserList.vue'], resolve)

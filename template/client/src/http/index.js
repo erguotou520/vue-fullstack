@@ -16,29 +16,32 @@ Vue.http.interceptors.push((request, next) => {
 // response interceptor
 Vue.http.interceptors.push((request, next) => {
   next((response) => {
-    if (response.status === 401 && store.state.route.path !== '/login') {
+    if (store.state.route.path === '/login') {
+      return
+    }
+    if (response.status === 401) {
       store.dispatch('logout').then(() => {
         router.push({ path: '/login', query: { redirect: store.state.route.fullpath }})
       })
       return
     }
     if (response.status === 404) {
-      Message.error('请求地址有误')
+      Message.error(Vue.t('http.error.E404'))
       return
     }
     if (response.status === 500) {
-      Message.error('后台出错')
+      Message.error(Vue.t('http.error.E500'))
       return
     }
     // other errors
     if (!response.ok) {
       response.json().then(data => {
         Message.error({
-          message: data.message || '操作失败，请重试'
+          message: data.message || Vue.t('http.error.E404')
         })
       }).catch(() => {
         Message.error({
-          message: response || '操作失败，请重试'
+          message: response || Vue.t('http.error.E404')
         })
       })
     }
