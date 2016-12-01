@@ -31,7 +31,7 @@ $ npm run client
 - `socket.io`
 
 ## Demo app
-Here is a [demo](http://fullstack.erguotou.me)  
+Here is a [demo](https://vue-fullstack-demo.herokuapp.com)  
 This is [other one](http://meals.erguotou.me)  
 ```
 username: admin
