@@ -50,8 +50,20 @@ var webpackConfig = merge(baseWebpackConfig, {
         // more options:
         // https://github.com/kangax/html-minifier#options-quick-reference
       },
+      chunks: ['manifest', 'vendor', 'element', 'app'],
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
-      chunksSortMode: 'dependency'
+      chunksSortMode: function (a, b) {
+        var orders = ['manifest', 'vendor', 'element', 'app']
+        var order1 = orders.indexOf(a.names[0])
+        var order2 = orders.indexOf(b.names[0])
+        if (order1 > order2) {
+          return 1
+        } else if (order1 < order2) {
+          return -1
+        } else {
+          return 0
+        }
+      }
     }),
     // split vendor js into its own file
     new webpack.optimize.CommonsChunkPlugin({

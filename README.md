@@ -32,7 +32,7 @@ $ npm run client
 - `socket.io`
 
 ## Demo app
-Here is a [demo](https://vue-fullstack-demo.herokuapp.com)  
+Here is a [demo](https://vue-fullstack-demo.herokuapp.com) and the demo repo is [here](https://github.com/erguotou520/vue-fullstack-demo)  
 This is [other one](http://meals.erguotou.me)  
 ```
 username: admin
