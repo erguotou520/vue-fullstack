@@ -8,6 +8,7 @@ This project's target is to helper people to create a **Reactivity, Realtime, Us
 ## Usage
 This is a project template for vue-cli. It is recommended to use npm 3+ for a more efficient dependency tree.
 ```shell
+# cli version must greater than 2.5.0
 $ npm install -g vue-cli
 $ vue init erguotou520/vue-fullstack my-project
 $ cd my-project
