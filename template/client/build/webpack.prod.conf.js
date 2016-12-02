@@ -62,7 +62,7 @@ var webpackConfig = merge(baseWebpackConfig, {
           module.resource &&
           /\.js$/.test(module.resource) &&
           module.resource.indexOf(
-            path.join(__dirname, '../node_modules')
+            path.join(__dirname, '../../node_modules')
           ) === 0
         )
       }
@@ -73,7 +73,7 @@ var webpackConfig = merge(baseWebpackConfig, {
         // element-ui will extracted to element
         return (
           module.resource.indexOf(
-            path.join(__dirname, '../node_modules/element-ui')
+            path.join(__dirname, '../../node_modules/element-ui')
           ) === 0
         )
       }
