@@ -16,6 +16,7 @@ Vue.http.interceptors.push((request, next) => {
 // response interceptor
 Vue.http.interceptors.push((request, next) => {
   next((response) => {
+    // don't handle for login page
     if (store.state.route.path === '/login') {
       return
     }

@@ -1,6 +1,6 @@
 {
-  "name": "vue-cli-template-vue-fullstack",
-  "version": "0.1.0",
+  "name": "vue-fullstack",
+  "version": "0.1.1",
   "license": "MIT",
   "keywords": [
     "vue",

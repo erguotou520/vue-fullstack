@@ -40,7 +40,7 @@ router.beforeEach((to, from, next) => {
     store.dispatch('changeRouteLoading', true).then(() => {
       // has logged in, redirect
       if (to.path === '/login' && store.getters.loggedIn) {
-        next(from.query.redirect || '/')
+        return next(false)
       }
       if (!to.meta.skipAuth) {
         // this route requires auth, check if logged in
