@@ -22,7 +22,7 @@
           <el-form-item :label="$t('header.localeSetting')" prop="locale">
             <el-select v-model="config.form.locale">
               <el-option label="简体中文(zh_CN)" value="zh_CN"></el-option>
-              <el-option label="English(en)" value="en"></el-option>
+              <el-option label="English(en_US)" value="en_US"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item :label="$t('header.pageLimit')" prop="pageLimit">

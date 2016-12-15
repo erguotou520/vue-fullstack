@@ -1,7 +1,7 @@
 import { assign } from 'lodash'
 
-import users from './users/en'
-import things from './things/en'
+import users from './users/en_US'
+import things from './things/en_US'
 const common = {
   el: {
     select: {

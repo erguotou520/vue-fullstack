@@ -78,6 +78,7 @@
     "inject-loader": "^2.0.1",
     "nodemon": "^1.10.2",
     "ora": "^0.2.0",
+    "os-locale": "^2.0.0",
     "shelljs": "^0.6.0",
     "stylus": "^0.54.5",
     "stylus-loader": "^2.3.1",
