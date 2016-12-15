@@ -103,7 +103,7 @@ export default {
     margin-bottom .5rem
     .el-form-item
       margin-bottom 0
-  // 数据表格
+  // data table
   .data-table
     position relative
     margin 0 -1rem

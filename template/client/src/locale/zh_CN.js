@@ -1,4 +1,9 @@
-export default {
+import { assign } from 'lodash'
+
+import users from './users/zh_CN'
+import things from './things/zh_CN'
+
+const common = {
   el: {
     select: {
       noData: '无匹配数据'
@@ -14,9 +19,16 @@ export default {
       err: '保存失败！'
     },
     confirm: {
+      title: '提示',
       ok: '确 定',
       cancel: '取 消'
-    }
+    },
+    created: '新增成功',
+    createFailed: '新增失败',
+    updated: '已保存更改',
+    updateFailed: '更新失败',
+    removed: '删除成功',
+    removeFailed: '删除失败'
   },
   http: {
     error: {
@@ -50,6 +62,13 @@ export default {
     users: '用户管理',
     things: '事件管理'
   },
+  toolbar: {
+    create: '添加',
+    remove: '删除'
+  },
+  datatable: {
+    operate: '操作'
+  },
   pagination: {
     current: '当前第',
     currentAppend: '页',
@@ -62,3 +81,5 @@ export default {
     button: '登录'
   }
 }
+
+export default assign({}, common, { users, things })

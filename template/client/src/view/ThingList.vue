@@ -1,17 +1,17 @@
 <template>
   <content-module name="things">
     <el-breadcrumb separator="/" style="margin-bottom:.5rem">
-      <el-breadcrumb-item to="/dashboard">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>事情管理</el-breadcrumb-item>
+      <el-breadcrumb-item to="/dashboard">{{$t('things.breadcrumb.home')}}</el-breadcrumb-item>
+      <el-breadcrumb-item>{{$t('things.breadcrumb.current')}}</el-breadcrumb-item>
     </el-breadcrumb>
     <div style="margin-bottom:.5rem">
-      <el-button type="primary" icon="plus" @click.native="createThing">新增</el-button>
+      <el-button type="primary" icon="plus" @click.native="createThing">{{$t('toolbar.create')}}</el-button>
     </div>
     <div>
       <el-card class="box-card" v-for="thing in things">
         <div slot="header" class="clearfix">
           <span>{{thing.name}}</span>
-          <i class="el-icon-delete icon" @click="deleteThing(thing._id)"></i>
+          <i class="el-icon-delete icon" @click="deleteThing(thing)"></i>
           <i class="el-icon-edit icon" @click="editThing(thing)"></i>
         </div>
         <p>
@@ -19,18 +19,18 @@
         </p>
       </el-card>
     </div>
-    <el-dialog :title="form._id ? '新增事件' : '编辑事件'" v-model="formVisible">
+    <el-dialog :title="form._id ? $t('things.edit.update') : $t('things.edit.create')" v-model="formVisible">
       <el-form :model="form">
-        <el-form-item label="名字">
+        <el-form-item :label="$t('things.model.name')">
           <el-input v-model="form.name"></el-input>
         </el-form-item>
-        <el-form-item label="描述">
+        <el-form-item :label="$t('things.model.description')">
           <el-input v-model="form.info"></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
-        <el-button @click.native="cancelForm">取 消</el-button>
-        <el-button type="primary" @click.native="saveForm">确 定</el-button>
+        <el-button @click.native="cancelForm">{{$t('message.confirm.cancel')}}</el-button>
+        <el-button type="primary" @click.native="saveForm">{{$t('message.confirm.ok')}}</el-button>
       </span>
     </el-dialog>
   </content-module>
@@ -80,7 +80,7 @@ export default {
         this.cancelForm()
         this.$message({
           type: 'success',
-          message: this.form._id ? '修改成功' : '新增成功'
+          message: this.form._id ? this.$t('message.updated') : this.$t('message.created')
         })
         this.fetch()
       }).catch(() => {})
@@ -89,14 +89,14 @@ export default {
       Object.assign(this.form, thing)
       this.formVisible = true
     },
-    deleteThing (_id) {
-      this.$confirm('此操作将删除该纪录, 是否继续?', '提示', {
+    deleteThing (thing) {
+      this.$confirm(`This action will remove the selected thing: ${thing.name} forever, still going on?`, this.$t('message.confirm.title'), {
         type: 'warning'
       }).then(() => {
-        thing.delete({ _id }).then(() => {
+        thing.delete({ _id: thing._id }).then(() => {
           this.$message({
             type: 'success',
-            message: '删除成功!'
+            message: this.$t('message.removed')
           })
           this.fetch()
         })

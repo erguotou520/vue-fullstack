@@ -14,7 +14,7 @@
           </el-dropdown-menu>
         </el-dropdown>
       </div>
-      <!-- 用户设置 -->
+      <!-- user settings -->
       <el-dialog :title="$t('header.settings')" v-model="config.visible" size="small"
         top="4%" @close="cancelConfig">
         <el-form class="noline" ref="config" label-position="top"
@@ -34,7 +34,7 @@
           <el-button type="primary" @click.native="saveConfig">{{$t('message.confirm.ok')}}</el-button>
         </span>
       </el-dialog>
-      <!-- 修改密码 -->
+      <!-- change password -->
       <el-dialog :title="$t('header.password')" v-model="password.visible" size="small" @close="cancelPassword">
         <el-form label-position="top" :model="password.form"
           :rules="password.rules" ref="password">

@@ -78,7 +78,7 @@ exports.changePassword = function (req, res, next) {
         res.sendStatus(200)
       })
     } else {
-      res.status(403).json({ message: '旧密码不正确' })
+      res.status(403).json({ message: 'Old password is not correct.' })
     }
   })
 }

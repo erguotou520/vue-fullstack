@@ -1,4 +1,8 @@
-export default {
+import { assign } from 'lodash'
+
+import users from './users/en'
+import things from './things/en'
+const common = {
   el: {
     select: {
       noData: 'no matched data'
@@ -14,9 +18,16 @@ export default {
       err: 'Error occured when saving!'
     },
     confirm: {
+      title: 'warning',
       ok: 'save',
       cancel: 'cancel'
-    }
+    },
+    created: 'Create successed',
+    createFailed: 'Create failed',
+    updated: 'Update successed',
+    updateFailed: 'Update failed',
+    removed: 'Delete successed',
+    removeFailed: 'Delete failed'
   },
   http: {
     error: {
@@ -50,6 +61,13 @@ export default {
     users: 'Users',
     things: 'Things'
   },
+  toolbar: {
+    create: 'Add',
+    remove: 'Delete'
+  },
+  datatable: {
+    operate: 'Operate'
+  },
   pagination: {
     current: 'current',
     currentAppend: 'page',
@@ -63,3 +81,5 @@ export default {
     button: 'Log in'
   }
 }
+
+export default assign({}, common, { users, things })

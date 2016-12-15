@@ -1,37 +1,34 @@
 <template>
   <content-module name="users">
     <el-breadcrumb separator="/" style="margin-bottom:.5rem">
-      <el-breadcrumb-item to="/dashboard">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>用户管理</el-breadcrumb-item>
+      <el-breadcrumb-item to="/dashboard">{{$t('users.breadcrumb.home')}}</el-breadcrumb-item>
+      <el-breadcrumb-item>{{$t('users.breadcrumb.current')}}</el-breadcrumb-item>
     </el-breadcrumb>
     <data-table :data="users" ref="users" row-key="_id"
       @page-change="fetch">
       <div slot="toolbar">
-        <el-button type="primary" icon="plus" @click.native="createUser">新增</el-button>
+        <el-button type="primary" icon="plus" @click.native="createUser">{{$t('toolbar.create')}}</el-button>
       </div>
       <el-table-column property="_id" label="ID" sortable min-width="120"></el-table-column>
-      <el-table-column property="username" label="用户名" sortable min-width="120"></el-table-column>
-      <el-table-column property="role" label="角色" min-width="90"></el-table-column>
-      <el-table-column inline-template label="操作" align="center" width="100">
-        <template>
-          <!-- <el-button type="warning" @click.native="updatePassword(row._id)">修改密码</el-button> -->
-          <el-button type="text" @click.native="deleteUser(row)">删除</el-button>
-        </template>
+      <el-table-column property="username" :label="$t('users.table.username')" sortable min-width="120"></el-table-column>
+      <el-table-column property="role" :label="$t('users.table.role')" min-width="90"></el-table-column>
+      <el-table-column inline-template :label="$t('datatable.operate')" align="center" width="100">
+        <el-button type="text" @click.native="deleteUser(row)">{{$t('toolbar.remove')}}</el-button>
       </el-table-column>
     </data-table>
-    <el-dialog title="新增用户" v-model="formVisible" @close="cancelForm">
+    <el-dialog :title="$t('users.create.title')" v-model="formVisible" @close="cancelForm">
       <el-form :model="form" :rules="rules" ref="form"
         :close-on-click-modal="false" :close-on-press-escape="false">
-        <el-form-item label="用户名" prop="username">
+        <el-form-item :label="$t('users.model.username')" prop="username">
           <el-input v-model="form.username"></el-input>
         </el-form-item>
-        <el-form-item label="密码" prop="password">
+        <el-form-item :label="$t('users.model.password')" prop="password">
           <el-input type="password" v-model="form.password"></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
-        <el-button @click.native="formVisible=false">取 消</el-button>
-        <el-button type="primary" @click.native="saveForm">确 定</el-button>
+        <el-button @click.native="formVisible=false">{{$t('message.confirm.cancel')}}</el-button>
+        <el-button type="primary" @click.native="saveForm">{{$t('message.confirm.ok')}}</el-button>
       </span>
     </el-dialog>
   </content-module>
@@ -50,10 +47,10 @@ export default {
       },
       rules: {
         username: [{
-          required: true, message: '请输入用户名', trigger: 'blur'
+          required: true, message: this.$t('users.rules.username'), trigger: 'blur'
         }],
         password: [{
-          required: true, message: '请输入密码', trigger: 'blur'
+          required: true, message: this.$t('users.rules.password'), trigger: 'blur'
         }]
       },
       formVisible: false,
@@ -86,53 +83,30 @@ export default {
             this.cancelForm()
             this.$message({
               type: 'success',
-              message: '新增成功'
+              message: this.$t('message.created')
             })
             this.fetch()
           }).catch((err) => {
             this.$message({
               type: 'error',
-              message: err.status === 422 ? '用户名已存在' : '新增失败'
+              message: err.status === 422 ? this.$t('users.action.userExisted') : this.$t('message.createFailed')
             })
           })
         }
       })
     },
-    // updatePassword (_id) {
-    //   this.$prompt('请输入新密码', '提示', {
-    //     inputPattern: /^[\da-zA-Z_]{6,12}$/,
-    //     inputErrorMessage: '密码至少6到12位，且只能是数字字母和下划线'
-    //   }).then(value => {
-    //     this.$http.put('users/' + _id + '/password').then(() => {
-    //       this.$message({
-    //         type: 'success',
-    //         message: '密码已修改'
-    //       })
-    //     }).catch((error) => {
-    //       console.error(error)
-    //       this.$message({
-    //         type: 'error',
-    //         message: '密码修改未完成。'
-    //       })
-    //     })
-    //   }).catch(() => {
-    //     // do nothing
-    //   })
-    // },
     deleteUser (user) {
-      this.$confirm(`此操作将删除用户: ${user.username}, 是否继续?`, '提示', {
+      this.$confirm(`This action will remove the selected user: ${user.username} forever, still going on?`, this.$t('message.confirm.title'), {
         type: 'warning'
       }).then(() => {
         user.delete({ _id: user._id }).then(() => {
           this.$message({
             type: 'success',
-            message: '删除成功!'
+            message: this.$t('message.removed')
           })
           this.fetch()
         })
-      }).catch(() => {
-        // do nothing
-      })
+      }).catch(() => {})
     }
   },
   mounted () {
