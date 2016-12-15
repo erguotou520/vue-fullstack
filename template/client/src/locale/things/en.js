@@ -4,18 +4,11 @@ export default {
     current: 'Things'
   },
   model: {
-    username: 'Username',
-    role: 'Role',
-    password: 'Password'
+    name: 'name',
+    description: 'description'
   },
-  create: {
-    title: 'Create a user'
-  },
-  rules: {
-    username: 'Please input the username',
-    password: 'Please input the password'
-  },
-  action: {
-    userExisted: 'User existed'
+  edit: {
+    create: 'Add thing',
+    update: 'Update thing'
   }
 }

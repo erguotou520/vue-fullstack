@@ -24,6 +24,13 @@ const routes = [{
   children: [...otherModuleRoutes, {
     path: '/', redirect: '/dashboard'
   }]
+}, {
+  path: '*',
+  component: {
+    render (h) {
+      return h('div', { staticClass: 'flex flex-main-center', attrs: { style: 'width:100%;font-size:32px' }}, 'Page not found')
+    }
+  }
 }]
 
 const router = new VueRouter({

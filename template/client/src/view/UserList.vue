@@ -10,8 +10,8 @@
         <el-button type="primary" icon="plus" @click.native="createUser">{{$t('toolbar.create')}}</el-button>
       </div>
       <el-table-column property="_id" label="ID" sortable min-width="120"></el-table-column>
-      <el-table-column property="username" :label="$t('users.table.username')" sortable min-width="120"></el-table-column>
-      <el-table-column property="role" :label="$t('users.table.role')" min-width="90"></el-table-column>
+      <el-table-column property="username" :label="$t('users.model.username')" sortable min-width="120"></el-table-column>
+      <el-table-column property="role" :label="$t('users.model.role')" min-width="90"></el-table-column>
       <el-table-column inline-template :label="$t('datatable.operate')" align="center" width="100">
         <el-button type="text" @click.native="deleteUser(row)">{{$t('toolbar.remove')}}</el-button>
       </el-table-column>
