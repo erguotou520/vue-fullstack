@@ -13,7 +13,7 @@ export default {
   edit: {
     create: '新增事件',
     update: '编辑事件'
-  }
+  },
   rules: {
     username: '请输入用户名',
     password: '请输入密码'
