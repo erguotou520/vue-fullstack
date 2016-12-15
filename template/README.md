@@ -70,3 +70,6 @@ When you deploy your app to you cloud server, it's easy to config you app with `
 
 ## Notice
 The generated app is just a template to build your app system fast, maybe it can't meet your needs, so you need to do some change at this issue.
+
+## License
+Under [MIT license](./LICENSE)
