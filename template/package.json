@@ -23,6 +23,7 @@
     "server": "./node_modules/.bin/nodemon --watch server server/app.js",
     "dev": "npm run client|npm run server",
     "build": "node client/build/build.js",
+    {{#unless i18n}}"remove:i18n": "node tasks/replaceI18n.js",{{/unless}}
     "lint": "eslint --ext .js,.vue client/src"
   },
   "dependencies": {
@@ -60,6 +61,7 @@
     "babel-plugin-transform-runtime": "^6.0.0",
     "babel-preset-es2015": "^6.0.0",
     "babel-preset-stage-2": "^6.0.0",
+    "babel-register": "^6.18.0",
     "babel-runtime": "^6.0.0",
     "connect-history-api-fallback": "^1.1.0",
     "cross-spawn": "^2.1.5",
@@ -73,6 +75,7 @@
     "eventsource-polyfill": "^0.9.6",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.4",
+    "glob": "^7.1.1",
     "html-webpack-plugin": "^2.8.1",
     "http-proxy-middleware": "^0.12.0",
     "inject-loader": "^2.0.1",

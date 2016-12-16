@@ -5,6 +5,10 @@ This project's target is to helper people to create a **Reactivity, Realtime, Us
 - `Mongodb` This project require `mongodb` as the db store, you can follow [it's tutorial](https://docs.mongodb.com/manual/administration/install-community/) to install if you do not installed.
 - Base `vue` skills
 
+## About i18n
+If you don't choose i18n when project initialization, you need to take a look at this description, or you can skip this step.
+As `vue-cli` does't support more ablity to run task after init, so you need to run `npm run remove:i18n` manually.
+
 ## Usage
 This is a project template for vue-cli. It is recommended to use npm 3+ for a more efficient dependency tree.
 ```shell
@@ -13,6 +17,8 @@ $ npm install -g vue-cli
 $ vue init erguotou520/vue-fullstack my-project
 $ cd my-project
 $ npm install
+# If you choose not to use vue-i18n, you need to run remove:i18n to replace the file with default locale text. If you have chosen vue-i18n, skip this step
+$ npm run remove:i18n
 # This runs a express server
 $ npm run server
 # Open other terminal and cd into my-project

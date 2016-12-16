@@ -11,7 +11,7 @@ This is a NodeJs fullstack project using `express`, `mongodb`, `passport`, `vue`
 2. NodeJs installed.
 
 ## Dev step
-1. Open terminal and run `npm install`
+1. Open terminal and run `npm install`, if you don't choose i18n when initialization, you need to run `npm run remove:i18n` here manually
 2. Run `npm run server`, this will initial the db and `User` document if not exists
 3. Open other terminal and run `npm run client`, you can combine the two command with `npm run dev`
 4. Open browser and nav to `localhost:9001` (the default port is 9001, if you change this, change the port)
