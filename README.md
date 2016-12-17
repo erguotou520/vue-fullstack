@@ -7,7 +7,7 @@ This project's target is to helper people to create a **Reactivity, Realtime, Us
 
 ## About i18n
 If you don't choose i18n when project initialization, you need to take a look at this description, or you can skip this step.
-As `vue-cli` does't support more ablity to run task after init, so you need to run `npm run remove:i18n` manually.
+As `vue-cli` does't support more ablity to run task after init, so you need to run `npm run remove:i18n` manually. *This script doesn't change the page view which contains `change locale` in `/client/src/components/Header.vue`, you can remove those code manually.*
 
 ## Usage
 This is a project template for vue-cli. It is recommended to use npm 3+ for a more efficient dependency tree.

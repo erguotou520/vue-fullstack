@@ -20,8 +20,8 @@
       </el-card>
     </div>
     <el-dialog :title="form._id ? $t('things.edit.update') : $t('things.edit.create')" v-model="formVisible">
-      <el-form :model="form">
-        <el-form-item :label="$t('things.model.name')">
+      <el-form :model="form" :rules="rules">
+        <el-form-item :label="$t('things.model.name')" prop="name">
           <el-input v-model="form.name"></el-input>
         </el-form-item>
         <el-form-item :label="$t('things.model.description')">
@@ -45,6 +45,9 @@ export default {
         _id: '',
         name: '',
         info: ''
+      },
+      rules: {
+        name: [{ required: true, message: this.$t('things.rules.name'), trigger: 'blur' }]
       },
       things: []
     }

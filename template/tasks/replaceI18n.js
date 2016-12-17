@@ -1,24 +1,27 @@
-require("babel-register")
+require('babel-register')
 var osLocale = require('os-locale')()
 var glob = require('glob')
 var path = require('path')
 var fs = require('fs')
 var _ = require('lodash')
 
-let YELLOW = '\x1b[33m'
-let BLUE = '\x1b[34m'
-let END = '\x1b[0m'
+const YELLOW = '\x1b[33m'
+const BLUE = '\x1b[34m'
+const END = '\x1b[0m'
 
 var clientPath = path.join(__dirname, '../client')
 
 // :prop="$t()"
-var syntax1 = /\:([a-z-]+=\")\$t\(\'([a-zA-Z\.]+)\'\)(\")/g
+var syntax1 = /:([a-z-]+=")\$t\('([a-zA-Z_\.]+)'\)(")/g
 
 // {{$t()}}
-var syntax2 = /\{\{\$t\(\'([a-zA-Z\.]+)\'\)\}\}/g
+var syntax2 = /\{\{\$t\('([a-zA-Z_\.]+)'\)\}\}/g
 
 // this.$t()
-var syntax3 = /this.\$t\(\'([a-zA-Z\.]+)\'\)/g
+var syntax3 = /this.\$t\('([a-zA-Z_\.]+)'\)/g
+
+// :prop="xxx$t('')xxx$t()"
+var syntax4 = /:([a-z-]+=".+)\$t\('([a-zA-Z_\.]+)'\)(.+)\$t\('([a-zA-Z_\.]+)'\)(")/g
 
 var _locale = 'zh_CN'
 osLocale.then(locale => {
@@ -29,7 +32,7 @@ osLocale.then(locale => {
   var langConfig = require('../client/src/locale/' + _locale).default
 
   // match files
-  console.log(BLUE +　'Replace src files......' + END)
+  console.log(BLUE + 'Replace src files......' + END)
   glob(clientPath + '/src/**/*.{js,vue}', function (er, files) {
     files.forEach(function (file) {
       fs.readFile(file, 'utf8', function (err, data) {
@@ -42,6 +45,9 @@ osLocale.then(locale => {
             return _.get(langConfig, arguments[1])
           }).replace(syntax3, function () {
             return '\'' + _.get(langConfig, arguments[1]) + '\''
+          }).replace(syntax4, function () {
+            return ':' + arguments[1] + '\'' + _.get(langConfig, arguments[2]) + '\'' +
+              arguments[3] + '\'' + _.get(langConfig, arguments[4]) + '\'' + arguments[5]
           })
           fs.writeFile(file, replaced, function (err) {
             if (err) {
@@ -54,7 +60,7 @@ osLocale.then(locale => {
   })
 
   // rewrite package.json
-  console.log(BLUE +　'Replace package.json......' + END)
+  console.log(BLUE + 'Replace package.json......' + END)
   var pkg = require('../package.json')
   delete pkg.devDependencies['os-locale']
   delete pkg.devDependencies['glob']
@@ -67,8 +73,10 @@ osLocale.then(locale => {
   })
 
   // delete locale folder
-  console.log(BLUE +　'Remove locale and task folder......' + END)
+  console.log(BLUE + 'Remove locale and task folder......' + END)
   require('shelljs/global')
   rm('-rf', path.join(__dirname, '../client/src/locale'))
   rm('-rf', path.join(__dirname, '../tasks'))
+
+  console.log(YELLOW + 'Finished' + END)
 })

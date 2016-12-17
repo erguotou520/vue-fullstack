@@ -8,8 +8,7 @@ sync(store, router)
 {{#if i18n}}
 // locale
 import './locale'
-{{/if}}
-// ui library
+{{/if}}// ui library
 import Element from 'element-ui'
 Vue.use(Element)
 

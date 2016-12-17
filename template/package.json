@@ -23,8 +23,8 @@
     "server": "./node_modules/.bin/nodemon --watch server server/app.js",
     "dev": "npm run client|npm run server",
     "build": "node client/build/build.js",
-    {{#unless i18n}}"remove:i18n": "node tasks/replaceI18n.js",{{/unless}}
-    "lint": "eslint --ext .js,.vue client/src"
+    {{#unless i18n}}"remove:i18n": "node tasks/replaceI18n.js",
+    {{/unless}}"lint": "eslint --ext .js,.vue client/src"
   },
   "dependencies": {
     "body-parser": "^1.15.2",

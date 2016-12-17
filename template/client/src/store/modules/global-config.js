@@ -1,43 +1,43 @@
-import Vue from 'vue'
-import { read, save } from '../../storage'
-import { STORE_KEY_CONFIG_LOCALE, STORE_KEY_CONFIG_PAGE_LIMIT } from '../../constants'
+{{#if i18n}}import Vue from 'vue'
+{{/if}}import { read, save } from '../../storage'
+import { {{#if i18n}}STORE_KEY_CONFIG_LOCALE, {{/if}}STORE_KEY_CONFIG_PAGE_LIMIT } from '../../constants'
 
 const state = {
-  locale: 'zh_CN',
-  pageLimit: 20
+  {{#if i18n}}locale: 'zh_CN',
+  {{/if}}pageLimit: 20
 }
 
 const mutations = {
   UPDATE (state, config) {
-    state.locale = config.locale || state.locale
-    state.pageLimit = config.pageLimit || state.pageLimit
+    {{#if i18n}}state.locale = config.locale || state.locale
+    {{/if}}state.pageLimit = config.pageLimit || state.pageLimit
   }
 }
 
 const actions = {
-  updateLocale ({ commit }, lang) {
+  {{#if i18n}}updateLocale ({ commit }, lang) {
     require([`../../locale/${lang}.js`], (langConfig) => {
       Vue.locale(lang, langConfig.default)
       Vue.config.lang = lang
       save(STORE_KEY_CONFIG_LOCALE, lang)
     })
   },
-  initGlobalConfig ({ commit, dispatch, state }) {
+  {{/if}}initGlobalConfig ({ commit, dispatch, state }) {
     commit('UPDATE', {
-      locale: read(STORE_KEY_CONFIG_LOCALE),
-      pageLimit: +read(STORE_KEY_CONFIG_PAGE_LIMIT)
-    })
+      {{#if i18n}}locale: read(STORE_KEY_CONFIG_LOCALE),
+      {{/if}}pageLimit: +read(STORE_KEY_CONFIG_PAGE_LIMIT)
+    }){{#if i18n}}
     if (state.locale !== 'zh_CN') {
       dispatch('updateLocale', state.locale)
-    }
+    }{{/if}}
   },
   updateGlobalConfig ({ commit, state, dispatch }, config) {
-    if (config.locale !== state.locale) {
+    {{#if i18n}}if (config.locale !== state.locale) {
       dispatch('updateLocale', config.locale)
     }
-    commit('UPDATE', config)
-    save(STORE_KEY_CONFIG_LOCALE, state.locale)
-    save(STORE_KEY_CONFIG_PAGE_LIMIT, state.pageLimit)
+    {{/if}}commit('UPDATE', config)
+    {{#if i18n}}save(STORE_KEY_CONFIG_LOCALE, state.locale)
+    {{/if}}save(STORE_KEY_CONFIG_PAGE_LIMIT, state.pageLimit)
   }
 }
 

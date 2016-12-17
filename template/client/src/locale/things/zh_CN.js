@@ -7,6 +7,9 @@ export default {
     name: '名字',
     description: '描述'
   },
+  rules: {
+    name: '请输入名称'
+  },
   edit: {
     create: '新增事件',
     update: '编辑事件'
