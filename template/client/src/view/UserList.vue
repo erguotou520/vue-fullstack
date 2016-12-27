@@ -79,7 +79,7 @@ export default {
     saveForm () {
       this.$refs.form.validate(valid => {
         if (valid) {
-          this.$http.post('users', this.form).then(() => {
+          user.save(null, this.form).then(() => {
             this.cancelForm()
             this.$message({
               type: 'success',

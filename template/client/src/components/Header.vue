@@ -68,6 +68,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import { merge } from 'lodash'
+import { user as userResource } from 'resources'
 export default {
   data () {
     return {
@@ -115,6 +116,7 @@ export default {
     ...mapGetters([
       'username',
       'loggedIn',
+      'userId',
       'globalConfig'
     ])
   },
@@ -150,14 +152,12 @@ export default {
     changePassword () {
       this.$refs.password.validate(valid => {
         if (valid) {
-          this.$http.put('password', this.password.form).then(res => {
-            if (res.ok) {
-              this.$notify.success(this.$t('header._password.afterChange'))
-              this.password.visible = false
-              setTimeout(() => {
-                this.doLogout()
-              }, 2000)
-            }
+          userResource.changePassword({ id: this.userId }, this.password.form).then(res => {
+            this.$notify.success(this.$t('header._password.afterChange'))
+            this.password.visible = false
+            setTimeout(() => {
+              this.doLogout()
+            }, 2000)
           }).catch(() => {})
         }
       })

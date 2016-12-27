@@ -88,12 +88,15 @@ const actions = {
       // token
       if (stored[1]) {
         getUserInfo(stored[1]).then(data => {
-          const userInfo = assign({}, data, {
-            username: stored[0],
-            access_token: stored[1],
-            refresh_token: stored[2]
-          })
-          commit('SET_USER_INFO', userInfo)
+          let userInfo
+          if (data._id) {
+            userInfo = assign({}, data, {
+              username: stored[0],
+              access_token: stored[1],
+              refresh_token: stored[2]
+            })
+            commit('SET_USER_INFO', userInfo)
+          }
           resolve(userInfo)
         }).catch(err => { reject(err) })
       } else {
