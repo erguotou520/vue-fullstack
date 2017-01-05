@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-1">
+  <div class="flex flex-1" style="width:100%">
     <transition name="router" mode="out-in">
       <router-view></router-view>
     </transition>
