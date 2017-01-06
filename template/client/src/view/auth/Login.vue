@@ -56,7 +56,7 @@ export default {
             this.$router.push(this.$route.query.redirect || '/')
           }).catch((err) => {
             this.$notify({
-              title: this.$t('message.error'),,
+              title: this.$t('message.error'),
               message: err.message || this.$t('login.authFail'),
               type: 'error',
               duration: 1500
