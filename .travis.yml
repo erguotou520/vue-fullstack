@@ -6,7 +6,7 @@ before_install:
   - git config --global user.name "erguotou"
   - git config --global user.email "erguotou525@gmail.com"
 install:
-  - git install -g vue-cli
+  - npm install -g vue-cli
   - cd ../
   - vue init ./vue-fullstack vue-fullstack-demo
   - cd vue-fullstack-demo
@@ -15,7 +15,6 @@ script:
   - cd ../vue-fullstack-demo
   - npm run lint
   - npm run build
-  - pwd
 cache:
   directories:
     - node_modules
