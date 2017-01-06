@@ -17,5 +17,8 @@
     "element-ui"
   ],
   "description": "This project's target is to helper people to create a Reactivity, Realtime, User friendly backend system",
-  "author": "erguotou525@gmail.com"
+  "author": "erguotou525@gmail.com",
+  "devDependencies": {
+    "suppose": "github:erguotou520/node-suppose"
+  }
 }
