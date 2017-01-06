@@ -1,29 +1,29 @@
 # Vue fullstack template
 ![](https://travis-ci.org/erguotou520/vue-fullstack.svg?branch=master)
 
-This project's target is to helper people to create a **Reactivity, Realtime, User friendly** backend system.
+This project's goal is to help people create a **reactive, realtime and user friendly** backend system.
 
 ## Requirement
-- `Mongodb` This project require `mongodb` as the db store, you can follow [it's tutorial](https://docs.mongodb.com/manual/administration/install-community/) to install if you do not installed.
-- Base `vue` skills
+- `Mongodb` This project requires `mongodb` as the database. You can follow [it's tutorial](https://docs.mongodb.com/manual/administration/install-community/) to install it if you haven't installed it already.
+- Basic `vue.js` skills
 
 ## About i18n
-If you don't choose i18n when project initialization, you need to take a look at this description, or you can skip this step.
-As `vue-cli` does't support more ablity to run task after init, so you need to run `npm run remove:i18n` manually. *This script doesn't change the page view which contains `change locale` in `/client/src/components/Header.vue`, you can remove those code manually.*
+If you chose to not use i18n at project initialization, you need to take a look at this description, else you can skip this step.
+As `vue-cli` does't anymore support to run a task after init, you need to run `npm run remove:i18n` manually. *This script doesn't change the page view which contains `change locale` in `/client/src/components/Header.vue`, you can remove that code manually.*
 
 ## Usage
 This is a project template for vue-cli. It is recommended to use npm 3+ for a more efficient dependency tree.
 ```shell
-# cli version must greater than 2.5.0
+# cli version must be greater than 2.5.0
 $ npm install -g vue-cli
 $ vue init erguotou520/vue-fullstack my-project ## (important hint: don't use a dot in your project name, otherwise it will cause issues with mongodb)
 $ cd my-project
 $ npm install
 # If you choose not to use vue-i18n, you need to run remove:i18n to replace the file with default locale text. If you have chosen vue-i18n, skip this step
 $ npm run remove:i18n
-# This runs a express server
+# This runs an express server
 $ npm run server
-# Open other terminal and cd into my-project
+# Open another terminal and cd into my-project
 # This runs a frontend dev server
 $ npm run client
 ```
@@ -43,7 +43,7 @@ $ npm run client
 Do not change the password please.
 
 * Here is a [demo](https://vue-fullstack-demo.herokuapp.com) and the demo repo is [here](https://github.com/erguotou520/vue-fullstack-demo)  
-* This is [other one](http://meals.erguotou.me)  
+* This is [another one](http://meals.erguotou.me)  
 ```
 username: admin
 password: admin
@@ -78,28 +78,28 @@ password: admin
     ├─components       # server components
     │  └─errors
     ├─config           # server configs, contains express socket.io, etc.
-    └─views            # server servered pages
+    └─views            # server served pages
 ```
 
 ## Configuration
-Most of the configuration is concentrated in the `config.js` file, and most of them have explicit comments, you need to take a look at it first.
+Most of the configuration is concentrated in the `config.js` file and most of them have explicit comments. You need to take a look at it first.
 
-Here is some important/frequently-used configuration:
+Here are some important/frequently-used configurations:
 - `frontend.port` port that frontend server listens at
 - `backend.port` port that backend server listen at
 - `backend.secrets.session` secret for session, important when you deploy your app, make sure it's complex enough
 - `backend.mongo.uri` change this if your mongodb uri is not matched
-- `backend.serverFrontend` whether to server the frontend code. If set to `true` the express server servers the frontend code, otherwise you may need a http server like nginx to server frontend code and there is a nginx configuration at `nginx.example.conf` (default true)
+- `backend.serverFrontend` whether to server the frontend code. If set to `true` the express server serves the frontend code. Otherwise you may need a http server like nginx to serve frontend code and there is a nginx configuration at `nginx.example.conf` (default true)
 
-## Environment variable
-When you deploy your app to you cloud server, it's easy to config you app with `environment variable`, here is the supported:  
+## Environment variables
+When you deploy your app to you cloud server it's easy to configure youre app with `environment variables`. Following are supported:  
 - `APP_port` or `PORT`: set to `backend.port`
 - `APP_HOST` or `APP_IP` or `HOST` or `IP`: set to `backend.ip`
 - `MONGODB_URI` or `MONGOHQ_URI`: set to `backend.mongo.uri`
 - `SECRET`: set to `backend.secrets.session`
 
 ## Notice
-The generated app is just a template to build your app system fast, maybe it can't meet your needs, so you need to do some change at this issue.
+The generated app is just a template to build your app system fast. Maybe it can't meet your needs, so you need to do some changes at this issue.
 
 ## License
 Under [MIT license](./LICENSE)
