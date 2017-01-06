@@ -1,4 +1,5 @@
 # Vue fullstack template
+![](https://travis-ci.org/erguotou520/vue-fullstack.svg?branch=master)
 This project's target is to helper people to create a **Reactivity, Realtime, User friendly** backend system.
 
 ## Requirement
