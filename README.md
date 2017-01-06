@@ -1,5 +1,6 @@
 # Vue fullstack template
 ![](https://travis-ci.org/erguotou520/vue-fullstack.svg?branch=master)
+
 This project's target is to helper people to create a **Reactivity, Realtime, User friendly** backend system.
 
 ## Requirement
@@ -39,8 +40,10 @@ $ npm run client
 - `socket.io`
 
 ## Demo app
-Here is a [demo](https://vue-fullstack-demo.herokuapp.com) and the demo repo is [here](https://github.com/erguotou520/vue-fullstack-demo)  
-This is [other one](http://meals.erguotou.me)  
+Do not change the password please.
+
+* Here is a [demo](https://vue-fullstack-demo.herokuapp.com) and the demo repo is [here](https://github.com/erguotou520/vue-fullstack-demo)  
+* This is [other one](http://meals.erguotou.me)  
 ```
 username: admin
 password: admin
