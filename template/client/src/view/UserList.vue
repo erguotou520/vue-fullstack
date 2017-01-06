@@ -4,16 +4,17 @@
       <el-breadcrumb-item to="/dashboard">{{$t('users.breadcrumb.home')}}</el-breadcrumb-item>
       <el-breadcrumb-item>{{$t('users.breadcrumb.current')}}</el-breadcrumb-item>
     </el-breadcrumb>
-    <data-table :data="users" ref="users" row-key="_id"
-      @page-change="fetch">
+    <data-table :data="users" ref="users" row-key="_id" @page-change="fetch">
       <div slot="toolbar">
         <el-button type="primary" icon="plus" @click.native="createUser">{{$t('toolbar.create')}}</el-button>
       </div>
       <el-table-column property="_id" label="ID" sortable min-width="120"></el-table-column>
       <el-table-column property="username" :label="$t('users.model.username')" sortable min-width="120"></el-table-column>
       <el-table-column property="role" :label="$t('users.model.role')" min-width="90"></el-table-column>
-      <el-table-column inline-template :label="$t('datatable.operate')" align="center" width="100">
-        <el-button type="text" @click.native="deleteUser(row)">{{$t('toolbar.remove')}}</el-button>
+      <el-table-column :label="$t('datatable.operate')" align="center" width="100">
+        <template scope="scope">
+          <el-button type="text" @click.native="deleteUser(scope.row)">{{$t('toolbar.remove')}}</el-button>
+        </template>
       </el-table-column>
     </data-table>
     <el-dialog :title="$t('users.create.title')" v-model="formVisible" @close="cancelForm">
