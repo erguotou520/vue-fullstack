@@ -17,4 +17,5 @@ script:
 cache:
   directories:
     - node_modules
+    - ../test-fullstack/node_modules
     - $(npm config get prefix)/vue-cli
