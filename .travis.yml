@@ -15,6 +15,7 @@ script:
   - cd ../vue-fullstack-demo
   - npm run lint
   - npm run build
+  - pwd
 cache:
   directories:
     - node_modules
