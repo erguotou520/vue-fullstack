@@ -1,0 +1,21 @@
+language: node_js
+node_js:
+  - "6"
+before_install:
+  - git config --global push.default matching
+  - git config --global user.name "erguotou"
+  - git config --global user.email "erguotou525@gmail.com"
+install:
+  - git install -g vue-cli
+  - cd ../
+  - vue init ./vue-fullstack vue-fullstack-demo
+  - cd vue-fullstack-demo
+  - npm install
+script:
+  - cd ../vue-fullstack-demo
+  - npm run lint
+  - npm run build
+cache:
+  directories:
+    - node_modules
+    - $(npm config get prefix)/vue-cli
