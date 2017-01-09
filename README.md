@@ -4,7 +4,7 @@
 This project's goal is to help people create a **reactive, realtime and user friendly** backend system.
 
 ## Requirement
-- `Mongodb` This project requires `mongodb` as the database. You can follow [it's tutorial](https://docs.mongodb.com/manual/administration/install-community/) to install it if you haven't installed it already.
+- `Mongodb` This project requires `mongodb` as the database. You can follow [it's tutorial](https://docs.mongodb.com/manual/administration/install-community/) to install it if you haven't installed it already. In consideration of the recent [mongodb attack event](https://www.bleepingcomputer.com/news/security/mongodb-apocalypse-is-here-as-ransom-attacks-hit-10-000-servers/), it's highly recommend to enable auth and disable public login for your mongodb.
 - Basic `vue.js` skills
 
 ## About i18n
