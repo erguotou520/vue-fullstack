@@ -1,5 +1,5 @@
 var path = require('path')
-var config = require('../../config').frontend
+var config = require({{#if_eq mock "mock"}}'../config'{{/if_eq}}{{#if_eq mock "backend"}}'../../config'{{/if_eq}}).frontend
 var utils = require('./utils')
 var webpack = require('webpack')
 var merge = require('webpack-merge')
@@ -41,7 +41,7 @@ var webpackConfig = merge(baseWebpackConfig, {
     // see https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       filename: config.index,
-      template: 'client/index.html',
+      template: '{{#if_eq mock "mock"}}index.html{{/if_eq}}{{#if_eq mock "backend"}}client/index.html{{/if_eq}}',
       inject: true,
       minify: {
         removeComments: true,
@@ -74,7 +74,7 @@ var webpackConfig = merge(baseWebpackConfig, {
           module.resource &&
           /\.js$/.test(module.resource) &&
           module.resource.indexOf(
-            path.join(__dirname, '../../node_modules')
+            path.join(__dirname, {{#if_eq mock "mock"}}'../node_modules'{{/if_eq}}{{#if_eq mock "backend"}}'../../node_modules'{{/if_eq}})
           ) === 0
         )
       }
@@ -85,7 +85,7 @@ var webpackConfig = merge(baseWebpackConfig, {
         // element-ui will extracted to element
         return (
           module.resource.indexOf(
-            path.join(__dirname, '../../node_modules/element-ui')
+            path.join(__dirname, {{#if_eq mock "mock"}}'../node_modules/element-ui'{{/if_eq}}{{#if_eq mock "backend"}}'../../node_modules/element-ui'{{/if_eq}})
           ) === 0
         )
       }

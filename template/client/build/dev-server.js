@@ -1,5 +1,5 @@
 process.env.NODE_ENV = 'development'
-var config = require('../../config').frontend
+var config = require({{#if_eq mock "mock"}}'../config'{{/if_eq}}{{#if_eq mock "backend"}}'../../config'{{/if_eq}}).frontend
 var path = require('path')
 var express = require('express')
 var webpack = require('webpack')

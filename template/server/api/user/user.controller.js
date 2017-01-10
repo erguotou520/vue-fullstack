@@ -5,6 +5,7 @@ var User = require('./user.model')
 var config = require('../../../config').backend
 var jwt = require('jsonwebtoken')
 var paging = require('../paging')
+var _ = require('lodash')
 
 var validationError = function (res, err) {
   return res.status(422).json(err)
@@ -15,7 +16,8 @@ var validationError = function (res, err) {
  * restriction: 'admin'
  */
 exports.index = function (req, res) {
-  paging.listQuery(User, req.query.search, '-salt -hashedPassword', {}, req.query.page, function (err, json) {
+  var search = _.merge(req.query.search, { role: 'user' })
+  paging.listQuery(User, search, '-salt -hashedPassword', {}, req.query.page, function (err, json) {
     if (err) return res.status(500).send(err)
     res.status(200).json(json)
   })

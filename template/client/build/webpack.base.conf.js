@@ -1,5 +1,5 @@
 var path = require('path')
-var config = require('../../config').frontend
+var config = require({{#if_eq mock "mock"}}'../config'{{/if_eq}}{{#if_eq mock "backend"}}'../../config'{{/if_eq}}).frontend
 var utils = require('./utils')
 var projectRoot = path.resolve(__dirname, '../')
 
@@ -14,7 +14,7 @@ module.exports = {
   },
   resolve: {
     extensions: ['', '.js', '.vue'],
-    fallback: [path.join(__dirname, '../../node_modules')],
+    fallback: [path.join(__dirname, {{#if_eq mock "mock"}}'../node_modules'{{/if_eq}}{{#if_eq mock "backend"}}'../../node_modules'{{/if_eq}})],
     alias: {
       'src': path.resolve(__dirname, '../src'),
       'assets': path.resolve(__dirname, '../src/assets'),
@@ -23,7 +23,7 @@ module.exports = {
     }
   },
   resolveLoader: {
-    fallback: [path.join(__dirname, '../../node_modules')]
+    fallback: [path.join(__dirname, {{#if_eq mock "mock"}}'../node_modules'{{/if_eq}}{{#if_eq mock "backend"}}'../../node_modules'{{/if_eq}})]
   },
   module: {
     preLoaders: [

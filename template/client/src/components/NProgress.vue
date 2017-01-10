@@ -2,6 +2,7 @@
 <script>
 import Vue from 'vue'
 import nprogress from 'nprogress'
+import 'nprogress/nprogress.css'
 export default {
   props: {
     parent: String
@@ -28,7 +29,6 @@ export default {
 }
 </script>
 <style lang="stylus">
-@import "../../../node_modules/nprogress/nprogress.css"
 #nprogress .spinner
   display none
 </style>

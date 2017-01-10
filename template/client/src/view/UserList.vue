@@ -36,7 +36,7 @@
 </template>
 <script>
 import DataTable from 'components/DataTable'
-import { user } from 'resources'
+import { user as userRes } from 'resources'
 export default {
   data () {
     return {
@@ -63,7 +63,7 @@ export default {
   },
   methods: {
     fetch (current = 1) {
-      this.$refs.users.query(user, current, { search: this.search }).then(list => {
+      this.$refs.users.query(userRes, current, { search: this.search }).then(list => {
         this.users = list
       }).catch(err => {
         console.error(err)
@@ -80,7 +80,7 @@ export default {
     saveForm () {
       this.$refs.form.validate(valid => {
         if (valid) {
-          user.save(null, this.form).then(() => {
+          userRes.save(null, this.form).then(() => {
             this.cancelForm()
             this.$message({
               type: 'success',
@@ -100,7 +100,7 @@ export default {
       this.$confirm(`This action will remove the selected user: ${user.username} forever, still going on?`, this.$t('message.confirm.title'), {
         type: 'warning'
       }).then(() => {
-        user.delete({ _id: user._id }).then(() => {
+        userRes.delete({ _id: user._id }).then(() => {
           this.$message({
             type: 'success',
             message: this.$t('message.removed')

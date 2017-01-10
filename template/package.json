@@ -19,33 +19,45 @@
   "author": "{{author}}",
   "private": false,
   "scripts": {
-    "client": "node client/build/dev-server.js",
-    "server": "./node_modules/.bin/nodemon --watch server server/app.js",
-    "dev": "npm run client|npm run server",
-    "build": "node client/build/build.js",
+    "client": "node {{#if_eq mock 'backend'}}client/{{/if_eq}}build/dev-server.js",{{#if_eq mock 'backend'}}
+    "server": "./node_modules/.bin/nodemon --watch server server/app.js",{{/if_eq}}{{#if_eq mock 'mock'}}
+    "mock": "./node_modules/.bin/nodemon --watch mock mock/index.js",{{/if_eq}}
+    "dev": "npm run client|npm run {{#if_eq mock 'backend'}}server{{/if_eq}}{{#if_eq mock 'mock'}}mock{{/if_eq}}",
+    "build": "node {{#if_eq mock 'backend'}}client/{{/if_eq}}build/build.js",
     {{#unless i18n}}"remove:i18n": "node tasks/replaceI18n.js",
-    {{/unless}}"lint": "eslint --ext .js,.vue client/src"
+    {{/unless}}{{#if_eq mock 'mock'}}"remove:mock": "node tasks/mock.js",
+    {{/if_eq}}"lint": "eslint --ext .js,.vue {{#if_eq mock 'backend'}}client/{{/if_eq}}src"
   },
   "dependencies": {
+    {{#if_eq mock "backend"}}
     "body-parser": "^1.15.2",
     "composable-middleware": "^0.3.0",
     "compression": "^1.6.2",
     "cookie-parser": "^1.4.3",
     "crypto": "0.0.3",
     "ejs": "^2.5.2",
+    {{/if_eq}}
     "element-ui": "^1.0.3",
+    {{#if_eq mock "backend"}}
     "express": "^4.14.0",
     "express-jwt": "^3.4.0",
     "jsonwebtoken": "^7.1.9",
+    {{/if_eq}}
     "lodash": "^4.17.2",
+    {{#if_eq mock "backend"}}
     "method-override": "^2.3.7",
     "mongoose": "^4.7.0",
+    {{/if_eq}}
     "nprogress": "^0.2.0",
+    {{#if_eq mock "backend"}}
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
+    {{/if_eq}}
     "socket.io": "^1.7.1",
     "socket.io-client": "^1.7.1",
+    {{#if_eq mock "backend"}}
     "socketio-jwt": "^4.5.0",
+    {{/if_eq}}
     "vue": "^2.1.3",
     "vue-i18n": "^4.7.3",
     "vue-resource": "^1.0.3",
@@ -75,11 +87,17 @@
     "eventsource-polyfill": "^0.9.6",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.4",
+    {{#if_eq mock "mock"}}
+    "fms": "0.0.34",
+    {{/if_eq}}
     "glob": "^7.1.1",
     "html-webpack-plugin": "^2.8.1",
     "http-proxy-middleware": "^0.12.0",
     "inject-loader": "^2.0.1",
+    "mockjs": "^1.0.1-beta3",
+    {{#if_eq mock "mock"}}
     "nodemon": "^1.10.2",
+    {{/if_eq}}
     "ora": "^0.2.0",
     "os-locale": "^2.0.0",
     "shelljs": "^0.6.0",

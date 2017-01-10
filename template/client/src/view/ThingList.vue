@@ -36,7 +36,7 @@
   </content-module>
 </template>
 <script>
-import { thing } from 'resources'
+import { thing as thingRes } from 'resources'
 export default {
   data () {
     return {
@@ -54,8 +54,8 @@ export default {
   },
   methods: {
     fetch () {
-      thing.query().then(data => data.json()).then(data => {
-        this.things = data.data
+      thingRes.query().then(data => data.json()).then(data => {
+        this.things = data.results
       }).catch(err => {
         console.error(err)
       })
@@ -72,9 +72,9 @@ export default {
     saveForm () {
       let promise
       if (this.form._id) {
-        promise = thing.update({ _id: this.form._id }, this.form)
+        promise = thingRes.update({ _id: this.form._id }, this.form)
       } else {
-        promise = thing.save({}, {
+        promise = thingRes.save({}, {
           name: this.form.name,
           info: this.form.info
         })
@@ -96,7 +96,7 @@ export default {
       this.$confirm(`This action will remove the selected thing: ${thing.name} forever, still going on?`, this.$t('message.confirm.title'), {
         type: 'warning'
       }).then(() => {
-        thing.delete({ _id: thing._id }).then(() => {
+        thingRes.delete({ _id: thing._id }).then(() => {
           this.$message({
             type: 'success',
             message: this.$t('message.removed')

@@ -4,7 +4,7 @@
 var path = require('path')
 var _ = require('lodash')
 
-var backendBase = {
+{{#if_eq mock 'backend'}}var backendBase = {
   // Root path of server
   root: path.normalize(__dirname),
 
@@ -27,7 +27,7 @@ var backendBase = {
       }
     }
   }
-}
+}{{/if_eq}}
 
 var development = {
   frontend: {
@@ -36,8 +36,8 @@ var development = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/api': { target: 'http://localhost:' + backendBase.port, changeOrigin: true },
-      '/socket.io': { target: 'http://localhost:' + backendBase.port, changeOrigin: true, ws: true }
+      '/api': { target: 'http://localhost:' + {{#if_eq mock 'backend'}}backendBase.port{{/if_eq}}{{#if_eq mock 'mock'}}{{mockPort}}{{/if_eq}}, changeOrigin: true },
+      '/socket.io': { target: 'http://localhost:' + {{#if_eq mock 'backend'}}backendBase.port{{/if_eq}}{{#if_eq mock 'mock'}}{{mockPort}}{{/if_eq}}, changeOrigin: true, ws: true }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
     // with this option, according to the CSS-Loader README
@@ -45,12 +45,12 @@ var development = {
     // In our experience, they generally work as expected,
     // just be aware of this issue when enabling this option.
     cssSourceMap: false
-  },
+  }{{#if_eq mock 'backend'}},
   backend: _.merge({}, backendBase, {
     mongo: {
       uri: {{#if mongoUri}}'{{mongoUri}}-dev'{{else}}'mongodb://localhost/{{name}}-dev'{{/if}}
     }
-  })
+  }){{/if_eq}}
 }
 var production = {
   frontend: {
@@ -65,7 +65,7 @@ var production = {
     // npm install --save-dev compression-webpack-plugin
     productionGzip: false,
     productionGzipExtensions: ['js', 'css']
-  },
+  }{{#if_eq mock 'backend'}},
   backend: _.merge({}, backendBase, {
     // whether backend servers the frontend, you can use nginx to server frontend and proxy to backend services
     // if set to true, you need no web services like nginx
@@ -82,7 +82,7 @@ var production = {
 
     // frontend folder
     frontend: path.resolve(__dirname, './client/dist')
-  })
+  }){{/if_eq}}
 }
 
 var config = process.env.NODE_ENV === 'production' ? production : development

@@ -2,7 +2,7 @@
 require('shelljs/global')
 var path = require('path')
 process.env.NODE_ENV = 'production'
-var config = require('../../config').frontend
+var config = require({{#if_eq mock "mock"}}'../config'{{/if_eq}}{{#if_eq mock "backend"}}'../../config'{{/if_eq}}).frontend
 var ora = require('ora')
 var webpack = require('webpack')
 var webpackConfig = require('./webpack.prod.conf')
@@ -19,7 +19,7 @@ spinner.start()
 var assetsPath = path.join(config.assetsRoot, config.assetsSubDirectory)
 rm('-rf', assetsPath) // eslint-disable-line
 mkdir('-p', assetsPath) // eslint-disable-line
-cp('-R', 'client/static/', assetsPath) // eslint-disable-line
+cp('-R', {{#if_eq mock "mock"}}'static/'{{/if_eq}}{{#if_eq mock "backend"}}'client/static/'{{/if_eq}}, assetsPath) // eslint-disable-line
 
 webpack(webpackConfig, function (err, stats) {
   spinner.stop()

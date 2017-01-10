@@ -19,6 +19,7 @@ instance
   .when(/Project name/).respond('\n')
   .when(/Project description/).respond('\n')
   .when(/Author/).respond('\n')
+  .when(/Use real backend server or mock server/).respond('\n')
   .when(/Port that backend server listen at development environment/).respond("\n")
   .when(/Port that frontend server listen at development environment/).respond('\n')
   .when(/MongoDB uri/).respond("\n")
