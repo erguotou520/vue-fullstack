@@ -7,9 +7,9 @@ This project's goal is to help people create a **reactive, realtime and user fri
 - `Mongodb` This project requires `mongodb` as the database. You can follow [it's tutorial](https://docs.mongodb.com/manual/administration/install-community/) to install it if you haven't installed it already. In consideration of the recent [mongodb attack event](https://www.bleepingcomputer.com/news/security/mongodb-apocalypse-is-here-as-ransom-attacks-hit-10-000-servers/), it's highly recommend to enable auth and disable public login for your mongodb.
 - Basic `vue.js` skills
 
-## About i18n
-If you chose to not use i18n at project initialization, you need to take a look at this description, else you can skip this step.
-As `vue-cli` does't anymore support to run a task after init, you need to run `npm run remove:i18n` manually. *This script doesn't change the page view which contains `change locale` in `/client/src/components/Header.vue`, you can remove that code manually.*
+## About mock and i18n
+If you chose to use mock server or not use i18n at project initialization, you need to take a look at this description, else you can skip this step.  
+As `vue-cli` does't support to run a task after initialization, you need to run `npm run remove:i18n`(*This script doesn't change the page view which contains `change locale` in `/client/src/components/Header.vue`, you can remove that code manually.*) and `npm run remove:mock` manually.
 
 ## Usage
 This is a project template for vue-cli. It is recommended to use npm 3+ for a more efficient dependency tree.
@@ -19,10 +19,14 @@ $ npm install -g vue-cli
 $ vue init erguotou520/vue-fullstack my-project ## (important hint: don't use a dot in your project name, otherwise it will cause issues with mongodb)
 $ cd my-project
 $ npm install
-# If you choose not to use vue-i18n, you need to run remove:i18n to replace the file with default locale text. If you have chosen vue-i18n, skip this step
+# If you chose to use mock server, you need to run remove:mock to change the file structure, otherwise just skip this step
+$ npm run remove:mock
+# If you chose not to use vue-i18n, you need to run remove:i18n to replace the files with default locale text, otherwise just skip this step
 $ npm run remove:i18n
-# This runs an express server
+# If you chose to use real backend server, run this script to start an express server
 $ npm run server
+# If you chose to use mock server, run this script to start a mock server
+$ npm run mock
 # Open another terminal and cd into my-project
 # This runs a frontend dev server
 $ npm run client
@@ -38,6 +42,7 @@ $ npm run client
 - `express`
 - `mongoose`
 - `socket.io`
+- `mock server`
 
 ## Demo app
 Do not change the password please.

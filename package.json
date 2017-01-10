@@ -1,6 +1,6 @@
 {
   "name": "vue-fullstack",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "MIT",
   "keywords": [
     "vue",
@@ -14,7 +14,8 @@
     "mongoose",
     "socket.io",
     "element",
-    "element-ui"
+    "element-ui",
+    "mock server"
   ],
   "description": "This project's target is to helper people to create a Reactivity, Realtime, User friendly backend system",
   "author": "erguotou525@gmail.com",
