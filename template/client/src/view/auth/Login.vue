@@ -15,6 +15,11 @@
           native-type="submit" :loading="loading">{{$t('login.button')}}</el-button>
       </el-form-item>
     </el-form>
+    <div class="lang">
+      <el-select :value="globalConfig.lang" @input="changeLang(arguments[0])">
+        <el-option v-for="lang in globalConfig.langs" :label="lang.label" :value="lang.value"></el-option>
+      </el-select>
+    </div>
   </div>
 </template>
 <script>
@@ -35,15 +40,14 @@ export default {
         }]
       },
       loading: false,
-      valid: false,
       loginError: false
     }
   },
   computed: {
-    ...mapGetters(['loggedIn'])
+    ...mapGetters(['loggedIn', 'globalConfig'])
   },
   methods: {
-    ...mapActions(['login']),
+    ...mapActions(['login', 'changeLang']),
     onSubmit () {
       this.$refs.form.validate(valid => {
         if (valid) {
@@ -53,7 +57,7 @@ export default {
             password: this.form.password
           }).then((data) => {
             this.loading = false
-            this.$router.push(this.$route.query.redirect || '/')
+            this.$router.push(this.$route.query.redirect)
           }).catch((err) => {
             this.$notify({
               title: this.$t('message.error'),
@@ -108,4 +112,21 @@ $input-width = 15rem
     width 100%
     &.error
       animation shake .5s
+  .lang
+    position fixed
+    right 1.5rem
+    bottom @right
+    width 5rem
+    .el-input__icon
+      display none
+    input
+      height 1.75rem
+      border none
+      padding-right 10px
+      text-align center
+      color $color-white-dark
+      background-color rgba(255,255,255,.4)
+      &:hover
+        color $color-white
+        background-color rgba(255,255,255,.25)
 </style>

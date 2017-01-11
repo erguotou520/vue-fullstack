@@ -1,33 +1,38 @@
 import Vue from 'vue'
-// router and store
-import store from './store'
-import router from './router'
-import { sync } from 'vuex-router-sync'
-sync(store, router)
-
+// read localStorage stored data
+import './stored'
 {{#if i18n}}
 // locale
 import './locale'
-{{/if}}// ui library
-import Element from 'element-ui'
-Vue.use(Element)
+{{/if}}
+
+// router and store
+import store from './store'
+import router, { hook as routerHook } from './router'
+import { sync } from 'vuex-router-sync'
+sync(store, router)
+
+// ui library
+import './element-ui'
 
 // ajax
 import './http'
 
-// init store data
-store.dispatch('initGlobalConfig')
-store.dispatch('initUserInfo')
+const userPromise = store.dispatch('initUserInfo')
+routerHook(userPromise)
 
 // main component
 import App from './App'
 
 import './socket'
 
-const app = new Vue({
-  router,
-  store,
-  ...App // Object spread copying everything from App.vue
+userPromise.then(() => {
+  const app = new Vue({
+    router,
+    store,
+    ...App // Object spread copying everything from App.vue
+  })
+  // actually mount to DOM
+  app.$mount('app')
 })
-// actually mount to DOM
-app.$mount('#app')
+

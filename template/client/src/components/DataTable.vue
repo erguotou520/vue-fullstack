@@ -4,7 +4,7 @@
       <slot name="toolbar"></slot>
     </div>
     <div class="data-table flex flex-1" ref="wrapper">
-      <el-table :data="data" border :height="avaliableHeight" :row-key="(row)=>row[rowKey]">
+      <el-table :data="data" border height="100%" :row-key="(row)=>row[rowKey]">
         <slot></slot>
       </el-table>
       <slot name="table"></slot>
@@ -40,7 +40,6 @@ export default {
   },
   data () {
     return {
-      avaliableHeight: 0,
       pending: false,
       page: {
         current: 1,
@@ -63,11 +62,6 @@ export default {
     Pagination
   },
   methods: {
-    calcTableAvaliableHeight () {
-      this.$nextTick(() => {
-        this.avaliableHeight = this.$refs.wrapper.clientHeight
-      })
-    },
     query (resource, current, ...rest) {
       current = current || this.page.current
       this.pending = true
@@ -86,13 +80,6 @@ export default {
   },
   created () {
     this.page.limit = this.globalConfig.pageLimit
-  },
-  mounted () {
-    this.calcTableAvaliableHeight()
-    window.addEventListener('resize', this.calcTableAvaliableHeight)
-  },
-  beforeDestroy () {
-    window.removeEventListener('resize', this.calcTableAvaliableHeight)
   }
 }
 </script>

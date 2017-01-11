@@ -9,7 +9,7 @@ This project's goal is to help people create a **reactive, realtime and user fri
 
 ## About mock and i18n
 If you chose to use mock server or not use i18n at project initialization, you need to take a look at this description, else you can skip this step.  
-As `vue-cli` does't support to run a task after initialization, you need to run `npm run remove:i18n`(*This script doesn't change the page view which contains `change locale` in `/client/src/components/Header.vue`, you can remove that code manually.*) and `npm run remove:mock` manually.
+As `vue-cli` does't support to run a task after initialization, you need to run `npm run remove:i18n`(*This script doesn't change the page view which contains `change locale` in `client/src/components/Header.vue` and `client/src/view/auth/Login.vue`, you can remove that code manually.*) and `npm run remove:mock` manually.
 
 ## Usage
 This is a project template for vue-cli. It is recommended to use npm 3+ for a more efficient dependency tree.

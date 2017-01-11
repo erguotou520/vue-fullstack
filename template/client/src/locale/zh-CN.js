@@ -1,7 +1,7 @@
 import { assign } from 'lodash'
 
-import users from './users/zh_CN'
-import things from './things/zh_CN'
+import users from './users/zh-CN'
+import things from './things/zh-CN'
 
 const common = {
   el: {
@@ -23,6 +23,7 @@ const common = {
       ok: '确 定',
       cancel: '取 消'
     },
+    error: '错误',
     created: '新增成功',
     createFailed: '新增失败',
     updated: '已保存更改',
@@ -33,6 +34,7 @@ const common = {
   http: {
     error: {
       E401: '身份认证失败',
+      E403: '权限不足',
       E404: '请求路径错误',
       E500: '后台错误',
       others: '操作失败，请重试'
@@ -42,7 +44,7 @@ const common = {
     settings: '用户设置',
     password: '修改密码',
     logout: '退出',
-    localeSetting: '语言',
+    langSetting: '语言',
     pageLimit: '每页条目数',
     _password: {
       description: '修改你的密码。强烈建议您选择一个复杂密码。',
@@ -78,7 +80,8 @@ const common = {
   login: {
     username: '请输入用户名',
     password: '请输入密码',
-    button: '登录'
+    button: '登录',
+    authFail: '用户名或密码错误'
   }
 }
 

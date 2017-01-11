@@ -19,10 +19,9 @@
         top="4%" @close="cancelConfig">
         <el-form class="noline" ref="config" label-position="top"
           :model="config.form" :rules="config.rules">
-          <el-form-item :label="$t('header.localeSetting')" prop="locale">
-            <el-select v-model="config.form.locale">
-              <el-option label="简体中文(zh_CN)" value="zh_CN"></el-option>
-              <el-option label="English(en_US)" value="en_US"></el-option>
+          <el-form-item :label="$t('header.langSetting')" prop="lang">
+            <el-select v-model="config.form.lang">
+              <el-option v-for="lang in globalConfig.langs" :label="lang.label" :value="lang.value"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item :label="$t('header.pageLimit')" prop="pageLimit">
@@ -30,7 +29,7 @@
           </el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
-          <el-button @click.native="config.visible=false">{{$t('message.confirm.ok')}}</el-button>
+          <el-button @click.native="config.visible=false">{{$t('message.confirm.cancel')}}</el-button>
           <el-button type="primary" @click.native="saveConfig">{{$t('message.confirm.ok')}}</el-button>
         </span>
       </el-dialog>
@@ -75,11 +74,11 @@ export default {
       config: {
         visible: false,
         form: {
-          locale: '',
+          lang: '',
           pageLimit: 10
         },
         rules: {
-          locale: [{ required: true }],
+          lang: [{ required: true }],
           pageLimit: [{ type: 'number', required: true }]
         }
       },
@@ -131,7 +130,7 @@ export default {
       this.config.visible = true
     },
     cancelConfig () {
-      this.config.form.locale = this.globalConfig.locale
+      this.config.form.lang = this.globalConfig.lang
       this.config.form.pageLimit = this.globalConfig.pageLimit
       this.config.visible = false
     },

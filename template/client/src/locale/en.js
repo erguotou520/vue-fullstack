@@ -1,7 +1,7 @@
 import { assign } from 'lodash'
 
-import users from './users/en_US'
-import things from './things/en_US'
+import users from './users/en'
+import things from './things/en'
 const common = {
   el: {
     select: {
@@ -22,6 +22,7 @@ const common = {
       ok: 'save',
       cancel: 'cancel'
     },
+    error: 'Error',
     created: 'Create successed',
     createFailed: 'Create failed',
     updated: 'Update successed',
@@ -32,6 +33,7 @@ const common = {
   http: {
     error: {
       E401: 'Not authorized',
+      E403: 'Permission not allowed',
       E404: 'Url not found',
       E500: 'Server error',
       others: 'Some error occured, please try again'
@@ -41,7 +43,7 @@ const common = {
     settings: 'User settings',
     password: 'Password',
     logout: 'Logout',
-    localeSetting: 'Locale',
+    langSetting: 'Lang',
     pageLimit: 'Data count limit per page',
     _password: {
       description: 'Change your password. It\'s strongly recommend that you should pick a complex password.',
@@ -78,7 +80,8 @@ const common = {
   login: {
     username: 'Please input the username',
     password: 'Please input the password',
-    button: 'Log in'
+    button: 'Log in',
+    authFail: 'Username or password is not correct'
   }
 }
 

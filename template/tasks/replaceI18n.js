@@ -18,22 +18,30 @@ if (fs.existsSync(path.join(__dirname, '../client'))) {
 }
 
 // :prop="$t()"
-var syntax1 = /:([a-z-]+=")\$t\('([a-zA-Z_\.]+)'\)(")/g
+var syntax1 = /:([a-z-]+=")\$t\('([a-zA-Z_\w\.]+)'\)(")/g
 
 // {{$t()}}
-var syntax2 = /\{\{\$t\('([a-zA-Z_\.]+)'\)\}\}/g
+var syntax2 = /\{\{\$t\('([a-zA-Z_\w\.]+)'\)\}\}/g
 
 // this.$t()
-var syntax3 = /this.\$t\('([a-zA-Z_\.]+)'\)/g
+var syntax3 = /this.\$t\('([a-zA-Z_\w\.]+)'\)/g
 
 // :prop="xxx$t('')xxx$t()"
-var syntax4 = /:([a-z-]+=".+)\$t\('([a-zA-Z_\.]+)'\)(.+)\$t\('([a-zA-Z_\.]+)'\)(")/g
+var syntax4 = /:([a-z-]+=".+)\$t\('([a-zA-Z_\w\.]+)'\)(.+)\$t\('([a-zA-Z_\.]+)'\)(")/g
 
-var _locale = 'zh_CN'
+// Vue.t('xxx')
+var syntax5 = /Vue\.t\('([a-zA-Z_\w\.]+)'\)/g
+
+var _locale = 'zh-CN'
+// os locale not math browser language
+var langMap = {
+  'zh_CN': 'zh-CN',
+  'en_US': 'en'
+}
 osLocale.then(locale => {
   // set locale
-  if (locale !== _locale) {
-    _locale = 'en_US'
+  if (langMap[locale] !== _locale) {
+    _locale = 'en'
   }
   var langConfig = require(path.join(clientPath, 'src/locale/', _locale)).default
 
@@ -54,6 +62,8 @@ osLocale.then(locale => {
           }).replace(syntax4, function () {
             return ':' + arguments[1] + '\'' + _.get(langConfig, arguments[2]) + '\'' +
               arguments[3] + '\'' + _.get(langConfig, arguments[4]) + '\'' + arguments[5]
+          }).replace(syntax5, function () {
+            return '\'' + _.get(langConfig, arguments[1]) + '\''
           })
           fs.writeFile(file, replaced, function (err) {
             if (err) {

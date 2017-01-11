@@ -1,6 +1,6 @@
 <template>
   <div id="app-main">
-    <x-menu></x-menu>
+    <nav-menu></nav-menu>
     <div class="app-wrapper">
       <x-header></x-header>
       <div class="app-container" :class="{active: loggedIn}">
@@ -14,7 +14,7 @@
 <script>
 import Vue from 'vue'
 import XHeader from './components/Header'
-import XMenu from './components/Menu'
+import NavMenu from './components/NavMenu'
 // import RouterLoading from './components/RouterLoading'
 import NProgress from './components/NProgress'
 import ContentModule from './components/ContentModule'
@@ -26,7 +26,7 @@ export default {
   },
   components: {
     XHeader,
-    XMenu,
+    NavMenu,
     // RouterLoading,
     NProgress
   }
@@ -51,7 +51,7 @@ export default {
 
 html
   font-size 16px
-  font-family "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif
+  font-family "Helvetica Neue", Helvetica, Tahoma, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "微软雅黑", "WenQuanYi Micro Hei", Arial, sans-serif
 body
   margin 0
   padding 0

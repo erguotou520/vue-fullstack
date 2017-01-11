@@ -20,7 +20,7 @@
       </el-card>
     </div>
     <el-dialog :title="form._id ? $t('things.edit.update') : $t('things.edit.create')" v-model="formVisible">
-      <el-form :model="form" :rules="rules">
+      <el-form :model="form" :rules="rules" ref="thing">
         <el-form-item :label="$t('things.model.name')" prop="name">
           <el-input v-model="form.name"></el-input>
         </el-form-item>
@@ -70,23 +70,27 @@ export default {
       this.formVisible = false
     },
     saveForm () {
-      let promise
-      if (this.form._id) {
-        promise = thingRes.update({ _id: this.form._id }, this.form)
-      } else {
-        promise = thingRes.save({}, {
-          name: this.form.name,
-          info: this.form.info
-        })
-      }
-      promise.then(() => {
-        this.cancelForm()
-        this.$message({
-          type: 'success',
-          message: this.form._id ? this.$t('message.updated') : this.$t('message.created')
-        })
-        this.fetch()
-      }).catch(() => {})
+      this.$refs.thing.validate(valid => {
+        if (valid) {
+          let promise
+          if (this.form._id) {
+            promise = thingRes.update({ _id: this.form._id }, this.form)
+          } else {
+            promise = thingRes.save({}, {
+              name: this.form.name,
+              info: this.form.info
+            })
+          }
+          promise.then(() => {
+            this.cancelForm()
+            this.$message({
+              type: 'success',
+              message: this.form._id ? this.$t('message.updated') : this.$t('message.created')
+            })
+            this.fetch()
+          }).catch(() => {})
+        }
+      })
     },
     editThing (thing) {
       Object.assign(this.form, thing)
