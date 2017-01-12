@@ -8,9 +8,9 @@
     "vue-router",
     "vue-i18n",
     "vue-resource",
-    "fullstack",
+    "fullstack",{{#if_eq mock 'backend'}}
     "mongodb",
-    "mongoose",
+    "mongoose",{{/if_eq}}
     "socket.io",
     "element",
     "element-ui"
@@ -52,8 +52,8 @@
     {{#if_eq mock "backend"}}
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
-    {{/if_eq}}
     "socket.io": "^1.7.1",
+    {{/if_eq}}
     "socket.io-client": "^1.7.1",
     {{#if_eq mock "backend"}}
     "socketio-jwt": "^4.5.0",
@@ -101,6 +101,9 @@
     "ora": "^0.2.0",
     "os-locale": "^2.0.0",
     "shelljs": "^0.6.0",
+    {{#if_eq mock "mock"}}
+    "socket.io": "^1.7.1",
+    {{/if_eq}}
     "stylus": "^0.54.5",
     "stylus-loader": "^2.3.1",
     "url-loader": "^0.5.7",
