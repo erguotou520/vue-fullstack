@@ -29,6 +29,7 @@ export default {
 }
 </script>
 <style lang="stylus">
+.nprogress-custom-parent #nprogress .spinner
 #nprogress .spinner
   display none
 </style>
