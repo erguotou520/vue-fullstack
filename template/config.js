@@ -32,7 +32,7 @@ var backendBase = {
 var development = {
   frontend: {
     port: {{frontendPort}},
-    assetsRoot: path.resolve(__dirname, './client/src'),
+    assetsRoot: path.resolve(__dirname, './{{#if_eq mock "backend"}}client/{{/if_eq}}src',
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
@@ -50,12 +50,15 @@ var development = {
     mongo: {
       uri: {{#if mongoUri}}'{{mongoUri}}-dev'{{else}}'mongodb://localhost/{{name}}-dev'{{/if}}
     }
-  }){{/if_eq}}
+  }){{/if_eq}}{{#if_eq mock 'mock'}},
+  mock: {
+    port: {{mockPort}}
+  }{{/if_eq}}
 }
 var production = {
   frontend: {
-    index: path.resolve(__dirname, './client/dist/index.html'),
-    assetsRoot: path.resolve(__dirname, './client/dist'),
+    index: path.resolve(__dirname, './{{#if_eq mock "backend"}}client/{{/if_eq}}dist/index.html'),
+    assetsRoot: path.resolve(__dirname, './{{#if_eq mock "backend"}}client/{{/if_eq}}dist'),
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     cssSourceMap: true,
@@ -82,7 +85,10 @@ var production = {
 
     // frontend folder
     frontend: path.resolve(__dirname, './client/dist')
-  }){{/if_eq}}
+  }){{/if_eq}}{{#if_eq mock 'mock'}},
+  mock: {
+    port: {{mockPort}}
+  }{{/if_eq}}
 }
 
 var config = process.env.NODE_ENV === 'production' ? production : development
