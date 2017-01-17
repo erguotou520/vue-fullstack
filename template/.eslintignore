@@ -1,1 +1,1 @@
-client/src/assets/fonts
+{{#if_eq mock 'backend'}}client/{{/if_eq}}src/assets/fonts

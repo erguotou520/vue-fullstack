@@ -1,4 +1,4 @@
 .DS_Store
 node_modules/
 npm-debug.log
-client/dist
+{{#if_eq mock 'backend'}}client/{{/if_eq}}dist
