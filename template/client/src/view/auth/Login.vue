@@ -57,7 +57,7 @@ export default {
             password: this.form.password
           }).then((data) => {
             this.loading = false
-            this.$router.push(this.$route.query.redirect)
+            this.$router.push(this.$route.query.redirect || '')
           }).catch((err) => {
             this.$notify({
               title: this.$t('message.error'),

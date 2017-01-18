@@ -36,7 +36,7 @@ var development = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/api': { target: 'http://localhost:' + {{#if_eq mock 'backend'}}backendBase.port{{/if_eq}}{{#if_eq mock 'mock'}}{{mockPort}}{{/if_eq}}, changeOrigin: true, pathRewrite: { '^/api/': '' }},
+      '/api': { target: 'http://localhost:' + {{#if_eq mock 'backend'}}backendBase.port{{/if_eq}}{{#if_eq mock 'mock'}}{{mockPort}}{{/if_eq}}, changeOrigin: true{{#if_eq mock 'backend'}} {{/if_eq}}{{#if_eq mock 'mock'}}, pathRewrite: { '^/api/': '' }{{/if_eq}}},
       '/socket.io': { target: 'http://localhost:' + {{#if_eq mock 'backend'}}backendBase.port{{/if_eq}}{{#if_eq mock 'mock'}}{{mockPort}}{{/if_eq}}, changeOrigin: true, ws: true }
     },
     // CSS Sourcemaps off by default because relative paths are "buggy"
