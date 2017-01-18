@@ -32,7 +32,7 @@ var backendBase = {
 var development = {
   frontend: {
     port: {{frontendPort}},
-    assetsRoot: path.resolve(__dirname, './{{#if_eq mock "backend"}}client/{{/if_eq}}src',
+    assetsRoot: path.resolve(__dirname, './{{#if_eq mock "backend"}}client/{{/if_eq}}src'),
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
