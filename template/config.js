@@ -87,7 +87,7 @@ var production = {
     frontend: path.resolve(__dirname, './client/dist')
   }){{/if_eq}}{{#if_eq mock 'mock'}},
   mock: {
-    port: {{mockPort}}
+    port: process.env.APP_PORT || process.env.PORT
   }{{/if_eq}}
 }
 

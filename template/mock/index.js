@@ -5,7 +5,10 @@ var path = require('path')
 // api prefix: /api
 fms.run({
   port: require('../config').mock.port,
+  root: process.cwd(),
+  static: './dist',
   urlRewrite: [
+    '/', '/index.html',
     /^\/api/, ''
   ]
 })
