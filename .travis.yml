@@ -25,7 +25,7 @@ script:
   - git push -u https://$GH_TOKEN@github.com/erguotou520/vue-fullstack.git HEAD:vf-mock --force
   - cd ../vf-backend
   - sed -i '4d' .gitignore
-  - echo "web: node server/app.js" > Procfile
+  - echo "web: node server\/app.js" > Procfile
   - git init
   - git add -A
   - git commit -m "Auto commit"
