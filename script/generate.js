@@ -6,7 +6,7 @@ var backendProject = 'vf-backend'
 var mockProject = 'vf-mock'
 // cd to parent folder
 process.chdir(path.join(__dirname, '../../'))
-console.log('Current pwd: ', __dirname)
+console.log('Current pwd: ', process.cwd())
 // remove folder
 // fs.unlinkSync(path.join(__dirname, backendProject))
 // fs.unlinkSync(path.join(__dirname, mockProject))
@@ -28,7 +28,7 @@ suppose('vue', ['init', './vue-fullstack', backendProject])
   })
   .end(function(code){
     console.log('Finish expecting backend.')
-    fs.writeFileSync(path.join(__dirname, backendProject), 'web: npm run mock')
+    fs.writeFileSync(path.join(__dirname, '../../', backendProject, 'Procfile'), 'web: node server/app.js')
 
     // mock expect
     suppose('vue', ['init', './vue-fullstack', mockProject])
@@ -44,6 +44,6 @@ suppose('vue', ['init', './vue-fullstack', backendProject])
       })
       .end(function(code){
         console.log('Finish expecting mock.')
-        fs.writeFileSync(path.join(__dirname, mockProject), 'web: npm run mock')
+        fs.writeFileSync(path.join(__dirname, '../../', mockProject, 'Procfile'), 'web: npm run mock')
       })
   })
