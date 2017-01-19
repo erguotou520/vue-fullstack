@@ -44,6 +44,6 @@ suppose('vue', ['init', './vue-fullstack', backendProject])
       })
       .end(function(code){
         console.log('Finish expecting mock.')
-        fs.writeFileSync(path.join(__dirname, '../../', mockProject, 'Procfile'), 'web: npm run mock')
+        fs.writeFileSync(path.join(__dirname, '../../', mockProject, 'Procfile'), 'web: node mock/index.js')
       })
   })
