@@ -41,11 +41,18 @@
     {{#if_eq mock "backend"}}
     "express": "^4.14.0",
     "express-jwt": "^3.4.0",
+    {{#if_eq mock "mock"}}
+    "fms": "0.0.34",
+    {{/if_eq}}
     "jsonwebtoken": "^7.1.9",
     {{/if_eq}}
     "lodash": "^4.17.2",
     {{#if_eq mock "backend"}}
     "method-override": "^2.3.7",
+    {{#if_eq mock "mock"}}
+    "mockjs": "^1.0.1-beta3",
+    "nodemon": "^1.10.2",
+    {{/if_eq}}
     "mongoose": "^4.7.0",
     {{/if_eq}}
     "nprogress": "^0.2.0",
@@ -87,23 +94,13 @@
     "eventsource-polyfill": "^0.9.6",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.8.4",
-    {{#if_eq mock "mock"}}
-    "fms": "0.0.34",
-    {{/if_eq}}
     "glob": "^7.1.1",
     "html-webpack-plugin": "^2.8.1",
     "http-proxy-middleware": "^0.12.0",
     "inject-loader": "^2.0.1",
-    "mockjs": "^1.0.1-beta3",
-    {{#if_eq mock "mock"}}
-    "nodemon": "^1.10.2",
-    {{/if_eq}}
     "ora": "^0.2.0",
     "os-locale": "^2.0.0",
     "shelljs": "^0.6.0",
-    {{#if_eq mock "mock"}}
-    "socket.io": "^1.7.1",
-    {{/if_eq}}
     "stylus": "^0.54.5",
     "stylus-loader": "^2.3.1",
     "url-loader": "^0.5.7",
