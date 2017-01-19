@@ -36,5 +36,4 @@ script:
 cache:
   directories:
     - node_modules
-    - ../vf-backend/node_modules
     - $(npm config get prefix)/vue-cli
