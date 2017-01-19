@@ -41,18 +41,18 @@
     {{#if_eq mock "backend"}}
     "express": "^4.14.0",
     "express-jwt": "^3.4.0",
-    {{#if_eq mock "mock"}}
+    {{/if_eq}}{{#if_eq mock "mock"}}
     "fms": "0.0.34",
-    {{/if_eq}}
+    {{/if_eq}}{{#if_eq mock "backend"}}
     "jsonwebtoken": "^7.1.9",
     {{/if_eq}}
     "lodash": "^4.17.2",
     {{#if_eq mock "backend"}}
     "method-override": "^2.3.7",
-    {{#if_eq mock "mock"}}
+    {{/if_eq}}{{#if_eq mock "mock"}}
     "mockjs": "^1.0.1-beta3",
     "nodemon": "^1.10.2",
-    {{/if_eq}}
+    {{/if_eq}}{{#if_eq mock "backend"}}
     "mongoose": "^4.7.0",
     {{/if_eq}}
     "nprogress": "^0.2.0",
