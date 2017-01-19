@@ -28,6 +28,7 @@ suppose('vue', ['init', './vue-fullstack', backendProject])
   })
   .end(function(code){
     console.log('Finish expecting backend.')
+    fs.writeFileSync(path.join(__dirname, backendProject), 'web: npm run mock')
 
     // mock expect
     suppose('vue', ['init', './vue-fullstack', mockProject])
@@ -43,5 +44,6 @@ suppose('vue', ['init', './vue-fullstack', backendProject])
       })
       .end(function(code){
         console.log('Finish expecting mock.')
+        fs.writeFileSync(path.join(__dirname, mockProject), 'web: npm run mock')
       })
   })
