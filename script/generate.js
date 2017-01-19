@@ -28,19 +28,20 @@ suppose('vue', ['init', './vue-fullstack', backendProject])
   })
   .end(function(code){
     console.log('Finish expecting backend.')
-  })
-// mock expect
-suppose('vue', ['init', './vue-fullstack', mockProject])
-  .when(/Project name/).respond('\n')
-  .when(/Project description/).respond('\n')
-  .when(/Author/).respond('\n')
-  .when(/Use real backend server or mock server/).respond('\40\n')
-  .when(/Port that frontend server listen at development environment/).respond('\n')
-  .when(/Port that mock server listen at/).respond('\n')
-  .when(/Need vue-i18n/).respond('Y\n')
-  .on('error', function(err){
-    console.log(err.message)
-  })
-  .end(function(code){
-    console.log('Finish expecting mock[].')
+
+    // mock expect
+    suppose('vue', ['init', './vue-fullstack', mockProject])
+      .when(/Project name/).respond('\n')
+      .when(/Project description/).respond('\n')
+      .when(/Author/).respond('\n')
+      .when(/Use real backend server or mock server/).respond('\40\n')
+      .when(/Port that frontend server listen at development environment/).respond('\n')
+      .when(/Port that mock server listen at/).respond('\n')
+      .when(/Need vue-i18n/).respond('Y\n')
+      .on('error', function(err){
+        console.log(err.message)
+      })
+      .end(function(code){
+        console.log('Finish expecting mock[].')
+      })
   })
