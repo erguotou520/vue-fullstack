@@ -45,10 +45,13 @@ $ npm run client
 - `mock server`
 
 ## Demo app
-Do not change the password please.
+~~* Here is a [demo](https://vue-fullstack-demo.herokuapp.com) and the demo repo is [here](https://github.com/erguotou520/vue-fullstack-demo)~~  
+~~* This is [another one](http://meals.erguotou.me)~~
 
-* Here is a [demo](https://vue-fullstack-demo.herokuapp.com) and the demo repo is [here](https://github.com/erguotou520/vue-fullstack-demo)  
-* This is [another one](http://meals.erguotou.me)  
+- [Backend server demo](https://vf-backend.herokuapp.com)
+- [Mock server demo](https://vf-mock.herokuapp.com/)
+
+*Do not change the password please.*
 ```
 username: admin
 password: admin
@@ -74,6 +77,9 @@ password: admin
 │  │  └─view           # app pages
 │  │     └─auth
 │  └─static            # static folder
+├─mock                 # mock server
+│  ├─ajax              # ajax mock configs
+│  ├─socket            # socket.io mock configs
 └─server               # backend server folder
     ├─api              # backend api list
     │  ├─thing
