@@ -19,13 +19,13 @@ script:
   - git init
   - git add -A
   - git commit -m "Auto commit"
-  - git push -u https://$GH_token@github.com/erguotou520/vue-fullstack.git HEAD:vf-mock --force
+  - git push -u https://$GH_TOKEN@github.com/erguotou520/vue-fullstack.git HEAD:vf-mock --force
   - cd ../vf-backend
   - sed -i '4d' .gitignore
   - git init
   - git add -A
   - git commit -m "Auto commit"
-  - git push -u https://$GH_token@github.com/username/vue-fullstack.git HEAD:vf-backend --force
+  - git push -u https://$GH_TOKEN@github.com/erguotou520/vue-fullstack.git HEAD:vf-backend --force
   - npm install
   - npm run lint
   - npm run build
