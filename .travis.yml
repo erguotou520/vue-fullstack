@@ -25,6 +25,7 @@ script:
   - git push -u https://$GH_TOKEN@github.com/erguotou520/vue-fullstack.git HEAD:vf-mock --force
   - cd ../vf-backend
   - sed -i '4d' .gitignore
+  - npm install
   - npm run build
   - git init
   - git add -A
