@@ -16,6 +16,8 @@ script:
   - pwd
   - cd ../vf-mock
   - sed -i '4d' .gitignore
+  - npm install
+  - npm run remove:mock
   - git init
   - git add -A
   - git commit -m "Auto commit"
