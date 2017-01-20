@@ -15,7 +15,6 @@
 import Vue from 'vue'
 import XHeader from './components/Header'
 import NavMenu from './components/NavMenu'
-// import RouterLoading from './components/RouterLoading'
 import NProgress from './components/NProgress'
 import ContentModule from './components/ContentModule'
 import { mapGetters } from 'vuex'
@@ -27,7 +26,6 @@ export default {
   components: {
     XHeader,
     NavMenu,
-    // RouterLoading,
     NProgress
   }
 }

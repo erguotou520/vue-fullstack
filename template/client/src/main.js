@@ -3,7 +3,7 @@ import Vue from 'vue'
 import './stored'
 {{#if i18n}}
 // locale
-import './locale'
+import './locales'
 {{/if}}
 
 // router and store
@@ -35,4 +35,3 @@ userPromise.then(() => {
   // actually mount to DOM
   app.$mount('app')
 })
-

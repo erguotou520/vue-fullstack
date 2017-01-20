@@ -2,22 +2,27 @@
   <transition name="menu">
     <div v-if="loggedIn" id="app-menu">
       <router-link class="logo-wrapper" to="/" exact>Backend System</router-link>
-      <ul class="menu">
-        <li class="menu-item">
-          <router-link class="menu-link" to="/users">{{$t('menu.users')}}</router-link>
-        </li>
-        <li class="menu-item">
-          <router-link class="menu-link" to="/things">{{$t('menu.things')}}</router-link>
-        </li>
-      </ul>
+      <el-menu :default-active="$route.path" theme="dark" :router="true">
+        <el-menu-item index="/users">{{$t('menu.users')}}</el-menu-item>
+        <el-menu-item index="/things">{{$t('menu.things')}}</el-menu-item>
+      </el-menu>
     </div>
   </transition>
 </template>
 <script>
 import { mapGetters } from 'vuex'
+import locales from 'locales/menu'
+import { Menu, Submenu, MenuItem, MenuItemGroup } from 'element-ui'
 export default {
+  locales,
   computed: {
     ...mapGetters(['loggedIn'])
+  },
+  components: {
+    [Menu.name]: Menu,
+    [Submenu.name]: Submenu,
+    [MenuItem.name]: MenuItem,
+    [MenuItemGroup.name]: MenuItemGroup
   }
 }
 </script>
@@ -42,20 +47,8 @@ export default {
     color #fff
     font-size 1.25rem
     background-color #435065
-  > .menu
-    margin 0
-    padding 0
-    list-style none
-    .menu-item
-      display block
-      height 3.5rem
-      line-height @height
-      .menu-link
-        display block
-        padding-left 1.25rem
-        color $color-silver-exact-light
-        &:hover
-          background-color $color-black-exact-light
-        &.active
-          color $color-primary
+  .el-submenu
+  .el-menu-item
+    .iconfont
+      margin-right 10px
 </style>

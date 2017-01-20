@@ -3,37 +3,32 @@
     <div v-if="$slots.toolbar" class="toolbar">
       <slot name="toolbar"></slot>
     </div>
-    <div class="data-table flex flex-1" ref="wrapper">
-      <el-table :data="data" border height="100%" :row-key="(row)=>row[rowKey]">
-        <slot></slot>
-      </el-table>
-      <slot name="table"></slot>
+    <div class="data-table flex flex-1" ref="wrapper" :style="{margin:full?'0 -1rem':'0'}">
+      <slot></slot>
       <transition name="fade">
-        <div class="data-loading flex flex-main-center flex-cross-center" v-show="pending">
-          <div class="loader-inner">
-            <div></div>
-            <div></div>
-          </div>
-        </div>
+        <content-loading :show="pending"></content-loading>
       </transition>
     </div>
     <pagination v-if="showPagination" :current="page.current"
-      :total="page.total||0" @page-change="onPageChange"></pagination>
+      :total="page.total||0" @page-change="onPageChange"
+      :style="{margin:full?'0 -1rem -1rem':'.5rem 0'}"></pagination>
   </div>
 </template>
 <script>
 import { mapGetters } from 'vuex'
 import { merge } from 'lodash'
+import ContentLoading from 'components/ContentLoading'
 import Pagination from 'components/Pagination'
 
 export default {
   props: {
-    data: {
-      type: Array,
-      required: true
-    },
     rowKey: String,
     showPagination: {
+      type: Boolean,
+      default: true
+    },
+    // fully fill the page?(By add -1rem margin)
+    full: {
       type: Boolean,
       default: true
     }
@@ -59,19 +54,23 @@ export default {
     }
   },
   components: {
+    ContentLoading,
     Pagination
   },
   methods: {
     query (resource, current, ...rest) {
+      return this.customQuery(resource, 'query', current, ...rest)
+    },
+    customQuery (resource, method, current, ...rest) {
       current = current || this.page.current
       this.pending = true
-      const condition = merge({ page: { current, limit: this.globalConfig.pageLimit }}, ...rest)
-      return resource.query(condition)
+      const condition = merge(this.showPagination ? { page: { current, limit: this.globalConfig.pageLimit }} : {}, ...rest)
+      return resource[method](condition)
       .then(res => res.json()).then(data => {
         this.pending = false
         this.page.current = current || this.page.current
         this.page.total = data.page ? data.page.total : data.results.length
-        return data.results
+        return data.results || data
       })
     },
     onPageChange (targetPage) {
@@ -93,44 +92,12 @@ export default {
   // data table
   .data-table
     position relative
-    margin 0 -1rem
     font-size .75rem
     border-left none
     border-right none
     .el-table
       &::before
         background none
-    > .data-loading
-      position absolute
-      left 0
-      right 0
-      top 0
-      bottom 0
-      background-color rgba(255, 255, 255, .9)
-      z-index 10
-      .loader-inner
-        position relative
-        > div
-          position absolute
-          left 0
-          top 0
-          width 35px
-          height @width
-          border 2px solid $color-primary
-          border-bottom-color transparent
-          border-top-color transparent
-          border-radius 100%
-          animation rotate 1s 0s ease-in-out infinite
-          animation-fill-mode both
-          &:last-child
-            display inline-block
-            left 10px
-            top 10px
-            width 15px
-            height @width
-            animation-duration 0.5s
-            border-color $color-primary transparent $color-primary transparent
-            animation-direction reverse
     .actions
       display flex
       align-items center
@@ -152,12 +119,6 @@ export default {
           margin-left 0
         &:hover
           color $color-primary-light
-    .fade-enter-active
-    .fade-leave-active
-      transition opacity .5s
-    .fade-enter
-    .fade-leave-active
-      opacity 0
 @media (max-width 64rem)
   .ui-data-table
     .data-table

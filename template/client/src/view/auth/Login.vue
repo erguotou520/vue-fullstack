@@ -1,7 +1,7 @@
 <template>
   <div class="login-wrapper" v-show="!loggedIn">
     <div class="bg"></div>
-    <h1>{{$t('config.title')}}</h1>
+    <h1>{{$t('title')}}</h1>
     <el-form ref="form" :model="form" :rules="rules"
       @submit.native.prevent="onSubmit">
       <el-form-item prop="username">
@@ -24,7 +24,9 @@
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import locales from 'locales/login'
 export default {
+  locales,
   data () {
     return {
       form: {
@@ -57,7 +59,7 @@ export default {
             password: this.form.password
           }).then((data) => {
             this.loading = false
-            this.$router.push(this.$route.query.redirect || '')
+            this.$router.push(this.$route.query.redirect || '/')
           }).catch((err) => {
             this.$notify({
               title: this.$t('message.error'),

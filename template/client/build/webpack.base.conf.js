@@ -19,6 +19,8 @@ module.exports = {
       'src': path.resolve(__dirname, '../src'),
       'assets': path.resolve(__dirname, '../src/assets'),
       'components': path.resolve(__dirname, '../src/components'),
+      'locales': path.resolve(__dirname, '../src/locales'),
+      'shared': path.resolve(__dirname, '../src/shared'),
       'resources': path.resolve(__dirname, '../src/resources')
     }
   },

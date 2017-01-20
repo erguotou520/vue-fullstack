@@ -5,6 +5,7 @@
       <div class="nav" v-if="loggedIn">
         <el-dropdown trigger="click">
           <span class="el-dropdown-link">
+            <span class="iconfont icon-user" style="margin-right:2px;vertical-align:middle;"></span>
             {{username}}&nbsp;<i class="el-icon-caret-bottom el-icon-right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
@@ -29,8 +30,8 @@
           </el-form-item>
         </el-form>
         <span slot="footer" class="dialog-footer">
-          <el-button @click.native="config.visible=false">{{$t('message.confirm.cancel')}}</el-button>
-          <el-button type="primary" @click.native="saveConfig">{{$t('message.confirm.ok')}}</el-button>
+          <el-button @click.native="config.visible=false">{{$t('confirm.cancel')}}</el-button>
+          <el-button type="primary" @click.native="saveConfig">{{$t('confirm.ok')}}</el-button>
         </span>
       </el-dialog>
       <!-- change password -->
@@ -50,15 +51,15 @@
               </el-form-item>
             </el-col>
             <el-col :span="12">
-              <el-form-item :label="$t('config.description')">
+              <el-form-item :label="$t('constant.desc')">
                 <div>{{$t('header._password.description')}}</div>
               </el-form-item>
             </el-col>
           </el-row>
         </el-form>
         <span slot="footer" class="dialog-footer">
-          <el-button @click.native="password.visible=false">{{$t('message.confirm.cancel')}}</el-button>
-          <el-button type="primary" @click.native="changePassword">{{$t('message.confirm.ok')}}</el-button>
+          <el-button @click.native="password.visible=false">{{$t('confirm.cancel')}}</el-button>
+          <el-button type="primary" @click.native="changePassword">{{$t('confirm.ok')}}</el-button>
         </span>
       </el-dialog>
     </header>
@@ -68,7 +69,9 @@
 import { mapGetters, mapActions } from 'vuex'
 import { merge } from 'lodash'
 import { user as userResource } from 'resources'
+import locales from 'locales/header'
 export default {
+  locales,
   data () {
     return {
       config: {

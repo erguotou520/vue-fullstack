@@ -1,11 +1,11 @@
 <template>
   <content-module name="things">
     <el-breadcrumb separator="/" style="margin-bottom:.5rem">
-      <el-breadcrumb-item to="/dashboard">{{$t('things.breadcrumb.home')}}</el-breadcrumb-item>
-      <el-breadcrumb-item>{{$t('things.breadcrumb.current')}}</el-breadcrumb-item>
+      <el-breadcrumb-item to="/dashboard">{{$t('thing.breadcrumb.home')}}</el-breadcrumb-item>
+      <el-breadcrumb-item>{{$t('thing.breadcrumb.current')}}</el-breadcrumb-item>
     </el-breadcrumb>
     <div style="margin-bottom:.5rem">
-      <el-button type="primary" icon="plus" @click.native="createThing">{{$t('toolbar.create')}}</el-button>
+      <el-button type="primary" icon="plus" @click.native="createThing">{{$t('operation.create')}}</el-button>
     </div>
     <div>
       <el-card class="box-card" v-for="thing in things">
@@ -19,25 +19,27 @@
         </p>
       </el-card>
     </div>
-    <el-dialog :title="form._id ? $t('things.edit.update') : $t('things.edit.create')" v-model="formVisible">
+    <el-dialog :title="form._id ? $t('thing.edit.update') : $t('thing.edit.create')" v-model="formVisible">
       <el-form :model="form" :rules="rules" ref="thing">
-        <el-form-item :label="$t('things.model.name')" prop="name">
+        <el-form-item :label="$t('thing.model.name')" prop="name">
           <el-input v-model="form.name"></el-input>
         </el-form-item>
-        <el-form-item :label="$t('things.model.description')">
+        <el-form-item :label="$t('thing.model.description')">
           <el-input v-model="form.info"></el-input>
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
-        <el-button @click.native="cancelForm">{{$t('message.confirm.cancel')}}</el-button>
-        <el-button type="primary" @click.native="saveForm">{{$t('message.confirm.ok')}}</el-button>
+        <el-button @click.native="cancelForm">{{$t('confirm.cancel')}}</el-button>
+        <el-button type="primary" @click.native="saveForm">{{$t('confirm.ok')}}</el-button>
       </span>
     </el-dialog>
   </content-module>
 </template>
 <script>
 import { thing as thingRes } from 'resources'
+import locales from 'locales/things'
 export default {
+  locales,
   data () {
     return {
       formVisible: false,
@@ -47,7 +49,7 @@ export default {
         info: ''
       },
       rules: {
-        name: [{ required: true, message: this.$t('things.rules.name'), trigger: 'blur' }]
+        name: [{ required: true, message: this.$t('thing.rules.name'), trigger: 'blur' }]
       },
       things: []
     }
@@ -97,7 +99,7 @@ export default {
       this.formVisible = true
     },
     deleteThing (thing) {
-      this.$confirm(`This action will remove the selected thing: ${thing.name} forever, still going on?`, this.$t('message.confirm.title'), {
+      this.$confirm(`This action will remove the selected thing: ${thing.name} forever, still going on?`, this.$t('confirm.title'), {
         type: 'warning'
       }).then(() => {
         thingRes.delete({ _id: thing._id }).then(() => {

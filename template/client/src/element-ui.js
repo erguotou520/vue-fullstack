@@ -2,8 +2,9 @@ import Vue from 'vue'
 import { Dialog, Autocomplete, Dropdown, DropdownMenu, DropdownItem, Input, InputNumber,
   Radio, RadioGroup, RadioButton, Checkbox, CheckboxGroup, Switch, Select, Option,
   OptionGroup, Button, ButtonGroup, Table, TableColumn, DatePicker, TimeSelect, TimePicker,
-  Popover, Tooltip, MessageBox, Breadcrumb, BreadcrumbItem, Form, FormItem, Tabs, TabPane, Tag, Tree, Notification, Slider,
-  Loading, Icon, Row, Col, Upload, Progress, Spinner, Message, Badge, Card, Steps, Step } from 'element-ui'
+  Popover, Tooltip, MessageBox, Breadcrumb, BreadcrumbItem, Form, FormItem, Tabs, TabPane,
+  Tag, Tree, Notification, Slider, Loading, Row, Col, Upload, Progress, Spinner,
+  Message, Badge, Card, Steps, Step } from 'element-ui'
 
 Vue.component(Dialog.name, Dialog)
 Vue.component(Autocomplete.name, Autocomplete)
@@ -39,7 +40,6 @@ Vue.component(TabPane.name, TabPane)
 Vue.component(Tag.name, Tag)
 Vue.component(Tree.name, Tree)
 Vue.component(Slider.name, Slider)
-Vue.component(Icon.name, Icon)
 Vue.component(Row.name, Row)
 Vue.component(Col.name, Col)
 Vue.component(Upload.name, Upload)

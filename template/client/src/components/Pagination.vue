@@ -6,10 +6,10 @@
         <span class="iconfont icon-home-page"></span>
       </a>
       <a :disabled="current<=1" @click="change(current-1, current<=1)">
-        <el-icon name="arrow-left"></el-icon>
+        <span class="el-icon-arrow-left"></span>
       </a>
       <a :disabled="current>=pages" @click="change(current+1, current>=pages)">
-        <el-icon name="arrow-right"></el-icon>
+        <span class="el-icon-arrow-right"></span>
       </a>
       <a :disabled="current>=pages" @click="change(pages, current>=pages)">
         <span class="iconfont icon-last-page"></span>
@@ -20,7 +20,9 @@
 </template>
 <script>
 import { mapGetters } from 'vuex'
+import locales from 'locales/pagination'
 export default {
+  locales,
   props: {
     current: {
       type: Number,
@@ -56,7 +58,6 @@ export default {
   display flex
   justify-content space-between
   align-items center
-  margin 0 -1rem -1rem
   padding .75rem 1rem
   border-top 1px solid $color-gray
   background-color #fff
@@ -77,7 +78,7 @@ export default {
         border-right 1px solid $color-gray
       &[disabled]
         color $color-silver-exact-light
-        cursor: not-allowed
+        cursor not-allowed
         background-color $color-gray-exact-light
       &:hover
         background-color $color-primary
