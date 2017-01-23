@@ -1,4 +1,4 @@
-# <img src="./assets/images/logo.png" width="40" style="vertical-align:bottom"/>Vue fullstack template
+# <img src="./assets/images/logo.png" width="40" align="bottom"/>Vue fullstack template
 ![](https://travis-ci.org/erguotou520/vue-fullstack.svg?branch=master)
 
 This project's goal is to help people create a **reactive, realtime and user friendly** backend system.
