@@ -16,7 +16,7 @@ This is a project template for vue-cli. It is recommended to use npm 3+ for a mo
 ```shell
 # cli version must be greater than 2.5.0
 $ npm install -g vue-cli
-$ vue init vue-fullstack my-project ## (important hint: don't use a dot in your project name, otherwise it will cause issues with mongodb)
+$ vue init erguotou520/vue-fullstack my-project ## (important hint: don't use a dot in your project name, otherwise it will cause issues with mongodb)
 $ cd my-project
 $ npm install
 # If you chose to use mock server, you need to run remove:mock to change the file structure, otherwise just skip this step
