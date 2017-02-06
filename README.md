@@ -1,3 +1,4 @@
+![Logo](./assets/images/logo.png)
 # Vue fullstack template
 ![](https://travis-ci.org/erguotou520/vue-fullstack.svg?branch=master)
 

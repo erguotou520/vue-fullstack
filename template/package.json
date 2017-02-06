@@ -51,8 +51,9 @@
     "method-override": "^2.3.7",
     {{/if_eq}}{{#if_eq mock "mock"}}
     "mockjs": "^1.0.1-beta3",
+    {{/if_eq}}
     "nodemon": "^1.10.2",
-    {{/if_eq}}{{#if_eq mock "backend"}}
+    {{#if_eq mock "backend"}}
     "mongoose": "^4.7.0",
     {{/if_eq}}
     "nprogress": "^0.2.0",
