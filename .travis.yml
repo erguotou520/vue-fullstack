@@ -9,31 +9,40 @@ install:
   - npm install -g vue-cli
   - npm install
 script:
+  # 删除旧目录，如果存在？
   - rm -rf ../vf-backend
   - rm -rf ../vf-mock
+  # 使用expect生成项目（同时包括server和mock2个项目）
   - node script/generate.js
+  # 测试，查看当前目录
   - echo 'shell pwd'
   - pwd
+  # 移除.gitignore文件中对于dist的ignore，这样可以提交生成的dist目录
   - cd ../vf-mock
   - sed -i '4d' .gitignore
+  # 安装，就不说了
   - npm install
+  # 运行代码检查
+  - npm run lint
+  # 移除与mock无关的内容（还有一些目录/文件路径的更改）
   - npm run remove:mock
+  # 构建，都明白吧
   - npm run build
+  # 强制提交到github的vf-mock分支
   - git init
   - git add -A
   - git commit -m "Auto commit"
   - git push -u https://$GH_TOKEN@github.com/erguotou520/vue-fullstack.git HEAD:vf-mock --force
+  # 跟mock分支差不多的操作，就不细说了
   - cd ../vf-backend
   - sed -i '4d' .gitignore
   - npm install
+  - npm run lint
   - npm run build
   - git init
   - git add -A
   - git commit -m "Auto commit"
   - git push -u https://$GH_TOKEN@github.com/erguotou520/vue-fullstack.git HEAD:vf-backend --force
-  - npm install
-  - npm run lint
-  - npm run build
 cache:
   directories:
     - node_modules
