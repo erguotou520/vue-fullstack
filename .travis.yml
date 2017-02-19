@@ -25,15 +25,13 @@ script:
   - git push -u https://$GH_TOKEN@github.com/erguotou520/vue-fullstack.git HEAD:vf-mock --force
   - cd ../vf-backend
   - sed -i '4d' .gitignore
+  - sed -i '67a// Do not change admin's password\nif (req.user.role === 'admin') {\nreturn res.sendStatus(200)}' server/api/user/user.controller.js
   - npm install
   - npm run build
   - git init
   - git add -A
   - git commit -m "Auto commit"
   - git push -u https://$GH_TOKEN@github.com/erguotou520/vue-fullstack.git HEAD:vf-backend --force
-  - npm install
-  - npm run lint
-  - npm run build
 cache:
   directories:
     - node_modules

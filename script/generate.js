@@ -29,7 +29,9 @@ suppose('vue', ['init', './vue-fullstack', backendProject])
   .end(function(code){
     console.log('Finish expecting backend.')
     fs.writeFileSync(path.join(__dirname, '../../', backendProject, 'Procfile'), 'web: node server/app.js')
-
+    // add code: can't change admin's password
+    var text = fs.readFileSync(path.join(__dirname, '../../', backendProject, 'server/api/user/user.controller.js'), { encoding: 'utf-8' })
+    fs.writeFileSync(path.join(__dirname, '../../', backendProject, 'server/api/user/user.controller.js'), text.replace(/exports\.changePassword = function \(req, res, next\) \{/, 'exports.changePassword = function (req, res, next) {\nif(req.user.role==="admin"){return res.sendStatus(200)}\n'))
     // mock expect
     suppose('vue', ['init', './vue-fullstack', mockProject])
       .when(/Project name/).respond('\n')
