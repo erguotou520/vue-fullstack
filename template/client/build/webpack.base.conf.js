@@ -1,7 +1,7 @@
 var path = require('path')
+var webpack = require('webpack')
 var config = require({{#if_eq mock "mock"}}'../config'{{/if_eq}}{{#if_eq mock "backend"}}'../../config'{{/if_eq}}).frontend
 var utils = require('./utils')
-var projectRoot = path.resolve(__dirname, '../')
 
 module.exports = {
   entry: {
@@ -13,9 +13,11 @@ module.exports = {
     filename: '[name].js'
   },
   resolve: {
-    extensions: ['', '.js', '.vue'],
-    fallback: [path.join(__dirname, {{#if_eq mock "mock"}}'../node_modules'{{/if_eq}}{{#if_eq mock "backend"}}'../../node_modules'{{/if_eq}})],
+    extensions: ['.js', '.vue'],
+    enforceExtension: true,
+    modules: ['node_modules'],
     alias: {
+      'vue$': 'vue/dist/vue.common.js',
       'src': path.resolve(__dirname, '../src'),
       'assets': path.resolve(__dirname, '../src/assets'),
       'components': path.resolve(__dirname, '../src/components'),
@@ -24,46 +26,51 @@ module.exports = {
       'resources': path.resolve(__dirname, '../src/resources')
     }
   },
-  resolveLoader: {
-    fallback: [path.join(__dirname, {{#if_eq mock "mock"}}'../node_modules'{{/if_eq}}{{#if_eq mock "backend"}}'../../node_modules'{{/if_eq}})]
-  },
-  module: {
-    preLoaders: [
-      {
-        test: /\.vue$/,
-        loader: 'eslint',
-        include: projectRoot,
-        exclude: /node_modules/
-      },
-      {
-        test: /\.js$/,
-        loader: 'eslint',
-        include: projectRoot,
-        exclude: /node_modules/
+  plugins: [
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        eslint: {
+          formatter: require('eslint-friendly-formatter')
+        },
+        vue: {
+          loaders: utils.cssLoaders({ sourceMap: config.cssSourceMap }),
+          postcss: [
+            require('autoprefixer')({
+              browsers: ['last 2 versions']
+            })
+          ]
+        }
       }
-    ],
-    loaders: [
+    })
+  ],
+  module: {
+    rules: [
       {
         test: /\.vue$/,
-        loader: 'vue'
+        enforce: 'pre',
+        loader: 'eslint-loader'
+      },
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader'
       },
       {
         test: /\.js$/,
-        loader: 'babel',
-        include: projectRoot,
+        enforce: 'pre',
+        loader: 'eslint-loader',
         exclude: /node_modules/
-      },
-      {
-        test: /\.json$/,
-        loader: 'json'
+      }, {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/
       },
       {
         test: /\.html$/,
-        loader: 'vue-html'
+        loader: 'vue-html-loader'
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        loader: 'url',
+        loader: 'url-loader',
         query: {
           limit: 10000,
           name: utils.assetsPath('img/[name].[hash:7].[ext]')
@@ -71,23 +78,12 @@ module.exports = {
       },
       {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        loader: 'url',
+        loader: 'url-loader',
         query: {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
       }
-    ]
-  },
-  eslint: {
-    formatter: require('eslint-friendly-formatter')
-  },
-  vue: {
-    loaders: utils.cssLoaders({ sourceMap: config.cssSourceMap }),
-    postcss: [
-      require('autoprefixer')({
-        browsers: ['last 2 versions']
-      })
     ]
   }
 }

@@ -1,16 +1,16 @@
 export default [{
   path: '/dashboard',
   component: (resolve) => {
-    require(['../view/Dashboard.vue'], resolve)
+    import('../view/Dashboard.vue').then(resolve)
   }
 }, {
   path: '/users',
   component: (resolve) => {
-    require(['../view/UserList.vue'], resolve)
+    import('../view/UserList.vue').then(resolve)
   }
 }, {
   path: '/things',
   component: (resolve) => {
-    require(['../view/ThingList.vue'], resolve)
+    import('../view/ThingList.vue').then(resolve)
   }
 }]
