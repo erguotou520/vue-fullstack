@@ -1,11 +1,15 @@
 var path = require('path')
-var webpack = require('webpack')
 var config = require({{#if_eq mock "mock"}}'../config'{{/if_eq}}{{#if_eq mock "backend"}}'../../config'{{/if_eq}}).frontend
+var vueLoaderConfig = require('./vue-loader.conf')
 var utils = require('./utils')
+
+function resolve (dir) {
+  return path.join(__dirname, '..', dir)
+}
 
 module.exports = {
   entry: {
-    app: path.resolve(__dirname, '../src/main.js')
+    app: resolve('src/main.js')
   },
   output: {
     path: config.assetsRoot,
@@ -13,60 +17,38 @@ module.exports = {
     filename: '[name].js'
   },
   resolve: {
-    extensions: ['.js', '.vue'],
-    enforceExtension: true,
-    modules: ['node_modules'],
+    extensions: ['.js', '.vue', '.json'],
+    modules: [resolve('src'), resolve({{#if_eq mock "mock"}}'node_modules'{{/if_eq}}{{#if_eq mock "backend"}}'../node_modules'{{/if_eq}})],
     alias: {
       'vue$': 'vue/dist/vue.common.js',
-      'src': path.resolve(__dirname, '../src'),
-      'assets': path.resolve(__dirname, '../src/assets'),
-      'components': path.resolve(__dirname, '../src/components'),
-      'locales': path.resolve(__dirname, '../src/locales'),
-      'shared': path.resolve(__dirname, '../src/shared'),
-      'resources': path.resolve(__dirname, '../src/resources')
+      'src': resolve('src'),
+      'assets': resolve('src/assets'),
+      'components': resolve('src/components'),
+      'locales': resolve('src/locales'),
+      'shared': resolve('src/shared'),
+      'resources': resolve('src/resources')
     }
   },
-  plugins: [
-    new webpack.LoaderOptionsPlugin({
-      options: {
-        eslint: {
-          formatter: require('eslint-friendly-formatter')
-        },
-        vue: {
-          loaders: utils.cssLoaders({ sourceMap: config.cssSourceMap }),
-          postcss: [
-            require('autoprefixer')({
-              browsers: ['last 2 versions']
-            })
-          ]
-        }
-      }
-    })
-  ],
   module: {
     rules: [
       {
-        test: /\.vue$/,
-        enforce: 'pre',
-        loader: 'eslint-loader'
-      },
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader'
-      },
-      {
-        test: /\.js$/,
-        enforce: 'pre',
+        test: /\.(js|vue)$/,
         loader: 'eslint-loader',
-        exclude: /node_modules/
-      }, {
+        enforce: 'pre',
+        include: [resolve('src'), resolve('test')],
+        options: {
+          formatter: require('eslint-friendly-formatter')
+        }
+      },
+      {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+        options: vueLoaderConfig
+      },
+      {
         test: /\.js$/,
         loader: 'babel-loader',
-        exclude: /node_modules/
-      },
-      {
-        test: /\.html$/,
-        loader: 'vue-html-loader'
+        include: [resolve('src')]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,

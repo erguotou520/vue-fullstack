@@ -10,7 +10,7 @@ Vue.use(VueRouter)
 const routes = [{
   path: '/login',
   component: (resolve) => {
-    import('../view/auth/Login.vue').then(resolve)
+    System.import('../view/auth/Login.vue').then(resolve)
   },
   meta: {
     skipAuth: true
@@ -18,7 +18,7 @@ const routes = [{
 }, {
   path: '/',
   component: (resolve) => {
-    import('../view/CommonView.vue').then(resolve)
+    System.import('../view/CommonView.vue').then(resolve)
   },
   children: [...otherModuleRoutes, {
     path: '/', redirect: '/dashboard'
