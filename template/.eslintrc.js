@@ -14,5 +14,10 @@ module.exports = {
   globals: {
     "it": true,
     "describe": true
+  },
+  parser: 'babel-eslint',
+  parserOptions: {
+    sourceType: 'module',
+    allowImportExportEverywhere: false
   }
 }
