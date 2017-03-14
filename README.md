@@ -1,8 +1,12 @@
 ![Logo](./assets/images/logo.png)
 # Vue fullstack template
 ![](https://travis-ci.org/erguotou520/vue-fullstack.svg?branch=master)
+![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)
 
-This project's goal is to help people create a **reactive, realtime and user friendly** backend system.
+This project's goal is to help people create a **reactive, realtime and user friendly** backend system.:smirk:
+
+## Vue version
+This template only support vue2, because it use `ElementUI` as the default ui library and `ElementUI` just support vue2.
 
 ## Requirement
 - `Mongodb` This project requires `mongodb` as the database. You can follow [it's tutorial](https://docs.mongodb.com/manual/administration/install-community/) to install it if you haven't installed it already. In consideration of the recent [mongodb attack event](https://www.bleepingcomputer.com/news/security/mongodb-apocalypse-is-here-as-ransom-attacks-hit-10-000-servers/), it's highly recommend to enable auth and disable public login for your mongodb.
