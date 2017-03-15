@@ -2,6 +2,7 @@
 # Vue fullstack template
 ![](https://travis-ci.org/erguotou520/vue-fullstack.svg?branch=master)
 ![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)
+![vue version](https://img.shields.io/badge/vue-2.x-brightgreen.svg)
 
 This project's goal is to help people create a **reactive, realtime and user friendly** backend system.:smirk:
 
@@ -19,7 +20,7 @@ As `vue-cli` does't support to run a task after initialization, you need to run 
 ## Usage
 This is a project template for vue-cli. It is recommended to use npm 3+ for a more efficient dependency tree.
 ```shell
-# cli version must be greater than 2.5.0
+# cli version must be greater than 2.8.0
 $ npm install -g vue-cli
 $ vue init erguotou520/vue-fullstack my-project ## (important hint: don't use a dot in your project name, otherwise it will cause issues with mongodb)
 $ cd my-project
@@ -120,6 +121,10 @@ The generated app is just a template to build your app system fast. Maybe it can
 
 ## License
 Under [MIT license](./LICENSE)
+
+## Reference resources
+- [generator-angular-fullstack](https://github.com/angular-fullstack/generator-angular-fullstack) most express code are copied from this repo :kissing_heart:
+- [ElementUI](http://element.eleme.io/) design page fast and easy :+1:
 
 ## At the end
 I am very glad to receive your suggestions and pull request.
