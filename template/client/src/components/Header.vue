@@ -22,7 +22,8 @@
           :model="config.form" :rules="config.rules">
           <el-form-item :label="$t('header.langSetting')" prop="lang">
             <el-select v-model="config.form.lang">
-              <el-option v-for="lang in globalConfig.langs" :label="lang.label" :value="lang.value"></el-option>
+              <el-option v-for="lang in globalConfig.langs" :key="lang.value"
+                :label="lang.label" :value="lang.value"></el-option>
             </el-select>
           </el-form-item>
           <el-form-item :label="$t('header.pageLimit')" prop="pageLimit">

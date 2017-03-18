@@ -8,7 +8,7 @@
       <el-button type="primary" icon="plus" @click.native="createThing">{{$t('operation.create')}}</el-button>
     </div>
     <div>
-      <el-card class="box-card" v-for="thing in things">
+      <el-card class="box-card" v-for="thing in things" :key="thing._id">
         <div slot="header" class="clearfix">
           <span>{{thing.name}}</span>
           <i class="el-icon-delete icon" @click="deleteThing(thing)"></i>

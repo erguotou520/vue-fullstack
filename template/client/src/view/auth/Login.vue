@@ -17,7 +17,8 @@
     </el-form>
     <div class="lang">
       <el-select :value="globalConfig.lang" @input="changeLang(arguments[0])">
-        <el-option v-for="lang in globalConfig.langs" :label="lang.label" :value="lang.value"></el-option>
+        <el-option v-for="lang in globalConfig.langs" :key="lang.value"
+          :label="lang.label" :value="lang.value"></el-option>
       </el-select>
     </div>
   </div>
