@@ -9,8 +9,8 @@ const state = {
   _id: '',
   role: 'guest',
   username: username,
-  access_token: access_token,
-  refresh_token: refresh_token
+  access_token, // eslint-disable-line
+  refresh_token // eslint-disable-line
 }
 
 const mutations = {
@@ -23,8 +23,8 @@ const mutations = {
     state._id = ''
     state.username = ''
     state.role = 'guest'
-    state.access_token = ''
-    state.refresh_token = ''
+    state.access_token = '' // eslint-disable-line
+    state.refresh_token = '' // eslint-disable-line
   }
 }
 
@@ -34,7 +34,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       // token
       if (username) {
-        getUserInfo(access_token).then(data => {
+        getUserInfo(state.access_token).then(data => { // eslint-disable-line
           if (data._id) {
             commit('SET_USER_INFO', data)
           }
@@ -52,8 +52,8 @@ const actions = {
         getUserInfo(data.token).then(user => {
           const userInfo = merge({}, user, {
             username: payload.username,
-            access_token: data.token,
-            refresh_token: ''
+            access_token: data.token, // eslint-disable-line
+            refresh_token: '' // eslint-disable-line
           })
           commit('SET_USER_INFO', userInfo)
           saveMulti([{
@@ -61,10 +61,10 @@ const actions = {
             value: userInfo.username
           }, {
             key: STORE_KEY_ACCESS_TOKEN,
-            value: userInfo.access_token
+            value: userInfo.access_token // eslint-disable-line
           }, {
             key: STORE_KEY_REFRESH_TOKEN,
-            value: userInfo.refresh_token
+            value: userInfo.refresh_token // eslint-disable-line
           }])
           resolve()
         }).catch(() => {})
@@ -76,10 +76,10 @@ const actions = {
     commit('REFERE_TOKEN', payload)
     saveMulti[{
       key: STORE_KEY_ACCESS_TOKEN,
-      value: payload.access_token
+      value: payload.access_token // eslint-disable-line
     }, {
       key: STORE_KEY_REFRESH_TOKEN,
-      value: payload.refresh_token
+      value: payload.refresh_token // eslint-disable-line
     }]
   },
   // logout action
@@ -97,13 +97,13 @@ const getters = {
     return state.role
   },
   accessToken (state) {
-    return state.access_token
+    return state.access_token // eslint-disable-line
   },
   username (state) {
     return state.username
   },
   loggedIn (state) {
-    return !!(state.username && state.access_token)
+    return !!(state.username && state.access_token) // eslint-disable-line
   }
 }
 
