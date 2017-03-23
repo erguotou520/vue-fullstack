@@ -4,6 +4,12 @@
     <h1>{{$t('title')}}</h1>
     <el-form ref="form" :model="form" :rules="rules"
       @submit.native.prevent="onSubmit">
+      <el-form-item>
+        <el-select :value="globalConfig.lang" @input="changeLang(arguments[0])">
+          <el-option v-for="lang in globalConfig.langs" :key="lang.value"
+            :label="lang.label" :value="lang.value"></el-option>
+        </el-select>
+      </el-form-item>
       <el-form-item prop="username">
         <el-input v-model="form.username" :placeholder="$t('login.username')"></el-input>
       </el-form-item>
@@ -15,12 +21,12 @@
           native-type="submit" :loading="loading">{{$t('login.button')}}</el-button>
       </el-form-item>
     </el-form>
-    <div class="lang">
+    <!-- <div class="lang">
       <el-select :value="globalConfig.lang" @input="changeLang(arguments[0])">
         <el-option v-for="lang in globalConfig.langs" :key="lang.value"
           :label="lang.label" :value="lang.value"></el-option>
       </el-select>
-    </div>
+    </div> -->
   </div>
 </template>
 <script>
@@ -115,7 +121,7 @@ $input-width = 15rem
     width 100%
     &.error
       animation shake .5s
-  .lang
+  /*.lang
     position fixed
     right 1.5rem
     bottom @right
@@ -131,5 +137,5 @@ $input-width = 15rem
       background-color rgba(255,255,255,.4)
       &:hover
         color $color-white
-        background-color rgba(255,255,255,.25)
+        background-color rgba(255,255,255,.25)*/
 </style>
