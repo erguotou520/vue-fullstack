@@ -19,7 +19,7 @@ spinner.start()
 var assetsPath = path.join(config.assetsRoot, config.assetsSubDirectory)
 rm('-rf', assetsPath) // eslint-disable-line
 mkdir('-p', assetsPath) // eslint-disable-line
-cp('-R', {{#if_eq mock "mock"}}'static/'{{/if_eq}}{{#if_eq mock "backend"}}'client/static/'{{/if_eq}}, assetsPath) // eslint-disable-line
+cp('-R', {{#if_eq mock "mock"}}'static/*'{{/if_eq}}{{#if_eq mock "backend"}}'client/static/*'{{/if_eq}}, assetsPath) // eslint-disable-line
 
 webpack(webpackConfig, function (err, stats) {
   spinner.stop()
