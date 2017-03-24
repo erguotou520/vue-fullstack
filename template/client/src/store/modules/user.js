@@ -74,13 +74,13 @@ const actions = {
   // refresh token action
   refreToken ({ commit }, payload) {
     commit('REFERE_TOKEN', payload)
-    saveMulti[{
+    saveMulti([{
       key: STORE_KEY_ACCESS_TOKEN,
       value: payload.access_token // eslint-disable-line
     }, {
       key: STORE_KEY_REFRESH_TOKEN,
       value: payload.refresh_token // eslint-disable-line
-    }]
+    }])
   },
   // logout action
   logout ({ commit }, payload) {
