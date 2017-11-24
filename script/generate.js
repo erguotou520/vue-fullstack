@@ -4,6 +4,20 @@ var fs = require('fs')
 
 var backendProject = 'vf-backend'
 var mockProject = 'vf-mock'
+
+// set the package.json engines
+var pkgPath = path.resolve(__dirname, '../template/package.json')
+fs.readFile(pkgPath, 'utf-8', function (err, data) {
+  if (err) throw err
+  data = data.replace('"node": ">= 4.0.0",', '"node": "6.4.0",')
+  data = data.replace('"npm": ">= 3.0.0"', '"npm": "3.10.6"')
+  fs.writeFile(pkgPath, data, function (err) {
+    if (err) {
+      console.error('Error when set engines.')
+    }
+  })
+})
+
 // cd to parent folder
 process.chdir(path.join(__dirname, '../../'))
 console.log('Current pwd: ', process.cwd())
