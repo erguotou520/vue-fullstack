@@ -1,0 +1,13 @@
+{
+  "presets": [
+    ["es2015", { "modules": false }],
+    "stage-2"
+  ],
+  "plugins": ["transform-runtime", ["component", [
+    {
+      "libraryName": "element-ui",
+      "styleLibraryName": "theme-default"
+    }
+  ]]],
+  "comments": false
+}
